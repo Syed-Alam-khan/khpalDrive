@@ -32,6 +32,8 @@ export function UserProvider({ children }) {
     setError(null);
     try {
       const { data } = await API.post('/users/register', formData);
+      localStorage.setItem('userInfo', JSON.stringify(data));
+      setUser(data.user);
       return data;
     } catch (err) {
       const errorMsg = err.response?.data?.message || 'Registration failed. Please try again.';
