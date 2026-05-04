@@ -4,7 +4,7 @@ import axios from 'axios';
 // This ensures it works both on localhost and over the local network (192.168.x.x)
 const baseURL = window.location.hostname === 'localhost' 
   ? 'http://localhost:3000/api' 
-  : `http://${window.location.hostname}:3000/api`;
+  : 'https://khpaldrivebackend-production.up.railway.app/api';
 
 const API = axios.create({
   baseURL: baseURL,
