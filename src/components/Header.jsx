@@ -1,0 +1,196 @@
+import { Link, NavLink, useNavigate, useLocation } from 'react-router-dom';
+import { useState, useEffect, useRef } from 'react';
+import { useUser } from '../context/UserContext';
+import Swal from 'sweetalert2';
+import { FaBars, FaTimes } from 'react-icons/fa';
+
+export default function Header() {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const isHomePage = location.pathname === '/';
+  const { logout } = useUser();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
+  const [userInfo, setUserInfo] = useState(null);
+  const dropdownRef = useRef(null);
+
+  useEffect(() => {
+    const data = localStorage.getItem('userInfo');
+    if (data) {
+      setUserInfo(JSON.parse(data));
+    }
+  }, []);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsProfileDropdownOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  const handleLogout = async () => {
+    Swal.fire({
+      title: 'Sign Out?',
+      text: 'Are you sure you want to log out of your account?',
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, Logout'
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          await logout();
+          setUserInfo(null);
+          setIsProfileDropdownOpen(false);
+          setIsMenuOpen(false);
+          navigate('/login');
+        } catch (err) {
+          console.error('Logout failed', err);
+          localStorage.removeItem('userInfo');
+          window.location.href = '/login';
+        }
+      }
+    });
+  };
+
+  const getProfileImage = () => {
+    if (userInfo?.user?.imageUrl) {
+      if (userInfo.user.imageUrl.startsWith('http')) return userInfo.user.imageUrl;
+      return `http://localhost:3000/uploads/${userInfo.user.imageUrl}`;
+    }
+    return null;
+  };
+
+  const activeClass = ({ isActive }) => 
+    `transition-all duration-300 ${isActive ? 'border-b-2 border-[#94D227]' : 'border-b-2 border-transparent hover:border-white/30'}`;
+
+  return (
+    <header className="bg-[#4B2DBD] text-white py-4 fixed top-0 left-0 w-full z-50 border-b border-white/10 font-sans">
+      <div className="max-w-7xl mx-auto px-6 md:px-12 flex justify-between items-center">
+        <Link to="/" className="flex items-center">
+          <img src="/kd_logo.png" alt="KhpalDrive" className="h-6 md:h-8 w-auto object-contain" />
+        </Link>
+
+        {/* Right Side Navigation & Actions */}
+        <div className="hidden md:flex items-center gap-10">
+          <nav className="flex items-center gap-10 font-bold text-sm uppercase tracking-wide">
+            <NavLink to="/" className={activeClass}>
+              Home
+            </NavLink>
+            <NavLink to="/all-cars" className={activeClass}>
+              All Cars
+            </NavLink>
+          </nav>
+
+          <div className="flex items-center gap-4">
+            {userInfo && (
+              <NavLink 
+                to="/listings" 
+                className="bg-white/10 text-white px-5 py-2 rounded-full font-bold text-[11px] uppercase tracking-wider hover:bg-white/20 transition-all border border-white/20"
+              >
+                My Listing
+              </NavLink>
+            )}
+            <Link 
+              to={userInfo ? "/sell" : "/register"} 
+              className="bg-[#94D227] text-white px-6 py-2 rounded-full font-bold text-[11px] uppercase tracking-wider hover:bg-[#85bd23] transition-all border border-[#94D227] shadow-lg shadow-black/10"
+            >
+              Sell my Car
+            </Link>
+            
+            {userInfo && (
+              <div className="relative ml-2" ref={dropdownRef}>
+                <button 
+                  onClick={() => setIsProfileDropdownOpen(!isProfileDropdownOpen)}
+                  className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center border-2 border-white/30 overflow-hidden hover:border-white transition-all shadow-md"
+                >
+                  {getProfileImage() ? (
+                    <img src={getProfileImage()} alt="profile" className="w-full h-full object-cover" />
+                  ) : (
+                    <span className="font-bold text-sm">{userInfo.user?.name?.charAt(0)}</span>
+                  )}
+                </button>
+                {isProfileDropdownOpen && (
+                  <div className="absolute right-0 mt-3 w-56 bg-white text-gray-900 rounded-2xl shadow-2xl border border-gray-100 py-3 overflow-hidden animate-in fade-in slide-in-from-top-2 duration-300">
+                    <div className="px-5 py-2 border-b mb-1">
+                      <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Logged in as</p>
+                      <p className="text-sm font-black text-[#4B2DBD]">{userInfo.user?.name}</p>
+                    </div>
+                    <Link 
+                      to="/settings" 
+                      onClick={() => setIsProfileDropdownOpen(false)}
+                      className="block px-5 py-2.5 text-xs font-bold text-gray-600 hover:bg-gray-50 hover:text-[#4B2DBD] transition-colors"
+                    >
+                      Account Settings
+                    </Link>
+                    <div className="h-px bg-gray-100 my-1"></div>
+                    <button onClick={handleLogout} className="w-full text-left px-5 py-2.5 text-xs font-black text-red-500 hover:bg-red-50 transition-colors uppercase tracking-widest">Sign Out</button>
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* Mobile Toggle */}
+        <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="md:hidden">
+          {isMenuOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
+        </button>
+      </div>
+
+      {/* Mobile Menu */}
+      {isMenuOpen && (
+        <div className="md:hidden absolute top-full left-0 w-full bg-[#4B2DBD] border-t border-white/10 py-6 px-6 flex flex-col gap-3 shadow-xl rounded-b-3xl">
+          <NavLink 
+            to="/" 
+            className={({ isActive }) => `block w-full px-5 py-3.5 rounded-2xl font-bold text-sm uppercase tracking-wider transition-all ${isActive ? 'bg-[#94D227] text-white shadow-md' : 'bg-white/10 text-white hover:bg-white/20'}`}
+            onClick={() => setIsMenuOpen(false)}
+          >
+            Home
+          </NavLink>
+          <NavLink 
+            to="/all-cars" 
+            className={({ isActive }) => `block w-full px-5 py-3.5 rounded-2xl font-bold text-sm uppercase tracking-wider transition-all ${isActive ? 'bg-[#94D227] text-white shadow-md' : 'bg-white/10 text-white hover:bg-white/20'}`}
+            onClick={() => setIsMenuOpen(false)}
+          >
+            All Cars
+          </NavLink>
+          
+          {userInfo && (
+            <NavLink 
+              to="/listings" 
+              className={({ isActive }) => `block w-full px-5 py-3.5 rounded-2xl font-bold text-sm uppercase tracking-wider transition-all ${isActive ? 'bg-[#94D227] text-white shadow-md' : 'bg-white/10 text-white hover:bg-white/20'}`}
+              onClick={() => setIsMenuOpen(false)}
+            >
+              My Listing
+            </NavLink>
+          )}
+          {userInfo && (
+             <button 
+               onClick={handleLogout} 
+               className="block w-full text-left px-5 py-3.5 rounded-2xl font-bold text-sm uppercase tracking-wider transition-all bg-red-500/20 text-red-100 hover:bg-red-500/30"
+             >
+               Logout
+             </button>
+          )}
+        </div>
+      )}
+
+      {/* Fixed Bottom Sell Button for Mobile */}
+      {isHomePage && (
+        <div className="md:hidden fixed bottom-0 left-0 w-full z-40">
+          <Link 
+            to={userInfo ? "/sell" : "/register"} 
+            className="w-full bg-[#94D227] text-white py-4 font-black text-sm uppercase tracking-widest flex items-center justify-center shadow-[0_-4px_15px_rgba(0,0,0,0.1)] active:bg-[#85bd23] transition-colors"
+          >
+            Sell my Car
+          </Link>
+        </div>
+      )}
+    </header>
+  );
+}

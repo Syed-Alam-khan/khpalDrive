@@ -1,0 +1,45 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Montserrat", "Inter", "system-ui", "sans-serif";
+}
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none !important;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none !important;
+    scrollbar-width: none !important;
+  }
+}
+
+body {
+  @apply antialiased text-gray-900 font-sans;
+}
+
+/* Modern Premium Scrollbar - Inset Pill Design */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: #F1F1F1;
+  border-radius: 100px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #4B2DBD;
+  border-radius: 100px;
+  border: 3px solid #F1F1F1;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #3B2396;
+}
+
+/* Firefox support */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #4B2DBD #F1F1F1;
+}
