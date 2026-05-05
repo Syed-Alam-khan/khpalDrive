@@ -258,7 +258,7 @@ export default function SellCar() {
       </div>
 
       {/* Form Content */}
-      <div className="max-w-3xl mx-auto px-4 mt-8 pb-20">
+      <div className="max-w-3xl mx-auto px-6 mt-8 pb-20">
         <div className="w-full h-1 bg-gray-200/50 rounded-full mb-6 overflow-hidden">
           <div className="h-full bg-[#4B2DBD]/30 rounded-full transition-all duration-700" style={{ width: `${(step / 4) * 100}%` }}></div>
         </div>
@@ -275,12 +275,12 @@ export default function SellCar() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-2">
                   <label className="text-[9px] font-black text-gray-400 uppercase tracking-widest ml-1">Car Model</label>
-                  <input name="model" value={formData.model} onChange={handleChange} placeholder="e.g. 2002" className="w-full bg-gray-50/50 border border-gray-200 rounded-xl py-3 px-5 focus:bg-white focus:ring-2 focus:ring-[#4B2DBD]/5 focus:border-[#4B2DBD] outline-none font-bold text-sm transition-all" />
+                  <input name="model" value={formData.model} onChange={handleChange} placeholder="e.g. 2002" className="w-full bg-gray-50/50 border border-gray-200 rounded-xl py-4 px-6 focus:bg-white focus:ring-2 focus:ring-[#4B2DBD]/5 focus:border-[#4B2DBD] outline-none font-bold text-base transition-all" />
                 </div>
                 <div className="space-y-2">
                   <label className="text-[9px] font-black text-gray-400 uppercase tracking-widest ml-1">Category</label>
                   <div className="relative">
-                    <select name="category" value={formData.category} onChange={handleChange} className="w-full bg-gray-50/50 border border-gray-200 rounded-xl py-3 px-5 focus:bg-white outline-none font-bold text-sm transition-all appearance-none">
+                    <select name="category" value={formData.category} onChange={handleChange} className="w-full bg-gray-50/50 border border-gray-200 rounded-xl py-4 px-6 focus:bg-white outline-none font-bold text-base transition-all appearance-none">
                       <option value="">Select Category</option>
                       {categories.map(c => (
                         <option key={c._id} value={c._id}>{c.name}</option>
@@ -291,12 +291,12 @@ export default function SellCar() {
                 </div>
                 <div className="space-y-2">
                   <label className="text-[9px] font-black text-gray-400 uppercase tracking-widest ml-1">Asking Price (PKR)</label>
-                  <input name="price" type="number" value={formData.price} onChange={handleChange} placeholder="4,500,000" className="w-full bg-gray-50/50 border border-[#4B2DBD]/20 rounded-xl py-3 px-5 focus:bg-white focus:border-[#4B2DBD] outline-none font-black text-sm text-[#4B2DBD] transition-all" />
+                  <input name="price" type="number" value={formData.price} onChange={handleChange} placeholder="4,500,000" className="w-full bg-gray-50/50 border border-[#4B2DBD]/20 rounded-xl py-4 px-6 focus:bg-white focus:border-[#4B2DBD] outline-none font-black text-base text-[#4B2DBD] transition-all" />
                 </div>
                 <div className="space-y-2">
                   <label className="text-[9px] font-black text-gray-400 uppercase tracking-widest ml-1">Location</label>
                   <div className="relative">
-                    <input name="location" value={formData.location} onChange={handleChange} placeholder="e.g. Islamabad" className="w-full bg-gray-50/50 border border-gray-200 rounded-xl py-3 pl-10 pr-5 focus:bg-white outline-none font-bold text-sm transition-all" />
+                    <input name="location" value={formData.location} onChange={handleChange} placeholder="e.g. Islamabad" className="w-full bg-gray-50/50 border border-gray-200 rounded-xl py-4 pl-12 pr-6 focus:bg-white outline-none font-bold text-base transition-all" />
                     <MapPin className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-300" size={14} />
                   </div>
                 </div>
@@ -387,11 +387,11 @@ export default function SellCar() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                 <div className="space-y-2">
                   <label className="text-[9px] font-black text-gray-400 uppercase tracking-widest ml-1">Engine CC</label>
-                  <input name="engineCC" value={formData.engineCC} onChange={handleChange} placeholder="e.g. 1800cc" className="w-full bg-gray-50/50 border border-gray-200 rounded-xl py-3 px-5 focus:bg-white outline-none font-bold text-sm transition-all" />
+                  <input name="engineCC" value={formData.engineCC} onChange={handleChange} placeholder="e.g. 1800cc" className="w-full bg-gray-50/50 border border-gray-200 rounded-xl py-4 px-6 focus:bg-white outline-none font-bold text-base transition-all" />
                 </div>
                 <div className="space-y-2">
                   <label className="text-[9px] font-black text-gray-400 uppercase tracking-widest ml-1">Mileage (KM)</label>
-                  <input name="mileage" value={formData.mileage} onChange={handleChange} placeholder="e.g. 45,000 km" className="w-full bg-gray-50/50 border border-gray-200 rounded-xl py-3 px-5 focus:bg-white outline-none font-bold text-sm transition-all" />
+                  <input name="mileage" value={formData.mileage} onChange={handleChange} placeholder="e.g. 45,000 km" className="w-full bg-gray-50/50 border border-gray-200 rounded-xl py-4 px-6 focus:bg-white outline-none font-bold text-base transition-all" />
                 </div>
               </div>
 
