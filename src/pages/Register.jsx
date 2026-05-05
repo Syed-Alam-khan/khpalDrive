@@ -138,12 +138,12 @@ export default function Register() {
               </label>
             </div>
             <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Update Profile Identity</p>
-            {errors.file && <p className="text-red-500 text-[10px] font-bold mt-1 ml-1">{errors.file}</p>}
+            {errors.file && <p className="text-red-500 text-[10px] font-bold mt-1 ml-1">* {errors.file}</p>}
           </div>
 
           <div className="border-b border-gray-100 pb-4 space-y-4">
             <div className="space-y-1.5">
-              <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">Full Name <span className="text-red-500">*</span></label>
+              <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">Full Name</label>
               <input 
                 required 
                 type="text" 
@@ -152,12 +152,12 @@ export default function Register() {
                 onChange={(e) => setFormData({...formData, name: e.target.value})} 
                 className="w-full bg-[#E5E7EB]/50 border-2 border-transparent rounded-2xl py-1.5 px-4 focus:bg-white focus:border-[#7C3AED]/20 transition-all outline-none text-sm text-gray-800 placeholder:text-gray-400 shadow-sm" 
               />
-              {errors.name && <p className="text-red-500 text-[10px] font-bold mt-0.5 ml-1">{errors.name}</p>}
+              {errors.name && <p className="text-red-500 text-[10px] font-bold mt-0.5 ml-1">* {errors.name}</p>}
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-1.5">
-                <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">Email Address <span className="text-red-500">*</span></label>
+                <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">Email Address</label>
                 <input 
                   required 
                   type="email" 
@@ -166,10 +166,10 @@ export default function Register() {
                   onChange={(e) => setFormData({...formData, email: e.target.value})} 
                   className="w-full bg-[#E5E7EB]/50 border-2 border-transparent rounded-2xl py-1.5 px-4 focus:bg-white focus:border-[#7C3AED]/20 transition-all outline-none text-sm text-gray-800 placeholder:text-gray-400 shadow-sm" 
                 />
-                {errors.email && <p className="text-red-500 text-[10px] font-bold mt-0.5 ml-1">{errors.email}</p>}
+                {errors.email && <p className="text-red-500 text-[10px] font-bold mt-0.5 ml-1">* {errors.email}</p>}
               </div>
               <div className="space-y-1.5">
-                <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">Phone Number <span className="text-red-500">*</span></label>
+                <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">Phone Number</label>
                 <input 
                   required 
                   type="text" 
@@ -178,7 +178,7 @@ export default function Register() {
                   onChange={(e) => setFormData({...formData, phoneNumber: e.target.value})} 
                   className="w-full bg-[#E5E7EB]/50 border-2 border-transparent rounded-2xl py-1.5 px-4 focus:bg-white focus:border-[#7C3AED]/20 transition-all outline-none text-sm text-gray-800 placeholder:text-gray-400 shadow-sm" 
                 />
-                {errors.phoneNumber && <p className="text-red-500 text-[10px] font-bold mt-0.5 ml-1">{errors.phoneNumber}</p>}
+                {errors.phoneNumber && <p className="text-red-500 text-[10px] font-bold mt-0.5 ml-1">* {errors.phoneNumber}</p>}
               </div>
             </div>
           </div>
@@ -187,7 +187,7 @@ export default function Register() {
             <p className="text-[10px] font-black text-[#7C3AED] uppercase tracking-widest ml-1">Security Credentials</p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-2">
-                <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">New Password <span className="text-red-500">*</span></label>
+                <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">New Password</label>
                 <div className="relative">
                   <input 
                     required 
@@ -201,10 +201,10 @@ export default function Register() {
                     {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
                   </button>
                 </div>
-                {errors.password && <p className="text-red-500 text-[10px] font-bold mt-0.5 ml-1">{errors.password}</p>}
+                {errors.password && <p className="text-red-500 text-[10px] font-bold mt-0.5 ml-1">* {errors.password}</p>}
               </div>
               <div className="space-y-2">
-                <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">Confirm New Password <span className="text-red-500">*</span></label>
+                <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">Confirm New Password</label>
                 <div className="relative">
                   <input 
                     required 
@@ -218,7 +218,7 @@ export default function Register() {
                     {showConfirmPassword ? <EyeOff size={18} /> : <Eye size={18} />}
                   </button>
                 </div>
-                {errors.confirmPassword && <p className="text-red-500 text-[10px] font-bold mt-0.5 ml-1">{errors.confirmPassword}</p>}
+                {errors.confirmPassword && <p className="text-red-500 text-[10px] font-bold mt-0.5 ml-1">* {errors.confirmPassword}</p>}
               </div>
             </div>
 

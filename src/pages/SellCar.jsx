@@ -41,7 +41,6 @@ export default function SellCar() {
   const [step, setStep] = useState(1);
   const [isSuccess, setIsSuccess] = useState(false);
   const [formData, setFormData] = useState({
-    carName: '',
     model: '',
     price: '',
     fuelType: 'Petrol',
@@ -52,7 +51,6 @@ export default function SellCar() {
     location: '',
     description: '',
     category: '',
-    year: '',
     mileage: ''
   });
   const [files, setFiles] = useState([]);
@@ -67,7 +65,6 @@ export default function SellCar() {
           const data = await getSingleCar(editId);
           const car = data.car || data;
           setFormData({
-            carName: car.carName || '',
             model: car.model || '',
             price: car.price || '',
             fuelType: car.fuelType || 'Petrol',
@@ -78,7 +75,6 @@ export default function SellCar() {
             location: car.location || '',
             description: car.description || '',
             category: car.category?._id || car.category || '',
-            year: car.year || '',
             mileage: car.mileage || ''
           });
           if (car.images) {
@@ -136,9 +132,7 @@ export default function SellCar() {
 
   const nextStep = () => {
     if (step === 1) {
-      if (!formData.carName.trim()) return toast.error("Car Make/Brand is required");
       if (!formData.model.trim()) return toast.error("Car Model is required");
-      if (!formData.year) return toast.error("Manufacture Year is required");
       if (!formData.category) return toast.error("Please select a category");
       if (!formData.price) return toast.error("Asking Price is required");
       if (!formData.location.trim()) return toast.error("Location is required");
@@ -280,16 +274,8 @@ export default function SellCar() {
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-2">
-                  <label className="text-[9px] font-black text-gray-400 uppercase tracking-widest ml-1">Car Make / Brand</label>
-                  <input name="carName" value={formData.carName} onChange={handleChange} placeholder="e.g. Toyota" className="w-full bg-gray-50/50 border border-gray-200 rounded-xl py-3 px-5 focus:bg-white focus:ring-2 focus:ring-[#4B2DBD]/5 focus:border-[#4B2DBD] outline-none font-bold text-sm transition-all" />
-                </div>
-                <div className="space-y-2">
                   <label className="text-[9px] font-black text-gray-400 uppercase tracking-widest ml-1">Car Model</label>
                   <input name="model" value={formData.model} onChange={handleChange} placeholder="e.g. 2002" className="w-full bg-gray-50/50 border border-gray-200 rounded-xl py-3 px-5 focus:bg-white focus:ring-2 focus:ring-[#4B2DBD]/5 focus:border-[#4B2DBD] outline-none font-bold text-sm transition-all" />
-                </div>
-                <div className="space-y-2">
-                  <label className="text-[9px] font-black text-gray-400 uppercase tracking-widest ml-1">Year</label>
-                  <input name="year" type="number" value={formData.year} onChange={handleChange} placeholder="e.g. 2024" className="w-full bg-gray-50/50 border border-gray-200 rounded-xl py-3 px-5 focus:bg-white outline-none font-bold text-sm transition-all" />
                 </div>
                 <div className="space-y-2">
                   <label className="text-[9px] font-black text-gray-400 uppercase tracking-widest ml-1">Category</label>
@@ -553,17 +539,9 @@ export default function SellCar() {
               </div>
               
               <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
-                <div className="p-4 rounded-2xl bg-gray-50/50 border border-gray-100">
-                  <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1">Make / Brand</p>
-                  <p className="text-[12px] font-black text-gray-900">{formData.carName}</p>
-                </div>
-                <div className="p-4 rounded-2xl bg-gray-50/50 border border-gray-100">
+                 <div className="p-4 rounded-2xl bg-gray-50/50 border border-gray-100">
                   <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1">Model</p>
                   <p className="text-[12px] font-black text-gray-900">{formData.model}</p>
-                </div>
-                <div className="p-4 rounded-2xl bg-gray-50/50 border border-gray-100">
-                  <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1">Year</p>
-                  <p className="text-[12px] font-black text-gray-900">{formData.year || '2024'}</p>
                 </div>
                 
                 <div className="p-4 rounded-2xl bg-gray-50/50 border border-gray-100">
