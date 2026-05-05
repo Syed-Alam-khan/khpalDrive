@@ -19,6 +19,7 @@ export default function Register() {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [errors, setErrors] = useState({});
 
   const handleFileChange = (e) => {
     const selectedFile = e.target.files[0];
@@ -30,34 +31,24 @@ export default function Register() {
 
   const handleRegister = async (e) => {
     e.preventDefault();
+    const newErrors = {};
 
-    // Custom Validation Messages
-    if (!formData.name) {
-      toast.error("Please enter your full name.");
-      return;
+    // Custom Validation Logic
+    if (!formData.name) newErrors.name = "Full name is required";
+    if (!formData.email) newErrors.email = "Email address is required";
+    if (!formData.phoneNumber) newErrors.phoneNumber = "Phone number is required";
+    if (!formData.password) newErrors.password = "Password is required";
+    if (formData.password && formData.password !== formData.confirmPassword) {
+      newErrors.confirmPassword = "Passwords do not match";
     }
-    if (!formData.email) {
-      toast.error("Please enter your email address.");
-      return;
-    }
-    if (!formData.phoneNumber) {
-      toast.error("Please enter your phone number.");
-      return;
-    }
-    if (!formData.password) {
-      toast.error("Please enter a password.");
-      return;
-    }
-    
-    if (formData.password !== formData.confirmPassword) {
-      toast.error("Passwords do not match.");
+    if (!file) newErrors.file = "Profile photo is required";
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
       return;
     }
 
-    if (!file) {
-      toast.error("Please upload a profile photo.");
-      return;
-    }
+    setErrors({});
 
     const form = new FormData();
     form.append('name', formData.name);
@@ -147,6 +138,7 @@ export default function Register() {
               </label>
             </div>
             <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Update Profile Identity</p>
+            {errors.file && <p className="text-red-500 text-[10px] font-bold mt-1 ml-1">{errors.file}</p>}
           </div>
 
           <div className="border-b border-gray-100 pb-4 space-y-4">
@@ -160,6 +152,7 @@ export default function Register() {
                 onChange={(e) => setFormData({...formData, name: e.target.value})} 
                 className="w-full bg-[#E5E7EB]/50 border-2 border-transparent rounded-2xl py-1.5 px-4 focus:bg-white focus:border-[#7C3AED]/20 transition-all outline-none text-sm text-gray-800 placeholder:text-gray-400 shadow-sm" 
               />
+              {errors.name && <p className="text-red-500 text-[10px] font-bold mt-0.5 ml-1">{errors.name}</p>}
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -173,6 +166,7 @@ export default function Register() {
                   onChange={(e) => setFormData({...formData, email: e.target.value})} 
                   className="w-full bg-[#E5E7EB]/50 border-2 border-transparent rounded-2xl py-1.5 px-4 focus:bg-white focus:border-[#7C3AED]/20 transition-all outline-none text-sm text-gray-800 placeholder:text-gray-400 shadow-sm" 
                 />
+                {errors.email && <p className="text-red-500 text-[10px] font-bold mt-0.5 ml-1">{errors.email}</p>}
               </div>
               <div className="space-y-1.5">
                 <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">Phone Number <span className="text-red-500">*</span></label>
@@ -184,6 +178,7 @@ export default function Register() {
                   onChange={(e) => setFormData({...formData, phoneNumber: e.target.value})} 
                   className="w-full bg-[#E5E7EB]/50 border-2 border-transparent rounded-2xl py-1.5 px-4 focus:bg-white focus:border-[#7C3AED]/20 transition-all outline-none text-sm text-gray-800 placeholder:text-gray-400 shadow-sm" 
                 />
+                {errors.phoneNumber && <p className="text-red-500 text-[10px] font-bold mt-0.5 ml-1">{errors.phoneNumber}</p>}
               </div>
             </div>
           </div>
@@ -206,6 +201,7 @@ export default function Register() {
                     {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
                   </button>
                 </div>
+                {errors.password && <p className="text-red-500 text-[10px] font-bold mt-0.5 ml-1">{errors.password}</p>}
               </div>
               <div className="space-y-2">
                 <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">Confirm New Password <span className="text-red-500">*</span></label>
@@ -222,6 +218,7 @@ export default function Register() {
                     {showConfirmPassword ? <EyeOff size={18} /> : <Eye size={18} />}
                   </button>
                 </div>
+                {errors.confirmPassword && <p className="text-red-500 text-[10px] font-bold mt-0.5 ml-1">{errors.confirmPassword}</p>}
               </div>
             </div>
 
