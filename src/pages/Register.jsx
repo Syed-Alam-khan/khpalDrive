@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import { useUser } from '../context/UserContext';
 import { Eye, EyeOff, Camera, CheckCircle2 } from 'lucide-react';
