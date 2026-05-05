@@ -191,7 +191,7 @@ export default function SellCar() {
         setIsSuccess(true);
       }
     } catch (err) {
-      toast.error(err.response?.data?.message || 'Submission failed');
+      console.error('Submission error:', err);
     }
   };
 
@@ -352,6 +352,7 @@ export default function SellCar() {
                   <div className="flex flex-wrap gap-2">
                     {['Petrol', 'Diesel', 'CNG', 'Hybrid', 'Electric'].map(type => (
                       <button 
+                        type="button"
                         key={type}
                         onClick={() => setManualValue('fuelType', type)}
                         className={`px-6 py-2 rounded-full text-[10px] font-bold transition-all border ${
@@ -375,6 +376,7 @@ export default function SellCar() {
                     <div className="flex gap-2">
                       {['Automatic', 'Manual'].map(t => (
                         <button 
+                          type="button"
                           key={t}
                           onClick={() => setManualValue('transmission', t)}
                           className={`flex-1 py-2 rounded-full text-[10px] font-bold transition-all border ${
@@ -396,6 +398,7 @@ export default function SellCar() {
                     <div className="flex gap-2">
                       {['Used', 'New'].map(c => (
                         <button 
+                          type="button"
                           key={c}
                           onClick={() => setManualValue('condition', c)}
                           className={`flex-1 py-2 rounded-full text-[10px] font-bold transition-all border ${
@@ -442,6 +445,7 @@ export default function SellCar() {
                 <div className="flex flex-wrap gap-2">
                   {['Non Cut', 'Cut', 'Import', 'Local'].map(type => (
                     <button 
+                      type="button"
                       key={type}
                       onClick={() => setManualValue('type', type)}
                       className={`px-6 py-2 rounded-full text-[10px] font-bold transition-all border ${
@@ -543,7 +547,7 @@ export default function SellCar() {
                       </div>
 
                       {/* Delete Button */}
-                      <button onClick={() => removeFile(i)} className="absolute top-1.5 right-1.5 w-6 h-6 bg-red-500/80 text-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity backdrop-blur-sm shadow-lg hover:bg-red-600">
+                      <button type="button" onClick={() => removeFile(i)} className="absolute top-1.5 right-1.5 w-6 h-6 bg-red-500/80 text-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity backdrop-blur-sm shadow-lg hover:bg-red-600">
                         <X size={12} strokeWidth={3} />
                       </button>
 
@@ -575,7 +579,7 @@ export default function SellCar() {
                   <div className="w-1.5 h-5 bg-[#4B2DBD] rounded-full"></div>
                   <h2 className="text-[10px] font-black text-[#4B2DBD] uppercase tracking-widest">Review Your Listing</h2>
                 </div>
-                <button onClick={() => setStep(1)} className="flex items-center gap-1.5 text-[9px] font-black text-[#4B2DBD] uppercase tracking-widest hover:underline">
+                <button type="button" onClick={() => setStep(1)} className="flex items-center gap-1.5 text-[9px] font-black text-[#4B2DBD] uppercase tracking-widest hover:underline">
                   <Edit3 size={12} /> Edit Details
                 </button>
               </div>
@@ -652,7 +656,7 @@ export default function SellCar() {
                   <div className="w-1.5 h-5 bg-[#4B2DBD] rounded-full"></div>
                   <h2 className="text-[10px] font-black text-[#4B2DBD] uppercase tracking-widest">Photos</h2>
                 </div>
-                <button onClick={() => setStep(3)} className="text-[9px] font-black text-[#4B2DBD] uppercase tracking-widest hover:underline">
+                <button type="button" onClick={() => setStep(3)} className="text-[9px] font-black text-[#4B2DBD] uppercase tracking-widest hover:underline">
                   Edit Photos
                 </button>
               </div>
