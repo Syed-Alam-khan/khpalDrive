@@ -236,11 +236,11 @@ export default function SellCar() {
           <div className="absolute top-4 md:top-6 left-0 w-full h-[2px] bg-white/10 -z-0"></div>
           {STEPS.map((s, idx) => (
             <div key={s.id} className="relative z-10 flex flex-col items-center gap-1.5 md:gap-3">
-              <div className={`w-8 h-8 md:w-12 md:h-12 rounded-full flex items-center justify-center transition-all duration-500 shadow-xl ${
+              <div className={`w-8 h-8 md:w-12 md:h-12 rounded-full flex items-center justify-center transition-all duration-500 ${
                 step === s.id 
-                  ? 'bg-white text-[#4B2DBD] scale-110 shadow-white/20' 
+                  ? 'bg-white text-[#4B2DBD] scale-110' 
                   : step > s.id 
-                    ? 'bg-purple-500 text-white shadow-purple-900/20' 
+                    ? 'bg-purple-500 text-white' 
                     : 'bg-[#4B2DBD] border border-white/30 md:border-2 md:border-white/20 text-white/60'
               }`}>
                 {step > s.id ? (
