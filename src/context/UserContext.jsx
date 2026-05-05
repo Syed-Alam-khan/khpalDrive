@@ -25,6 +25,7 @@ export function UserProvider({ children }) {
     setError(null);
     try {
       const { data } = await API.post('/users/login', { email, password });
+      console.log("Login Response Data:", data);
       // Ensure token is explicitly included in the stored data
       localStorage.setItem('userInfo', JSON.stringify(data));
       setUser(data.user);
@@ -44,6 +45,7 @@ export function UserProvider({ children }) {
     setError(null);
     try {
       const { data } = await API.post('/users/register', formData);
+      console.log("Register Response Data:", data);
       localStorage.setItem('userInfo', JSON.stringify(data));
       setUser(data.user);
       return data;
