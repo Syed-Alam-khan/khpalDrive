@@ -35,13 +35,6 @@ export default function Login() {
       <div className="w-full lg:w-[45%] flex flex-col justify-start pt-24 px-8 md:px-16 lg:px-24">
         <div className="max-w-sm w-full mx-auto space-y-12">
           
-          {/* Logo */}
-          <div className="flex flex-col items-center space-y-2">
-            <div className="flex items-center gap-3 bg-[#4B2DBD] py-3 px-6 rounded-2xl shadow-xl shadow-indigo-100">
-              <img src="/kd_logo.png" alt="KhpalDrive" className="h-8 w-auto object-contain" />
-              <h1 className="text-2xl font-black tracking-tight text-white uppercase">KhpalDrive</h1>
-            </div>
-          </div>
 
           {/* Form */}
           <form onSubmit={handleLogin} className="space-y-8 pt-4">
