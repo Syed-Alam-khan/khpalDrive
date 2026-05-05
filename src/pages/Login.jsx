@@ -21,7 +21,7 @@ export default function Login() {
         if (data.user && data.user.role === 'admin') {
           window.location.href = '/admin';
         } else {
-          window.location.href = '/';
+          window.location.href = '/sell';
         }
       }, 1000);
     } catch (err) {

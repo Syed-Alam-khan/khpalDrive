@@ -73,7 +73,7 @@ export default function Register() {
         if (user?.role === 'admin') {
           window.location.href = '/admin';
         } else {
-          window.location.href = '/';
+          window.location.href = '/sell';
         }
       }, 2000);
       return () => clearTimeout(timer);
