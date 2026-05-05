@@ -133,7 +133,7 @@ export default function Register() {
 
           <div className="border-b border-gray-100 pb-4 space-y-4">
             <div className="space-y-1.5">
-              <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">Full Name</label>
+              <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">Full Name <span className="text-red-500">*</span></label>
               <input 
                 required 
                 type="text" 
@@ -146,7 +146,7 @@ export default function Register() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-1.5">
-                <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">Email Address</label>
+                <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">Email Address <span className="text-red-500">*</span></label>
                 <input 
                   required 
                   type="email" 
@@ -157,7 +157,7 @@ export default function Register() {
                 />
               </div>
               <div className="space-y-1.5">
-                <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">Phone Number</label>
+                <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">Phone Number <span className="text-red-500">*</span></label>
                 <input 
                   required 
                   type="text" 
@@ -174,7 +174,7 @@ export default function Register() {
             <p className="text-[10px] font-black text-[#7C3AED] uppercase tracking-widest ml-1">Security Credentials</p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-2">
-                <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">New Password</label>
+                <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">New Password <span className="text-red-500">*</span></label>
                 <div className="relative">
                   <input 
                     required 
@@ -190,7 +190,7 @@ export default function Register() {
                 </div>
               </div>
               <div className="space-y-2">
-                <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">Confirm New Password</label>
+                <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">Confirm New Password <span className="text-red-500">*</span></label>
                 <div className="relative">
                   <input 
                     required 
