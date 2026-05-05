@@ -88,7 +88,8 @@ export default function MyListings() {
   };
 
   const filteredListings = listings.filter(item => {
-    const matchesSearch = item.carName.toLowerCase().includes(searchQuery.toLowerCase());
+    const carTitle = item.model || '';
+    const matchesSearch = carTitle.toLowerCase().includes(searchQuery.toLowerCase());
     const matchesFilter = filter === 'All' || 
                         (filter === 'Active' && item.status !== 'sold') || 
                         (filter === 'Sold' && item.status === 'sold');
@@ -139,10 +140,10 @@ export default function MyListings() {
               { id: 'All', label: 'All' },
               { id: 'Active', label: 'Active' },
               { id: 'Sold', label: 'Sold' }
-            ].map((tab) => {
-              const count = tab.id === 'All' ? listings.length :
-                          tab.id === 'Active' ? listings.filter(i => i.status !== 'sold').length :
-                          listings.filter(i => i.status === 'sold').length;
+              ].map((tab) => {
+                const count = tab.id === 'All' ? listings.length :
+                            tab.id === 'Active' ? listings.filter(i => i.status !== 'sold').length :
+                            listings.filter(i => i.status === 'sold').length;
               
               return (
                 <button
@@ -198,7 +199,7 @@ export default function MyListings() {
                           <img src={getImageUrl(item.images?.[0])} className="w-full h-full object-cover" alt="" />
                       </div>
                       <div className="space-y-0.5">
-                          <div className="text-gray-900 font-medium text-sm">{item.carName}</div>
+                          <div className="text-gray-900 font-medium text-sm">{item.model}</div>
                           <div className="text-xs text-gray-500">
                             {item.model} · {item.fuelType} · {item.transmission}
                           </div>

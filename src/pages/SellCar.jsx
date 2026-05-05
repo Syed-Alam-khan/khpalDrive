@@ -40,6 +40,7 @@ export default function SellCar() {
   
   const [step, setStep] = useState(1);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [errors, setErrors] = useState({});
   const [formData, setFormData] = useState({
     model: '',
     price: '',
@@ -131,27 +132,34 @@ export default function SellCar() {
   };
 
   const nextStep = () => {
+    const newErrors = {};
     if (step === 1) {
-      if (!formData.model.trim()) return toast.error("Car Model is required");
-      if (!formData.category) return toast.error("Please select a category");
-      if (!formData.price) return toast.error("Asking Price is required");
-      if (!formData.location.trim()) return toast.error("Location is required");
+      if (!formData.model.trim()) newErrors.model = "Car Model is required";
+      if (!formData.category) newErrors.category = "Please select a category";
+      if (!formData.price) newErrors.price = "Asking Price is required";
+      if (!formData.location.trim()) newErrors.location = "Location is required";
     }
     
     if (step === 2) {
-      if (!formData.fuelType) return toast.error("Please select Fuel Type");
-      if (!formData.transmission) return toast.error("Please select Transmission");
-      if (!formData.condition) return toast.error("Please select Condition");
-      if (!formData.engineCC.trim()) return toast.error("Engine CC is required");
-      if (!formData.mileage.trim()) return toast.error("Mileage is required");
+      if (!formData.fuelType) newErrors.fuelType = "Please select Fuel Type";
+      if (!formData.transmission) newErrors.transmission = "Please select Transmission";
+      if (!formData.condition) newErrors.condition = "Please select Condition";
+      if (!formData.engineCC.trim()) newErrors.engineCC = "Engine CC is required";
+      if (!formData.mileage.trim()) newErrors.mileage = "Mileage is required";
     }
     
-    if (step === 3) {
-      if (files.length === 0 && previews.length === 0) {
-        return toast.error("Please upload at least one photo of your car");
-      }
+    // if (step === 3) {
+    //   if (files.length === 0 && previews.length === 0) {
+    //     newErrors.files = "Please upload at least one photo of your car";
+    //   }
+    // }
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      return;
     }
     
+    setErrors({});
     setStep(prev => prev + 1);
     window.scrollTo(0, 0);
   };
@@ -218,6 +226,7 @@ export default function SellCar() {
 
   return (
     <div className="min-h-screen bg-[#F3F4F6]/50">
+      <form onSubmit={handleSubmit} noValidate>
       {/* Header Banner */}
       <div className="bg-[#4B2DBD] pt-3 pb-6 md:pt-12 md:pb-20 px-4 text-left md:text-center relative overflow-hidden">
         {/* Background Decorative Circles */}
@@ -274,11 +283,19 @@ export default function SellCar() {
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-2">
-                  <label className="text-[9px] font-black text-gray-400 uppercase tracking-widest ml-1">Car Model</label>
-                  <input name="model" value={formData.model} onChange={handleChange} placeholder="e.g. 2002" className="w-full bg-gray-50/50 border border-gray-200 rounded-xl py-4 px-6 focus:bg-white focus:ring-2 focus:ring-[#4B2DBD]/5 focus:border-[#4B2DBD] outline-none font-bold text-base transition-all" />
+                  <label className="text-[9px] font-black text-gray-400 uppercase tracking-widest ml-1 flex items-center gap-0.5">
+                    Car Model <span className="text-red-500">*</span>
+                  </label>
+                  <div className="relative">
+                    <input name="model" value={formData.model} onChange={handleChange} placeholder="e.g. 2002" className="w-full bg-gray-50/50 border border-gray-200 rounded-xl py-4 pl-12 pr-6 focus:bg-white focus:ring-2 focus:ring-[#4B2DBD]/5 focus:border-[#4B2DBD] outline-none font-bold text-base transition-all" />
+                    <FileText className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-300" size={14} />
+                  </div>
+                  {errors.model && <p className="text-red-500 text-[10px] font-bold mt-1 ml-1">* {errors.model}</p>}
                 </div>
                 <div className="space-y-2">
-                  <label className="text-[9px] font-black text-gray-400 uppercase tracking-widest ml-1">Category</label>
+                  <label className="text-[9px] font-black text-gray-400 uppercase tracking-widest ml-1 flex items-center gap-0.5">
+                    Category <span className="text-red-500">*</span>
+                  </label>
                   <div className="relative">
                     <select name="category" value={formData.category} onChange={handleChange} className="w-full bg-gray-50/50 border border-gray-200 rounded-xl py-4 px-6 focus:bg-white outline-none font-bold text-base transition-all appearance-none">
                       <option value="">Select Category</option>
@@ -288,21 +305,31 @@ export default function SellCar() {
                     </select>
                     <ChevronRight size={14} className="absolute right-5 top-1/2 -translate-y-1/2 text-gray-400 rotate-90" />
                   </div>
+                  {errors.category && <p className="text-red-500 text-[10px] font-bold mt-1 ml-1">* {errors.category}</p>}
                 </div>
                 <div className="space-y-2">
-                  <label className="text-[9px] font-black text-gray-400 uppercase tracking-widest ml-1">Asking Price (PKR)</label>
-                  <input name="price" type="number" value={formData.price} onChange={handleChange} placeholder="4,500,000" className="w-full bg-gray-50/50 border border-[#4B2DBD]/20 rounded-xl py-4 px-6 focus:bg-white focus:border-[#4B2DBD] outline-none font-black text-base text-[#4B2DBD] transition-all" />
+                  <label className="text-[9px] font-black text-gray-400 uppercase tracking-widest ml-1 flex items-center gap-0.5">
+                    Asking Price (PKR) <span className="text-red-500">*</span>
+                  </label>
+                  <div className="relative">
+                    <input name="price" type="text" value={formData.price} onChange={handleChange} placeholder="4,500,000" className="w-full bg-gray-50/50 border border-[#4B2DBD]/20 rounded-xl py-4 pl-14 pr-6 focus:bg-white focus:border-[#4B2DBD] outline-none font-black text-base text-[#4B2DBD] transition-all" />
+                    <span className="absolute left-5 top-1/2 -translate-y-1/2 text-[10px] font-black text-[#4B2DBD]/40">PKR</span>
+                  </div>
+                  {errors.price && <p className="text-red-500 text-[10px] font-bold mt-1 ml-1">* {errors.price}</p>}
                 </div>
                 <div className="space-y-2">
-                  <label className="text-[9px] font-black text-gray-400 uppercase tracking-widest ml-1">Location</label>
+                  <label className="text-[9px] font-black text-gray-400 uppercase tracking-widest ml-1 flex items-center gap-0.5">
+                    Location <span className="text-red-500">*</span>
+                  </label>
                   <div className="relative">
                     <input name="location" value={formData.location} onChange={handleChange} placeholder="e.g. Islamabad" className="w-full bg-gray-50/50 border border-gray-200 rounded-xl py-4 pl-12 pr-6 focus:bg-white outline-none font-bold text-base transition-all" />
                     <MapPin className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-300" size={14} />
                   </div>
+                  {errors.location && <p className="text-red-500 text-[10px] font-bold mt-1 ml-1">* {errors.location}</p>}
                 </div>
               </div>
             </div>
-            <button onClick={nextStep} className="w-full bg-[#4B2DBD] text-white py-4 rounded-xl font-black text-base flex items-center justify-center gap-2 hover:bg-[#3b2396] transition-all shadow-lg shadow-purple-100 active:scale-[0.98]">
+            <button type="button" onClick={nextStep} className="w-full bg-[#4B2DBD] text-white py-4 rounded-xl font-black text-base flex items-center justify-center gap-2 hover:bg-[#3b2396] transition-all shadow-lg shadow-purple-100 active:scale-[0.98]">
               Continue <ArrowRight size={18} />
             </button>
           </div>
@@ -319,7 +346,9 @@ export default function SellCar() {
               
               <div className="space-y-6">
                 <div className="space-y-3">
-                  <p className="text-[9px] font-black text-gray-400 uppercase tracking-widest ml-1">Fuel Type</p>
+                  <p className="text-[9px] font-black text-gray-400 uppercase tracking-widest ml-1 flex items-center gap-0.5">
+                    Fuel Type <span className="text-red-500">*</span>
+                  </p>
                   <div className="flex flex-wrap gap-2">
                     {['Petrol', 'Diesel', 'CNG', 'Hybrid', 'Electric'].map(type => (
                       <button 
@@ -335,11 +364,14 @@ export default function SellCar() {
                       </button>
                     ))}
                   </div>
+                  {errors.fuelType && <p className="text-red-500 text-[10px] font-bold mt-1 ml-1">* {errors.fuelType}</p>}
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-3">
-                    <p className="text-[9px] font-black text-gray-400 uppercase tracking-widest ml-1">Transmission</p>
+                    <p className="text-[9px] font-black text-gray-400 uppercase tracking-widest ml-1 flex items-center gap-0.5">
+                      Transmission <span className="text-red-500">*</span>
+                    </p>
                     <div className="flex gap-2">
                       {['Automatic', 'Manual'].map(t => (
                         <button 
@@ -355,9 +387,12 @@ export default function SellCar() {
                         </button>
                       ))}
                     </div>
+                    {errors.transmission && <p className="text-red-500 text-[10px] font-bold mt-1 ml-1">* {errors.transmission}</p>}
                   </div>
                   <div className="space-y-3">
-                    <p className="text-[9px] font-black text-gray-400 uppercase tracking-widest ml-1">Condition</p>
+                    <p className="text-[9px] font-black text-gray-400 uppercase tracking-widest ml-1 flex items-center gap-0.5">
+                      Condition <span className="text-red-500">*</span>
+                    </p>
                     <div className="flex gap-2">
                       {['Used', 'New'].map(c => (
                         <button 
@@ -373,6 +408,7 @@ export default function SellCar() {
                         </button>
                       ))}
                     </div>
+                    {errors.condition && <p className="text-red-500 text-[10px] font-bold mt-1 ml-1">* {errors.condition}</p>}
                   </div>
                 </div>
               </div>
@@ -386,12 +422,18 @@ export default function SellCar() {
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                 <div className="space-y-2">
-                  <label className="text-[9px] font-black text-gray-400 uppercase tracking-widest ml-1">Engine CC</label>
+                  <label className="text-[9px] font-black text-gray-400 uppercase tracking-widest ml-1 flex items-center gap-0.5">
+                    Engine CC <span className="text-red-500">*</span>
+                  </label>
                   <input name="engineCC" value={formData.engineCC} onChange={handleChange} placeholder="e.g. 1800cc" className="w-full bg-gray-50/50 border border-gray-200 rounded-xl py-4 px-6 focus:bg-white outline-none font-bold text-base transition-all" />
+                  {errors.engineCC && <p className="text-red-500 text-[10px] font-bold mt-1 ml-1">* {errors.engineCC}</p>}
                 </div>
                 <div className="space-y-2">
-                  <label className="text-[9px] font-black text-gray-400 uppercase tracking-widest ml-1">Mileage (KM)</label>
+                  <label className="text-[9px] font-black text-gray-400 uppercase tracking-widest ml-1 flex items-center gap-0.5">
+                    Mileage (KM) <span className="text-red-500">*</span>
+                  </label>
                   <input name="mileage" value={formData.mileage} onChange={handleChange} placeholder="e.g. 45,000 km" className="w-full bg-gray-50/50 border border-gray-200 rounded-xl py-4 px-6 focus:bg-white outline-none font-bold text-base transition-all" />
+                  {errors.mileage && <p className="text-red-500 text-[10px] font-bold mt-1 ml-1">* {errors.mileage}</p>}
                 </div>
               </div>
 
@@ -421,10 +463,10 @@ export default function SellCar() {
             </div>
             
             <div className="flex gap-3">
-              <button onClick={prevStep} className="flex-1 bg-white text-gray-400 border border-gray-200 py-4 rounded-xl font-black text-base hover:bg-gray-50 transition-all active:scale-[0.98]">
+              <button type="button" onClick={prevStep} className="flex-1 bg-white text-gray-400 border border-gray-200 py-4 rounded-xl font-black text-base hover:bg-gray-50 transition-all active:scale-[0.98]">
                 ← Back
               </button>
-              <button onClick={nextStep} className="flex-[2] bg-[#4B2DBD] text-white py-4 rounded-xl font-black text-base flex items-center justify-center gap-2 hover:bg-[#3b2396] transition-all shadow-lg active:scale-[0.98]">
+              <button type="button" onClick={nextStep} className="flex-[2] bg-[#4B2DBD] text-white py-4 rounded-xl font-black text-base flex items-center justify-center gap-2 hover:bg-[#3b2396] transition-all shadow-lg active:scale-[0.98]">
                 Continue <ArrowRight size={18} />
               </button>
             </div>
@@ -466,7 +508,6 @@ export default function SellCar() {
                 </div>
                 <span className="text-[9px] font-bold text-blue-600 bg-blue-50 px-2.5 py-1 rounded-full">{files.length} selected</span>
               </div>
-              
               <div className="space-y-8">
                 <label className="w-full h-48 bg-gray-50/50 border-2 border-dashed border-gray-200 rounded-[2rem] hover:bg-purple-50/30 hover:border-[#4B2DBD]/20 transition-all flex flex-col items-center justify-center gap-3 cursor-pointer group relative overflow-hidden">
                   <input type="file" multiple accept="image/*" onChange={handleFileChange} className="absolute inset-0 opacity-0 cursor-pointer" />
@@ -478,6 +519,7 @@ export default function SellCar() {
                     <p className="text-[9px] font-bold text-gray-400 mt-1 uppercase tracking-widest">Up to 10 photos · Max 10MB each</p>
                   </div>
                 </label>
+                {errors.files && <p className="text-red-500 text-[10px] font-bold mt-1 text-center">* {errors.files}</p>}
 
                 <div className="grid grid-cols-3 md:grid-cols-5 gap-3">
                   {previews.map((url, i) => (
@@ -513,10 +555,10 @@ export default function SellCar() {
             </div>
 
             <div className="flex gap-3">
-              <button onClick={prevStep} className="flex-1 bg-white text-gray-400 border border-gray-200 py-4 rounded-xl font-black text-base hover:bg-gray-50 transition-all active:scale-[0.98]">
+              <button type="button" onClick={prevStep} className="flex-1 bg-white text-gray-400 border border-gray-200 py-4 rounded-xl font-black text-base hover:bg-gray-50 transition-all active:scale-[0.98]">
                 ← Back
               </button>
-              <button onClick={nextStep} className="flex-[2] bg-[#4B2DBD] text-white py-4 rounded-xl font-black text-base flex items-center justify-center gap-2 hover:bg-[#3b2396] transition-all shadow-lg active:scale-[0.98]">
+              <button type="button" onClick={nextStep} className="flex-[2] bg-[#4B2DBD] text-white py-4 rounded-xl font-black text-base flex items-center justify-center gap-2 hover:bg-[#3b2396] transition-all shadow-lg active:scale-[0.98]">
                 Review Listing <ArrowRight size={18} />
               </button>
             </div>
@@ -640,13 +682,14 @@ export default function SellCar() {
             
             <div className="flex gap-4 pt-4">
               <button 
+                type="button"
                 onClick={() => setStep(3)} 
                 className="flex-1 bg-white border border-gray-100 text-gray-400 py-4 rounded-xl font-black text-base hover:bg-gray-50 transition-all active:scale-95"
               >
                 ← Edit
               </button>
               <button 
-                onClick={handleSubmit} 
+                type="submit"
                 disabled={loading} 
                 className={`flex-[3] bg-emerald-500 text-white py-4 rounded-xl font-black text-lg flex items-center justify-center gap-2 hover:bg-emerald-600 transition-all shadow-lg active:scale-95 ${loading ? 'opacity-50' : ''}`}
               >
@@ -656,6 +699,7 @@ export default function SellCar() {
           </div>
         )}
       </div>
+      </form>
     </div>
   );
 }
