@@ -19,9 +19,9 @@ export default function Login() {
       toast.success(data.message || 'Login successful!');
       setTimeout(() => {
         if (data.user && data.user.role === 'admin') {
-          navigate('/admin');
+          window.location.href = '/admin';
         } else {
-          navigate('/');
+          window.location.href = '/';
         }
       }, 1000);
     } catch (err) {

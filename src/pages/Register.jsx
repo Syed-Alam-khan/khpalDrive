@@ -71,9 +71,9 @@ export default function Register() {
         const info = localStorage.getItem('userInfo');
         const user = info ? JSON.parse(info).user : null;
         if (user?.role === 'admin') {
-          navigate('/admin');
+          window.location.href = '/admin';
         } else {
-          navigate('/');
+          window.location.href = '/';
         }
       }, 2000);
       return () => clearTimeout(timer);
