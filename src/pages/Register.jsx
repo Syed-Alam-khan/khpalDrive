@@ -30,6 +30,24 @@ export default function Register() {
 
   const handleRegister = async (e) => {
     e.preventDefault();
+
+    // Custom Validation Messages
+    if (!formData.name) {
+      toast.error("Please enter your full name.");
+      return;
+    }
+    if (!formData.email) {
+      toast.error("Please enter your email address.");
+      return;
+    }
+    if (!formData.phoneNumber) {
+      toast.error("Please enter your phone number.");
+      return;
+    }
+    if (!formData.password) {
+      toast.error("Please enter a password.");
+      return;
+    }
     
     if (formData.password !== formData.confirmPassword) {
       toast.error("Passwords do not match.");
@@ -109,7 +127,7 @@ export default function Register() {
       </div>
 
       <div className="max-w-lg w-full bg-white rounded-[2.5rem] border border-gray-200 p-4 md:p-6 shadow-xl">
-        <form onSubmit={handleRegister} className="space-y-3">
+        <form onSubmit={handleRegister} className="space-y-3" noValidate>
           
           {/* Avatar Upload */}
           <div className="flex flex-col items-center gap-2">
