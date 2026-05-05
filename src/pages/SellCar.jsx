@@ -208,6 +208,7 @@ export default function SellCar() {
            </div>
            <div className="flex flex-col gap-3">
              <button 
+              type="button"
               onClick={() => { setIsSuccess(false); setStep(1); setFormData({
                 carName: '', model: '', price: '', fuelType: 'Petrol', transmission: 'Automatic',
                 engineCC: '', condition: 'Used', type: 'Non Cut', location: '', description: '',
@@ -533,12 +534,14 @@ export default function SellCar() {
                       {/* Controls Overlay */}
                       <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-between px-2">
                         <button 
+                          type="button"
                           onClick={() => moveFile(i, 'left')} 
                           className={`w-6 h-6 bg-white/90 text-[#4B2DBD] rounded-full flex items-center justify-center shadow-md hover:bg-white transition-all ${i === 0 ? 'invisible' : ''}`}
                         >
                           <ChevronLeft size={14} strokeWidth={3} />
                         </button>
                         <button 
+                          type="button"
                           onClick={() => moveFile(i, 'right')} 
                           className={`w-6 h-6 bg-white/90 text-[#4B2DBD] rounded-full flex items-center justify-center shadow-md hover:bg-white transition-all ${i === previews.length - 1 ? 'invisible' : ''}`}
                         >
