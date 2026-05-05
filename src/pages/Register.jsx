@@ -65,6 +65,21 @@ export default function Register() {
 
   const strength = getPasswordStrength();
 
+  useEffect(() => {
+    if (isSuccess) {
+      const timer = setTimeout(() => {
+        const info = localStorage.getItem('userInfo');
+        const user = info ? JSON.parse(info).user : null;
+        if (user?.role === 'admin') {
+          window.location.href = '/admin';
+        } else {
+          window.location.href = '/';
+        }
+      }, 2000);
+      return () => clearTimeout(timer);
+    }
+  }, [isSuccess, navigate]);
+
   if (isSuccess) {
     return (
       <div className="min-h-screen bg-[#F3F4F6] flex flex-col items-center justify-center py-12 px-4 animate-in fade-in zoom-in-95 duration-500">
@@ -78,15 +93,7 @@ export default function Register() {
           <div className="space-y-2">
             <h1 className="text-2xl font-black text-gray-800 tracking-tight">Congratulations {formData.name}</h1>
             <p className="text-[#7C3AED] font-bold text-lg">Your Identity & Security synchronized successfully! ✨</p>
-          </div>
-
-          <div className="pt-6">
-            <button 
-              onClick={() => navigate('/login')} 
-              className="w-full bg-[#7C3AED] hover:bg-[#6D28D9] text-white py-5 rounded-2xl font-black text-lg transition-all active:scale-[0.98] shadow-lg shadow-purple-200 uppercase tracking-widest"
-            >
-              Go to Login
-            </button>
+            <p className="text-gray-400 text-xs font-bold uppercase tracking-widest pt-4">Redirecting you to dashboard...</p>
           </div>
         </div>
       </div>

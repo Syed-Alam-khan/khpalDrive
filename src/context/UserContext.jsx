@@ -4,7 +4,18 @@ import API from '../services/api';
 const UserContext = createContext();
 
 export function UserProvider({ children }) {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(() => {
+    const storedInfo = localStorage.getItem('userInfo');
+    if (storedInfo) {
+      try {
+        const parsed = JSON.parse(storedInfo);
+        return parsed.user || parsed;
+      } catch (e) {
+        return null;
+      }
+    }
+    return null;
+  });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
@@ -14,6 +25,7 @@ export function UserProvider({ children }) {
     setError(null);
     try {
       const { data } = await API.post('/users/login', { email, password });
+      // Ensure token is explicitly included in the stored data
       localStorage.setItem('userInfo', JSON.stringify(data));
       setUser(data.user);
       return data;

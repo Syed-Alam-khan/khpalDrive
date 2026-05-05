@@ -18,8 +18,13 @@ API.interceptors.request.use(
       const userInfo = localStorage.getItem('userInfo');
       if (userInfo) {
         const parsedInfo = JSON.parse(userInfo);
-        if (parsedInfo && parsedInfo.token) {
-          config.headers.Authorization = `Bearer ${parsedInfo.token}`;
+        // The token could be in parsedInfo.token or parsedInfo.data.token depending on response structure
+        const token = parsedInfo.token || parsedInfo.data?.token;
+        
+        if (token) {
+          config.headers.Authorization = `Bearer ${token}`;
+        } else {
+          console.warn("No token found in userInfo", parsedInfo);
         }
       }
     } catch (error) {
