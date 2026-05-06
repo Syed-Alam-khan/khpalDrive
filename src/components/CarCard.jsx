@@ -26,6 +26,9 @@ export default function CarCard({ car }) {
             <h3 className="text-base font-black text-gray-800 truncate">
               {car.carName}
             </h3>
+            <p className="text-[9px] font-black text-gray-400 uppercase tracking-[0.1em] mb-0.5">
+              {car.category?.name || 'Luxury'}
+            </p>
             <p className="text-[#4B2DBD] font-black text-xl md:text-base truncate">
               PKR {car.price?.toLocaleString()}
             </p>
