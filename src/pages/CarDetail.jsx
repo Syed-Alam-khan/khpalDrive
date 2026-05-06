@@ -11,19 +11,31 @@ import {
   Phone, 
   MessageSquare,
   ChevronLeft,
-  ChevronRight
+  ChevronRight,
+  X
 } from 'lucide-react';
+
 
 export default function CarDetail() {
   const { id } = useParams();
   const { getSingleCar, singleCar, loading } = useCar();
   const [activeImage, setActiveImage] = useState(0);
+  const [isFullScreenOpen, setIsFullScreenOpen] = useState(false);
 
   useEffect(() => {
     if (id) {
       getSingleCar(id);
     }
   }, [id]);
+
+  useEffect(() => {
+    if (isFullScreenOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => { document.body.style.overflow = 'unset'; };
+  }, [isFullScreenOpen]);
 
   if (loading) return (
     <div className="flex flex-col items-center justify-center min-h-[60vh] gap-4">
@@ -83,7 +95,8 @@ export default function CarDetail() {
             <img 
               src={getImageUrl(car.images?.[activeImage])} 
               alt={car.carName} 
-              className="w-full aspect-[4/3] md:aspect-[16/11] object-cover transition-transform duration-700 group-hover:scale-105" 
+              className="w-full aspect-[4/3] md:aspect-[16/11] object-cover transition-transform duration-700 group-hover:scale-105 cursor-zoom-in" 
+              onClick={() => setIsFullScreenOpen(true)}
             />
             <div className="absolute bottom-3 right-3 bg-white/90 backdrop-blur-sm text-gray-900 px-3 py-1 rounded-full text-[10px] font-black shadow-sm">
                {activeImage + 1} / {car.images?.length || 1}
@@ -241,9 +254,51 @@ export default function CarDetail() {
           </div>
         </div>
       </div>
+
+      {/* Full Screen Image Modal */}
+      {isFullScreenOpen && (
+        <div 
+          className="fixed inset-0 z-[100] bg-black/95 backdrop-blur-md flex items-center justify-center animate-in fade-in duration-300"
+          onClick={() => setIsFullScreenOpen(false)}
+        >
+          <button 
+            className="absolute top-6 right-6 text-white/50 hover:text-white transition-colors p-2 z-[110]"
+            onClick={() => setIsFullScreenOpen(false)}
+          >
+            <X size={32} />
+          </button>
+          
+          <div className="relative w-full max-w-5xl px-4 flex items-center justify-center" onClick={(e) => e.stopPropagation()}>
+             <img 
+               src={getImageUrl(car.images?.[activeImage])} 
+               className="max-w-full max-h-[90vh] object-contain rounded-lg shadow-2xl animate-in zoom-in duration-500"
+               alt=""
+             />
+             
+             {car.images?.length > 1 && (
+               <>
+                 <button 
+                   onClick={() => setActiveImage(prev => prev === 0 ? car.images.length - 1 : prev - 1)}
+                   className="absolute left-6 md:left-10 top-1/2 -translate-y-1/2 p-3 bg-white/10 hover:bg-white/20 rounded-full text-white backdrop-blur-md transition-all hover:scale-110 active:scale-95"
+                 >
+                   <ChevronLeft size={24} />
+                 </button>
+                 <button 
+                   onClick={() => setActiveImage(prev => prev === car.images.length - 1 ? 0 : prev + 1)}
+                   className="absolute right-6 md:right-10 top-1/2 -translate-y-1/2 p-3 bg-white/10 hover:bg-white/20 rounded-full text-white backdrop-blur-md transition-all hover:scale-110 active:scale-95"
+                 >
+                   <ChevronRight size={24} />
+                 </button>
+               </>
+             )}
+             
+             <div className="absolute bottom-[-40px] left-1/2 -translate-x-1/2 text-white/50 font-black text-[10px] uppercase tracking-[0.3em]">
+                {activeImage + 1} / {car.images?.length}
+             </div>
+          </div>
+        </div>
+      )}
     </div>
-
-
   );
 }
 
