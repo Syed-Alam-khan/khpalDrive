@@ -198,12 +198,23 @@ const SearchFilter = ({ onSearch }) => {
           </div>
           <FaChevronDown size={12} className="text-gray-300" />
         </button>
-        <button 
-          onClick={() => onSearch(filters)}
-          className="bg-[#4B2DBD] text-white w-14 rounded-2xl flex items-center justify-center shadow-lg shadow-purple-100"
-        >
-          <FaSearch size={18} />
-        </button>
+        {activeFiltersCount > 0 ? (
+          <button 
+            onClick={handleClear}
+            className="bg-red-500 text-white w-14 rounded-2xl flex items-center justify-center shadow-lg shadow-red-100 animate-in zoom-in duration-300"
+            title="Clear Filters"
+          >
+            <RotateCcw size={18} />
+          </button>
+        ) : (
+          <button 
+            onClick={() => onSearch(filters)}
+            className="bg-[#4B2DBD] text-white w-14 rounded-2xl flex items-center justify-center shadow-lg shadow-purple-100 animate-in zoom-in duration-300"
+            title="Search"
+          >
+            <FaSearch size={18} />
+          </button>
+        )}
       </div>
 
       {/* Mobile Filter Modal (Full Screen Overlay) */}
