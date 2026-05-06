@@ -24,7 +24,7 @@ export default function CarCard({ car }) {
           {/* Text Content */}
           <div className="flex flex-col flex-1 min-w-0">
             <h3 className="text-base font-black text-gray-800 truncate">
-              {car.carName} {car.year || '2022'}
+              {car.carName}
             </h3>
             <p className="text-[#4B2DBD] font-black text-xl md:text-base truncate">
               PKR {car.price?.toLocaleString()}

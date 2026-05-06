@@ -123,6 +123,12 @@ export default function CarDetail() {
 
         {/* Right: Info */}
         <div className="space-y-5">
+          <div className="flex flex-wrap items-center gap-2">
+            <div className="bg-white border border-gray-100 px-2.5 py-1 rounded-md text-gray-500 font-bold text-[9px] uppercase tracking-wider flex items-center gap-1.5 shadow-sm">
+              <MapPin size={12} className="text-gray-400" />
+              {car.location}
+            </div>
+          </div>
           <div className="space-y-1">
             <h1 className=" font-black text-gray-900 tracking-tight uppercase">
               {car.carName} {car.model}
@@ -132,15 +138,7 @@ export default function CarDetail() {
             </div>
           </div>
 
-          <div className="flex flex-wrap items-center gap-2">
-            <div className="bg-[#4B2DBD] text-white px-3 py-1 rounded-md text-[9px] font-black uppercase tracking-wider">
-              {car.year} Model
-            </div>
-            <div className="bg-white border border-gray-100 px-2.5 py-1 rounded-md text-gray-500 font-bold text-[9px] uppercase tracking-wider flex items-center gap-1.5 shadow-sm">
-              <MapPin size={12} className="text-gray-400" />
-              {car.location}
-            </div>
-          </div>
+
 
           {/* Specs Grid */}
           <div className="grid grid-cols-3 gap-2">
@@ -170,7 +168,7 @@ export default function CarDetail() {
           {/* Details Row */}
           <div className="flex flex-wrap gap-2">
             {[
-              { label: 'Year', value: car.year },
+
               { label: 'Mileage', value: car.mileage },
               { label: 'Cond.', value: car.condition },
               { label: 'Type', value: car.type },

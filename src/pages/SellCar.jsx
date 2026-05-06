@@ -210,9 +210,9 @@ export default function SellCar() {
              <button 
               type="button"
               onClick={() => { setIsSuccess(false); setStep(1); setFormData({
-                carName: '', model: '', price: '', fuelType: 'Petrol', transmission: 'Automatic',
+                model: '', price: '', fuelType: 'Petrol', transmission: 'Automatic',
                 engineCC: '', condition: 'Used', type: 'Non Cut', location: '', description: '',
-                category: '', year: '', mileage: ''
+                category: '', mileage: ''
               }); setFiles([]); setPreviews([]); }}
               className="bg-[#4B2DBD] text-white py-3.5 rounded-xl font-bold hover:bg-[#3b2396] transition-all"
              >

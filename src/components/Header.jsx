@@ -136,10 +136,31 @@ export default function Header() {
           </div>
         </div>
 
-        {/* Mobile Toggle */}
-        <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="md:hidden">
-          {isMenuOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
-        </button>
+        {/* Mobile Profile & Toggle */}
+        <div className="md:hidden flex items-center gap-4">
+          {userInfo ? (
+            <button 
+              onClick={() => navigate('/settings')}
+              className="w-9 h-9 bg-white/10 rounded-full flex items-center justify-center border-2 border-white/30 overflow-hidden active:scale-95 transition-all shadow-sm"
+            >
+              {getProfileImage() ? (
+                <img src={getProfileImage()} alt="profile" className="w-full h-full object-cover" />
+              ) : (
+                <span className="font-bold text-sm">{userInfo.user?.name?.charAt(0)}</span>
+              )}
+            </button>
+          ) : (
+            <Link 
+              to="/login" 
+              className="bg-white/10 text-white px-4 py-1.5 rounded-full font-bold text-[10px] uppercase tracking-wider border border-white/20 active:bg-white/20 transition-all"
+            >
+              Login
+            </Link>
+          )}
+          <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="text-white">
+            {isMenuOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
+          </button>
+        </div>
       </div>
 
       {/* Mobile Menu */}
