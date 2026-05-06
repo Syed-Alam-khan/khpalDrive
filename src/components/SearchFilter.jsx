@@ -54,7 +54,7 @@ const SearchFilter = ({ onSearch }) => {
   }, [isMobileModalOpen]);
 
   return (
-    <div className={`max-w-7xl mx-auto mt-[14px] mb-[5px] md:-mt-12 md:mb-0 relative px-6 md:px-12 ${isMobileModalOpen ? 'z-[100]' : 'z-10'}`}>
+    <div className={`max-w-7xl mx-auto mt-12 mb-[5px] md:-mt-12 md:mb-0 relative px-6 md:px-12 ${isMobileModalOpen ? 'z-[100]' : 'z-10'}`}>
       {/* Desktop Filter (Hidden on Mobile) */}
       <div className="hidden md:flex flex-row items-stretch gap-4 mb-4">
         <div className="flex-1 bg-white rounded-xl border-2 border-gray-200 flex flex-row items-center overflow-hidden shadow-sm">
