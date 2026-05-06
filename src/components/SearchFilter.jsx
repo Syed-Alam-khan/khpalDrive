@@ -90,6 +90,7 @@ const SearchFilter = ({ onSearch }) => {
                 <option value="">All Fuel</option>
                 <option value="Petrol">Petrol</option>
                 <option value="Diesel">Diesel</option>
+                <option value="CNG">CNG</option>
                 <option value="Hybrid">Hybrid</option>
                 <option value="Electric">Electric</option>
               </select>
@@ -297,7 +298,7 @@ const SearchFilter = ({ onSearch }) => {
               <div className="space-y-4">
                 <h3 className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">Fuel Type</h3>
                 <div className="grid grid-cols-3 gap-2">
-                  {['Petrol', 'Diesel', 'Hybrid'].map(f => (
+                  {['Petrol', 'Diesel', 'CNG', 'Hybrid'].map(f => (
                     <button 
                       key={f}
                       onClick={() => handleChange('fuelType', f)}

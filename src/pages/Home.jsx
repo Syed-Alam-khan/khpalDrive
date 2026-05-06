@@ -74,7 +74,7 @@ export default function Home() {
 
       {/* Browse Cars Section */}
       <div className="bg-[#FBF7F7]">
-        <div className="max-w-7xl mx-auto px-6 md:px-12 pt-[10px] md:py-16">
+        <div className="max-w-7xl mx-auto px-6 md:px-12 pt-[10px] pb-16 md:py-16">
           <div className="flex justify-between items-center mb-10">
             <h2 className="text-sm md:text-3xl font-bold text-gray-900">Browse Cars</h2>
             <Link to="/all-cars" className="text-gray-500 font-semibold flex items-center gap-2 hover:text-[#4B2DBD] transition-all">
