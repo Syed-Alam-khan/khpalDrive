@@ -26,7 +26,7 @@ export default function CarCard({ car }) {
             <h3 className="text-base font-black text-gray-800 truncate">
               {car.carName}
             </h3>
-            <p className="text-[11px] font-black text-gray-500 uppercase tracking-widest mb-1">
+            <p className="text-[11px] font-black text-black uppercase tracking-widest mb-1">
               {car.category?.name || 'Luxury'}
             </p>
             <p className="text-[#4B2DBD] font-black text-xl md:text-base truncate">
