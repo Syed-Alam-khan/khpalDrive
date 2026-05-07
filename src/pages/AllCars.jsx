@@ -75,8 +75,8 @@ export default function AllCars() {
       </div>
 
       {/* Browse Cars Section */}
-      <div className="bg-[#FBF7F7]">
-        <div className="max-w-7xl mx-auto px-6 md:px-12 pt-[10px] pb-16 md:py-16 ">
+      <div className="bg-white md:bg-[#FBF7F7]">
+        <div className="max-w-7xl mx-auto px-4 md:px-12 pt-[10px] pb-16 md:py-16 ">
           <div className="mb-3 ">
             <h1 className="text-sm md:text-3xl font-bold text-gray-900">Browse Cars</h1>
           </div>
