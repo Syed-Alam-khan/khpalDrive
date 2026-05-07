@@ -80,7 +80,7 @@ export default function CarDetail() {
   return (
     <div className="max-w-5xl mx-auto w-full px-4 md:px-6 py-4 md:py-6 animate-in fade-in duration-700">
       {/* Breadcrumb */}
-      <nav className="flex items-center gap-2 text-[10px] md:text-xs font-medium mb-5 text-gray-900">
+      <nav className="flex items-center gap-2 text-xs md:text-sm font-medium mb-5 text-gray-900">
         <Link to="/" className="hover:underline underline-offset-4">Home</Link>
         <span className="text-gray-400">/</span>
         <Link to="/all-cars" className="hover:underline underline-offset-4">All Cars</Link>
@@ -98,7 +98,7 @@ export default function CarDetail() {
               className="w-full aspect-[4/3] md:aspect-[16/11] object-cover transition-transform duration-700 group-hover:scale-105 cursor-zoom-in" 
               onClick={() => setIsFullScreenOpen(true)}
             />
-            <div className="absolute bottom-3 right-3 bg-white/90 backdrop-blur-sm text-gray-900 px-3 py-1 rounded-full text-[10px] font-black shadow-sm">
+            <div className="absolute bottom-3 right-3 bg-white/90 backdrop-blur-sm text-gray-900 px-3 py-1 rounded-full text-xs font-black shadow-sm">
                {activeImage + 1} / {car.images?.length || 1}
             </div>
             
@@ -137,13 +137,13 @@ export default function CarDetail() {
         {/* Right: Info */}
         <div className="space-y-5">
           <div className="flex flex-wrap items-center gap-2">
-            <div className="bg-white border border-gray-100 px-2.5 py-1 rounded-md text-gray-500 font-bold text-[9px] uppercase tracking-wider flex items-center gap-1.5 shadow-sm">
-              <MapPin size={12} className="text-gray-400" />
+            <div className="bg-white border border-gray-100 px-2.5 py-1.5 rounded-md text-gray-500 font-bold text-xs uppercase tracking-wider flex items-center gap-1.5 shadow-sm">
+              <MapPin size={14} className="text-gray-400" />
               {car.location}
             </div>
           </div>
           <div className="space-y-1">
-            <h1 className=" font-black text-gray-900 tracking-tight uppercase">
+            <h1 className="text-xl md:text-2xl font-black text-gray-900 tracking-tight uppercase">
               {car.carName} {car.model}
             </h1>
             <div className="text-2xl md:text-3xl font-black text-[#4B2DBD] tracking-tight">
@@ -156,24 +156,24 @@ export default function CarDetail() {
           {/* Specs Grid */}
           <div className="grid grid-cols-3 gap-2">
             <div className="bg-gray-100 p-3 rounded-xl border-2 border-gray-100/50 flex flex-col items-center text-center space-y-1.5">
-              <Gauge size={16} className="text-[#4B2DBD]" strokeWidth={2.5} />
+              <Gauge size={18} className="text-[#4B2DBD]" strokeWidth={2.5} />
               <div className="space-y-0">
-                <p className="text-[8px] font-bold text-gray-400 uppercase tracking-widest">Engine</p>
-                <p className="font-black text-gray-900 text-[11px] md:text-xs">{car.engineCC}</p>
+                <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Engine</p>
+                <p className="font-black text-gray-900 text-sm md:text-base">{car.engineCC}</p>
               </div>
             </div>
             <div className="bg-gray-100 p-3 rounded-xl border-2 border-gray-100/50 flex flex-col items-center text-center space-y-1.5">
-              <Fuel size={16} className="text-[#4B2DBD]" strokeWidth={2.5} />
+              <Fuel size={18} className="text-[#4B2DBD]" strokeWidth={2.5} />
               <div className="space-y-0">
-                <p className="text-[8px] font-bold text-gray-400 uppercase tracking-widest">Fuel</p>
-                <p className="font-black text-gray-900 text-[11px] md:text-xs">{car.fuelType}</p>
+                <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Fuel</p>
+                <p className="font-black text-gray-900 text-sm md:text-base">{car.fuelType}</p>
               </div>
             </div>
             <div className="bg-gray-100 p-3 rounded-xl border-2 border-gray-100/50 flex flex-col items-center text-center space-y-1.5">
-              <Settings2 size={16} className="text-[#4B2DBD]" strokeWidth={2.5} />
+              <Settings2 size={18} className="text-[#4B2DBD]" strokeWidth={2.5} />
               <div className="space-y-0">
-                <p className="text-[8px] font-bold text-gray-400 uppercase tracking-widest">Trans.</p>
-                <p className="font-black text-gray-900 text-[11px] md:text-xs">{car.transmission}</p>
+                <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Trans.</p>
+                <p className="font-black text-gray-900 text-sm md:text-base">{car.transmission}</p>
               </div>
             </div>
           </div>
@@ -187,7 +187,7 @@ export default function CarDetail() {
               { label: 'Type', value: car.type },
               { label: 'Cat.', value: car.category?.name || 'N/A' }
             ].map((item, idx) => (
-              <div key={idx} className="flex items-center gap-1.5 border-2 border-gray-100 px-3 py-1 rounded-full text-[9px] font-bold text-gray-600 bg-white shadow-sm">
+              <div key={idx} className="flex items-center gap-1.5 border-2 border-gray-100 px-3 py-1.5 rounded-full text-[11px] font-bold text-gray-600 bg-white shadow-sm">
                 <span className="text-gray-400">{item.label}</span>
                 <span className="text-gray-900 font-black">{item.value}</span>
               </div>
@@ -197,8 +197,8 @@ export default function CarDetail() {
           {/* Description Section */}
           {car.description && (
             <div className="bg-gray-50/50 p-4 rounded-xl border border-gray-100">
-              <h4 className="text-[9px] font-black text-gray-400 uppercase tracking-widest mb-2">Description</h4>
-              <p className="text-xs font-medium text-gray-600 leading-relaxed whitespace-pre-line">
+              <h4 className="text-[11px] font-black text-gray-400 uppercase tracking-widest mb-2">Description</h4>
+              <p className="text-sm font-medium text-gray-600 leading-relaxed whitespace-pre-line">
                 {car.description}
               </p>
             </div>
@@ -220,13 +220,13 @@ export default function CarDetail() {
                     )}
                   </div>
                 </div>
-                <div className="space-y-0.5">
+                <div className="space-y-1">
                   <div className="flex items-center gap-1">
-                    <ShieldCheck size={10} className="text-[#25D366]" fill="currentColor" fillOpacity={0.15} />
-                    <span className="text-[8px] md:text-[9px] font-black text-[#25D366] uppercase tracking-widest">Verified Seller</span>
+                    <ShieldCheck size={12} className="text-[#25D366]" fill="currentColor" fillOpacity={0.15} />
+                    <span className="text-[10px] font-black text-[#25D366] uppercase tracking-widest">Verified Seller</span>
                   </div>
-                  <h3 className="text-sm md:text-base font-black text-gray-900 leading-none">{car.seller?.name || 'Seller Name'}</h3>
-                  <p className="text-[10px] font-bold text-gray-400 tabular-nums">{car.seller?.phoneNumber || '03454740876'}</p>
+                  <h3 className="text-base md:text-lg font-black text-gray-900 leading-none">{car.seller?.name || 'Seller Name'}</h3>
+                  <p className="text-xs md:text-sm font-bold text-gray-400 tabular-nums">{car.seller?.phoneNumber || '03454740876'}</p>
                 </div>
               </div>
 
@@ -234,9 +234,9 @@ export default function CarDetail() {
               <div className="flex items-center gap-2 w-full sm:w-auto">
                 <button 
                   onClick={handleWhatsApp}
-                  className="flex-1 sm:flex-none bg-[#25D366] hover:bg-[#20bd5c] text-white px-4 py-2.5 rounded-full font-black text-[10px] md:text-[11px] flex items-center justify-center gap-1.5 transition-all active:scale-95 shadow-md shadow-green-100"
+                  className="flex-1 sm:flex-none bg-[#25D366] hover:bg-[#20bd5c] text-white px-5 py-3 rounded-full font-black text-xs flex items-center justify-center gap-1.5 transition-all active:scale-95 shadow-md shadow-green-100"
                 >
-                  <MessageSquare size={14} fill="currentColor" />
+                  <MessageSquare size={16} fill="currentColor" />
                   WhatsApp
                 </button>
                 <button 
@@ -244,9 +244,9 @@ export default function CarDetail() {
                     const cleanPhone = (car.seller?.phoneNumber || '').replace(/\D/g, '');
                     window.location.href = `tel:${cleanPhone}`;
                   }}
-                  className="flex-1 sm:flex-none bg-white hover:bg-gray-50 text-gray-900 px-4 py-2.5 rounded-full font-black text-[10px] md:text-[11px] flex items-center justify-center gap-1.5 border border-gray-200 transition-all active:scale-95 shadow-sm"
+                  className="flex-1 sm:flex-none bg-white hover:bg-gray-50 text-gray-900 px-5 py-3 rounded-full font-black text-xs flex items-center justify-center gap-1.5 border border-gray-200 transition-all active:scale-95 shadow-sm"
                 >
-                  <Phone size={14} fill="currentColor" className="text-gray-400" />
+                  <Phone size={16} fill="currentColor" className="text-gray-400" />
                   Call Now
                 </button>
               </div>
