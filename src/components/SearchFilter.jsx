@@ -148,10 +148,10 @@ const SearchFilter = ({ onSearch }) => {
                 onChange={(e) => handleChange('priceRange', e.target.value)}
               >
                 <option value="">No Limit</option>
-                <option value="1000000">Under 10 Lac</option>
-                <option value="2000000">Under 20 Lac</option>
-                <option value="5000000">Under 50 Lac</option>
-                <option value="10000000">Under 1 Crore</option>
+                <option value="1000000">PKR 10 Lac</option>
+                <option value="2000000">PKR 20 Lac</option>
+                <option value="5000000">PKR 50 Lac</option>
+                <option value="10000000">PKR 1 Crore</option>
               </select>
               <div className="absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none text-gray-400">
                 <FaChevronDown size={12} />
@@ -244,23 +244,21 @@ const SearchFilter = ({ onSearch }) => {
                 <h3 className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">Price Range</h3>
                 <div className="grid grid-cols-2 gap-3">
                   <div className="relative">
-                    <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-sm font-bold">$</span>
                     <input 
                       type="number" 
-                      placeholder="Min Price"
+                      placeholder="Min Price (PKR)"
                       value={filters.minPrice}
                       onChange={(e) => handleChange('minPrice', e.target.value)}
-                      className="w-full bg-gray-50 border border-gray-100 rounded-xl py-3 pl-8 pr-4 text-sm font-bold focus:bg-white focus:border-[#4B2DBD] outline-none transition-all"
+                      className="w-full bg-gray-50 border border-gray-100 rounded-xl py-3 px-4 text-sm font-bold focus:bg-white focus:border-[#4B2DBD] outline-none transition-all"
                     />
                   </div>
                   <div className="relative">
-                    <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-sm font-bold">$</span>
                     <input 
                       type="number" 
-                      placeholder="Max Price"
+                      placeholder="Max Price (PKR)"
                       value={filters.maxPrice}
                       onChange={(e) => handleChange('maxPrice', e.target.value)}
-                      className="w-full bg-gray-50 border border-gray-100 rounded-xl py-3 pl-8 pr-4 text-sm font-bold focus:bg-white focus:border-[#4B2DBD] outline-none transition-all"
+                      className="w-full bg-gray-50 border border-gray-100 rounded-xl py-3 px-4 text-sm font-bold focus:bg-white focus:border-[#4B2DBD] outline-none transition-all"
                     />
                   </div>
                 </div>
