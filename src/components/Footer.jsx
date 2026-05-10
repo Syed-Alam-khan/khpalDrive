@@ -1,8 +1,8 @@
 import { FaWhatsapp, FaInstagram, FaFacebookF, FaTiktok } from 'react-icons/fa';
 
-const Footer = ({ isDark = false }) => {
+const Footer = () => {
   return (
-    <footer className={`${isDark ? 'bg-white text-gray-800 border-t border-gray-100' : 'bg-[#4B2DBD] text-white'} py-2 px-3 md:px-8 mt-auto h-[60px] md:h-[70px] flex items-center`}>
+    <footer className="bg-[#4B2DBD] text-white py-2 px-3 md:px-8 mt-auto h-[60px] md:h-[70px] flex items-center">
       <div className="max-w-7xl mx-auto w-full flex justify-between items-center gap-2">
         
         {/* Brand & Copyright */}
@@ -22,16 +22,16 @@ const Footer = ({ isDark = false }) => {
 
         {/* Social */}
         <div className="flex gap-1.5 md:gap-3">
-          <a href="#" className={`w-6 h-6 md:w-8 md:h-8 ${isDark ? 'bg-[#4B2DBD] text-white' : 'bg-white text-[#4B2DBD]'} rounded-full flex items-center justify-center hover:bg-opacity-90 transition-all shadow-md`}>
+          <a href="#" className="w-6 h-6 md:w-8 md:h-8 bg-white rounded-full flex items-center justify-center text-[#4B2DBD] hover:bg-opacity-90 transition-all shadow-md">
             <FaWhatsapp size={12} className="md:w-[16px] md:h-[16px]" />
           </a>
-          <a href="#" className={`w-6 h-6 md:w-8 md:h-8 ${isDark ? 'bg-[#4B2DBD] text-white' : 'bg-white text-[#4B2DBD]'} rounded-full flex items-center justify-center hover:bg-opacity-90 transition-all shadow-md`}>
+          <a href="#" className="w-6 h-6 md:w-8 md:h-8 bg-white rounded-full flex items-center justify-center text-[#4B2DBD] hover:bg-opacity-90 transition-all shadow-md">
             <FaInstagram size={12} className="md:w-[16px] md:h-[16px]" />
           </a>
-          <a href="#" className={`w-6 h-6 md:w-8 md:h-8 ${isDark ? 'bg-[#4B2DBD] text-white' : 'bg-white text-[#4B2DBD]'} rounded-full flex items-center justify-center hover:bg-opacity-90 transition-all shadow-md`}>
+          <a href="#" className="w-6 h-6 md:w-8 md:h-8 bg-white rounded-full flex items-center justify-center text-[#4B2DBD] hover:bg-opacity-90 transition-all shadow-md">
             <FaFacebookF size={10} className="md:w-[14px] md:h-[14px]" />
           </a>
-          <a href="#" className={`w-6 h-6 md:w-8 md:h-8 ${isDark ? 'bg-[#4B2DBD] text-white' : 'bg-white text-[#4B2DBD]'} rounded-full flex items-center justify-center hover:bg-opacity-90 transition-all shadow-md`}>
+          <a href="#" className="w-6 h-6 md:w-8 md:h-8 bg-white rounded-full flex items-center justify-center text-[#4B2DBD] hover:bg-opacity-90 transition-all shadow-md">
             <FaTiktok size={10} className="md:w-[14px] md:h-[14px]" />
           </a>
         </div>

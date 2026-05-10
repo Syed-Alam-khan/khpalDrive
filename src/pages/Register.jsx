@@ -101,7 +101,7 @@ export default function Register() {
           
           <div className="space-y-2">
             <h1 className="text-2xl font-black text-gray-800 tracking-tight">Congratulations {formData.name}</h1>
-            <p className="text-[#7C3AED] font-bold text-lg">Your Identity & Security synchronized successfully! ✨</p>
+            <p className="text-[#4B2DBD] font-bold text-lg">Your Identity & Security synchronized successfully! ✨</p>
             <p className="text-gray-400 text-xs font-bold uppercase tracking-widest pt-4">Redirecting you to dashboard...</p>
           </div>
         </div>
@@ -123,16 +123,16 @@ export default function Register() {
           {/* Avatar Upload */}
           <div className="flex flex-col items-center gap-2">
             <div className="relative group">
-              <div className="w-28 h-28 rounded-full bg-[#7C3AED]/10 border-4 border-white shadow-md overflow-hidden flex items-center justify-center">
+              <div className="w-28 h-28 rounded-full bg-[#4B2DBD]/10 border-4 border-white overflow-hidden flex items-center justify-center">
                 {preview ? (
                   <img src={preview} alt="Preview" className="w-full h-full object-cover" />
                 ) : (
-                  <div className="text-[#7C3AED]/40">
+                  <div className="text-[#4B2DBD]/40">
                     <svg viewBox="0 0 24 24" className="w-16 h-16 fill-current"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08s5.97 1.09 6 3.08c-1.29 1.94-3.5 3.22-6 3.22z"/></svg>
                   </div>
                 )}
               </div>
-              <label className="absolute bottom-0 right-0 bg-[#4B6BFB] text-white p-2 rounded-full cursor-pointer shadow-lg hover:scale-110 transition-transform border-2 border-white">
+              <label className="absolute bottom-0 right-0 bg-[#4B2DBD] text-white p-2 rounded-full cursor-pointer hover:scale-110 transition-transform border-2 border-white">
                 <Camera size={16} strokeWidth={3} />
                 <input type="file" className="hidden" accept="image/*" onChange={handleFileChange} />
               </label>
@@ -150,7 +150,7 @@ export default function Register() {
                 placeholder="Enter your name" 
                 value={formData.name} 
                 onChange={(e) => setFormData({...formData, name: e.target.value})} 
-                className="w-full bg-[#F9FAFB] border border-[#E5E7EB] rounded-lg py-3 px-4 focus:bg-white focus:border-[#7C3AED]/20 transition-all outline-none text-sm text-gray-800 placeholder:text-gray-400" 
+                className="w-full bg-[#F9FAFB] border border-[#E5E7EB] rounded-lg py-3 px-4 focus:bg-white focus:border-[#4B2DBD]/20 transition-all outline-none text-sm text-gray-800 placeholder:text-gray-400" 
               />
               {errors.name && <p className="text-red-500 text-[10px] font-bold mt-0.5 ml-1">* {errors.name}</p>}
             </div>
@@ -164,7 +164,7 @@ export default function Register() {
                   placeholder="Enter your email" 
                   value={formData.email} 
                   onChange={(e) => setFormData({...formData, email: e.target.value})} 
-                  className="w-full bg-[#F9FAFB] border border-[#E5E7EB] rounded-lg py-3 px-4 focus:bg-white focus:border-[#7C3AED]/20 transition-all outline-none text-sm text-gray-800 placeholder:text-gray-400" 
+                  className="w-full bg-[#F9FAFB] border border-[#E5E7EB] rounded-lg py-3 px-4 focus:bg-white focus:border-[#4B2DBD]/20 transition-all outline-none text-sm text-gray-800 placeholder:text-gray-400" 
                 />
                 {errors.email && <p className="text-red-500 text-[10px] font-bold mt-0.5 ml-1">* {errors.email}</p>}
               </div>
@@ -176,7 +176,7 @@ export default function Register() {
                   placeholder="Enter your phone number" 
                   value={formData.phoneNumber} 
                   onChange={(e) => setFormData({...formData, phoneNumber: e.target.value})} 
-                  className="w-full bg-[#F9FAFB] border border-[#E5E7EB] rounded-lg py-3 px-4 focus:bg-white focus:border-[#7C3AED]/20 transition-all outline-none text-sm text-gray-800 placeholder:text-gray-400" 
+                  className="w-full bg-[#F9FAFB] border border-[#E5E7EB] rounded-lg py-3 px-4 focus:bg-white focus:border-[#4B2DBD]/20 transition-all outline-none text-sm text-gray-800 placeholder:text-gray-400" 
                 />
                 {errors.phoneNumber && <p className="text-red-500 text-[10px] font-bold mt-0.5 ml-1">* {errors.phoneNumber}</p>}
               </div>
@@ -184,7 +184,7 @@ export default function Register() {
           </div>
 
           <div className="pt-2 space-y-3">
-            <p className="text-[10px] font-black text-[#7C3AED] uppercase tracking-widest ml-1">Security Credentials</p>
+            <p className="text-[10px] font-black text-[#4B2DBD] uppercase tracking-widest ml-1">Security Credentials</p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-2">
                 <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">New Password</label>
@@ -195,9 +195,9 @@ export default function Register() {
                     placeholder="Enter your password" 
                     value={formData.password} 
                     onChange={(e) => setFormData({...formData, password: e.target.value})} 
-                    className="w-full bg-[#F9FAFB] border border-[#E5E7EB] rounded-lg py-3 px-4 focus:bg-white focus:border-[#7C3AED]/20 transition-all outline-none text-sm text-gray-800 placeholder:text-gray-400 pr-12" 
+                    className="w-full bg-[#F9FAFB] border border-[#E5E7EB] rounded-lg py-3 px-4 focus:bg-white focus:border-[#4B2DBD]/20 transition-all outline-none text-sm text-gray-800 placeholder:text-gray-400 pr-12" 
                   />
-                  <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-[#7C3AED] transition-colors">
+                  <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-[#4B2DBD] transition-colors">
                     {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
                   </button>
                 </div>
@@ -212,9 +212,9 @@ export default function Register() {
                     placeholder="Confirm your password" 
                     value={formData.confirmPassword} 
                     onChange={(e) => setFormData({...formData, confirmPassword: e.target.value})} 
-                    className="w-full bg-[#F9FAFB] border border-[#E5E7EB] rounded-lg py-3 px-4 focus:bg-white focus:border-[#7C3AED]/20 transition-all outline-none text-sm text-gray-800 placeholder:text-gray-400 pr-12" 
+                    className="w-full bg-[#F9FAFB] border border-[#E5E7EB] rounded-lg py-3 px-4 focus:bg-white focus:border-[#4B2DBD]/20 transition-all outline-none text-sm text-gray-800 placeholder:text-gray-400 pr-12" 
                   />
-                  <button type="button" onClick={() => setShowConfirmPassword(!showConfirmPassword)} className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-[#7C3AED] transition-colors">
+                  <button type="button" onClick={() => setShowConfirmPassword(!showConfirmPassword)} className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-[#4B2DBD] transition-colors">
                     {showConfirmPassword ? <EyeOff size={18} /> : <Eye size={18} />}
                   </button>
                 </div>
@@ -239,7 +239,7 @@ export default function Register() {
             <button 
               type="submit" 
               disabled={loading} 
-              className="w-full bg-[#7C3AED] hover:bg-[#6D28D9] text-white py-3.5 rounded-2xl font-black text-lg transition-all active:scale-[0.98] disabled:opacity-50 uppercase tracking-widest"
+              className="w-full bg-[#4B2DBD] hover:bg-[#3b2396] text-white py-3.5 rounded-2xl font-black text-lg transition-all active:scale-[0.98] disabled:opacity-50 uppercase tracking-widest"
             >
               {loading ? 'Processing...' : 'Register'}
             </button>
@@ -247,7 +247,7 @@ export default function Register() {
 
           <div className="mt-2 text-center pb-2">
             <p className="text-sm font-bold text-gray-500">
-              Already have an account? <span onClick={() => navigate('/login')} className="text-[#7C3AED] hover:underline cursor-pointer transition-all">Log in instead</span>
+              Already have an account? <span onClick={() => navigate('/login')} className="text-[#4B2DBD] hover:underline cursor-pointer transition-all">Log in instead</span>
             </p>
           </div>
         </form>
