@@ -288,7 +288,7 @@ export default function SellCar() {
                     Car Model <span className="text-red-500">*</span>
                   </label>
                   <div className="relative">
-                    <input name="model" value={formData.model} onChange={handleChange} placeholder="e.g. 2002" className="w-full bg-gray-50/50 border border-gray-200 rounded-xl py-4 pl-12 pr-6 focus:bg-white focus:ring-2 focus:ring-[#4B2DBD]/5 focus:border-[#4B2DBD] outline-none font-bold text-base transition-all" />
+                    <input name="model" value={formData.model} onChange={handleChange} placeholder="e.g. 2002" className="w-full bg-white border border-gray-200 rounded-xl py-4 pl-12 pr-6 focus:bg-white focus:ring-2 focus:ring-[#4B2DBD]/5 focus:border-[#4B2DBD] outline-none font-bold text-base transition-all" />
                     <FileText className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-300" size={14} />
                   </div>
                   {errors.model && <p className="text-red-500 text-[10px] font-bold mt-1 ml-1">* {errors.model}</p>}
@@ -298,7 +298,7 @@ export default function SellCar() {
                     Category <span className="text-red-500">*</span>
                   </label>
                   <div className="relative">
-                    <select name="category" value={formData.category} onChange={handleChange} className="w-full bg-gray-50/50 border border-gray-200 rounded-xl py-4 px-6 focus:bg-white outline-none font-bold text-base transition-all appearance-none">
+                    <select name="category" value={formData.category} onChange={handleChange} className="w-full bg-white border border-gray-200 rounded-xl py-4 px-6 focus:bg-white outline-none font-bold text-base transition-all appearance-none">
                       <option value="">Select Category</option>
                       {categories.map(c => (
                         <option key={c._id} value={c._id}>{c.name}</option>
@@ -313,7 +313,7 @@ export default function SellCar() {
                     Asking Price (PKR) <span className="text-red-500">*</span>
                   </label>
                   <div className="relative">
-                    <input name="price" type="text" value={formData.price} onChange={handleChange} placeholder="4,500,000" className="w-full bg-gray-50/50 border border-[#4B2DBD]/20 rounded-xl py-4 pl-14 pr-6 focus:bg-white focus:border-[#4B2DBD] outline-none font-black text-base text-[#4B2DBD] transition-all" />
+                    <input name="price" type="text" value={formData.price} onChange={handleChange} placeholder="4,500,000" className="w-full bg-white border border-[#4B2DBD]/20 rounded-xl py-4 pl-14 pr-6 focus:bg-white focus:border-[#4B2DBD] outline-none font-black text-base text-[#4B2DBD] transition-all" />
                     <span className="absolute left-5 top-1/2 -translate-y-1/2 text-[10px] font-black text-[#4B2DBD]/40">PKR</span>
                   </div>
                   {errors.price && <p className="text-red-500 text-[10px] font-bold mt-1 ml-1">* {errors.price}</p>}
@@ -323,7 +323,7 @@ export default function SellCar() {
                     Location <span className="text-red-500">*</span>
                   </label>
                   <div className="relative">
-                    <input name="location" value={formData.location} onChange={handleChange} placeholder="e.g. Islamabad" className="w-full bg-gray-50/50 border border-gray-200 rounded-xl py-4 pl-12 pr-6 focus:bg-white outline-none font-bold text-base transition-all" />
+                    <input name="location" value={formData.location} onChange={handleChange} placeholder="e.g. Islamabad" className="w-full bg-white border border-gray-200 rounded-xl py-4 pl-12 pr-6 focus:bg-white outline-none font-bold text-base transition-all" />
                     <MapPin className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-300" size={14} />
                   </div>
                   {errors.location && <p className="text-red-500 text-[10px] font-bold mt-1 ml-1">* {errors.location}</p>}
@@ -429,14 +429,14 @@ export default function SellCar() {
                   <label className="text-[9px] font-black text-gray-400 uppercase tracking-widest ml-1 flex items-center gap-0.5">
                     Engine CC <span className="text-red-500">*</span>
                   </label>
-                  <input name="engineCC" value={formData.engineCC} onChange={handleChange} placeholder="e.g. 1800cc" className="w-full bg-gray-50/50 border border-gray-200 rounded-xl py-4 px-6 focus:bg-white outline-none font-bold text-base transition-all" />
+                  <input name="engineCC" value={formData.engineCC} onChange={handleChange} placeholder="e.g. 1800cc" className="w-full bg-white border border-gray-200 rounded-xl py-4 px-6 focus:bg-white outline-none font-bold text-base transition-all" />
                   {errors.engineCC && <p className="text-red-500 text-[10px] font-bold mt-1 ml-1">* {errors.engineCC}</p>}
                 </div>
                 <div className="space-y-2">
                   <label className="text-[9px] font-black text-gray-400 uppercase tracking-widest ml-1 flex items-center gap-0.5">
                     Mileage (KM) <span className="text-red-500">*</span>
                   </label>
-                  <input name="mileage" value={formData.mileage} onChange={handleChange} placeholder="e.g. 45,000 km" className="w-full bg-gray-50/50 border border-gray-200 rounded-xl py-4 px-6 focus:bg-white outline-none font-bold text-base transition-all" />
+                  <input name="mileage" value={formData.mileage} onChange={handleChange} placeholder="e.g. 45,000 km" className="w-full bg-white border border-gray-200 rounded-xl py-4 px-6 focus:bg-white outline-none font-bold text-base transition-all" />
                   {errors.mileage && <p className="text-red-500 text-[10px] font-bold mt-1 ml-1">* {errors.mileage}</p>}
                 </div>
               </div>

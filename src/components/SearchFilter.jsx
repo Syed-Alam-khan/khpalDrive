@@ -249,7 +249,7 @@ const SearchFilter = ({ onSearch }) => {
                       placeholder="Min Price (PKR)"
                       value={filters.minPrice}
                       onChange={(e) => handleChange('minPrice', e.target.value)}
-                      className="w-full bg-gray-50 border border-gray-100 rounded-xl py-3 px-4 text-sm font-bold focus:bg-white focus:border-[#4B2DBD] outline-none transition-all"
+                      className="w-full bg-white border border-gray-100 rounded-xl py-3 px-4 text-sm font-bold focus:bg-white focus:border-[#4B2DBD] outline-none transition-all"
                     />
                   </div>
                   <div className="relative">
@@ -258,7 +258,7 @@ const SearchFilter = ({ onSearch }) => {
                       placeholder="Max Price (PKR)"
                       value={filters.maxPrice}
                       onChange={(e) => handleChange('maxPrice', e.target.value)}
-                      className="w-full bg-gray-50 border border-gray-100 rounded-xl py-3 px-4 text-sm font-bold focus:bg-white focus:border-[#4B2DBD] outline-none transition-all"
+                      className="w-full bg-white border border-gray-100 rounded-xl py-3 px-4 text-sm font-bold focus:bg-white focus:border-[#4B2DBD] outline-none transition-all"
                     />
                   </div>
                 </div>
@@ -271,7 +271,7 @@ const SearchFilter = ({ onSearch }) => {
                   <select 
                     value={filters.marka}
                     onChange={(e) => handleChange('marka', e.target.value)}
-                    className="w-full bg-gray-50 border border-gray-100 rounded-xl py-3 px-4 text-sm font-bold focus:bg-white focus:border-[#4B2DBD] outline-none appearance-none transition-all text-gray-800"
+                    className="w-full bg-white border border-gray-100 rounded-xl py-3 px-4 text-sm font-bold focus:bg-white focus:border-[#4B2DBD] outline-none appearance-none transition-all text-gray-800"
                   >
                     <option value="">Select Category</option>
                     {categories.map(cat => (

@@ -117,7 +117,7 @@ export default function Register() {
         <p className="text-gray-500 text-sm font-medium">Manage your personal Identity & Security</p>
       </div>
 
-      <div className="max-w-lg w-full bg-[#F9FAFB] rounded-2xl border border-[#E5E7EB] p-4 md:p-6">
+      <div className="max-w-lg w-full bg-white rounded-2xl border border-[#E5E7EB] p-4 md:p-6">
         <form onSubmit={handleRegister} className="space-y-3" noValidate>
           
           {/* Avatar Upload */}

@@ -416,7 +416,7 @@ export default function AdminDashboard() {
               <div className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
                  <h2 className="text-xs font-black text-gray-900 uppercase tracking-widest mb-4">Add Taxonomy</h2>
                  <form onSubmit={handleCreateCategory} className="flex gap-4">
-                    <input value={newCategoryName} onChange={(e) => setNewCategoryName(e.target.value)} placeholder="NEW CATEGORY..." className="flex-1 bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-[11px] font-black uppercase outline-none focus:border-blue-500 transition-colors" />
+                    <input value={newCategoryName} onChange={(e) => setNewCategoryName(e.target.value)} placeholder="NEW CATEGORY..." className="flex-1 bg-white border border-gray-200 rounded-xl px-4 py-3 text-[11px] font-black uppercase outline-none focus:border-blue-500 transition-colors" />
                     <button type="submit" disabled={submittingCategory} className="bg-blue-600 text-white px-6 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-blue-700 transition-colors">
                        {submittingCategory ? '...' : 'Add'}
                     </button>
@@ -463,22 +463,22 @@ export default function AdminDashboard() {
                    <div className="grid grid-cols-2 gap-4">
                       <div className="space-y-1">
                         <label className="text-[9px] font-black text-gray-400 uppercase tracking-widest ml-2">Name</label>
-                        <input value={editFormData.name} onChange={(e) => setEditFormData({...editFormData, name: e.target.value})} className="w-full bg-gray-50 border border-gray-200 rounded-xl py-3 px-4 outline-none font-bold text-gray-800 text-xs" />
+                        <input value={editFormData.name} onChange={(e) => setEditFormData({...editFormData, name: e.target.value})} className="w-full bg-white border border-gray-200 rounded-xl py-3 px-4 outline-none font-bold text-gray-800 text-xs" />
                       </div>
                       <div className="space-y-1">
                         <label className="text-[9px] font-black text-gray-400 uppercase tracking-widest ml-2">Email</label>
-                        <input value={editFormData.email} onChange={(e) => setEditFormData({...editFormData, email: e.target.value})} className="w-full bg-gray-50 border border-gray-200 rounded-xl py-3 px-4 outline-none font-bold text-gray-800 text-xs" />
+                        <input value={editFormData.email} onChange={(e) => setEditFormData({...editFormData, email: e.target.value})} className="w-full bg-white border border-gray-200 rounded-xl py-3 px-4 outline-none font-bold text-gray-800 text-xs" />
                       </div>
                       <div className="space-y-1">
                         <label className="text-[9px] font-black text-gray-400 uppercase tracking-widest ml-2">Role</label>
-                        <select value={editFormData.role} onChange={(e) => setEditFormData({...editFormData, role: e.target.value})} className="w-full bg-gray-50 border border-gray-200 rounded-xl py-3 px-4 outline-none font-bold text-gray-800 text-xs">
+                        <select value={editFormData.role} onChange={(e) => setEditFormData({...editFormData, role: e.target.value})} className="w-full bg-white border border-gray-200 rounded-xl py-3 px-4 outline-none font-bold text-gray-800 text-xs">
                            <option value="user">USER</option>
                            <option value="admin">ADMIN</option>
                         </select>
                       </div>
                       <div className="space-y-1">
                         <label className="text-[9px] font-black text-gray-400 uppercase tracking-widest ml-2">Phone</label>
-                        <input value={editFormData.phoneNumber} onChange={(e) => setEditFormData({...editFormData, phoneNumber: e.target.value})} className="w-full bg-gray-50 border border-gray-200 rounded-xl py-3 px-4 outline-none font-bold text-gray-800 text-xs" />
+                        <input value={editFormData.phoneNumber} onChange={(e) => setEditFormData({...editFormData, phoneNumber: e.target.value})} className="w-full bg-white border border-gray-200 rounded-xl py-3 px-4 outline-none font-bold text-gray-800 text-xs" />
                       </div>
                    </div>
                    <div className="flex gap-3 pt-6">
@@ -497,7 +497,7 @@ export default function AdminDashboard() {
                 <form onSubmit={handleUpdateCategory} className="space-y-4">
                     <div className="space-y-1">
                       <label className="text-[9px] font-black text-gray-400 uppercase tracking-widest ml-2">Name</label>
-                      <input value={editCategoryName} onChange={(e) => setEditCategoryName(e.target.value)} className="w-full bg-gray-50 border border-gray-200 rounded-xl py-3 px-4 outline-none font-bold text-gray-800 text-xs" />
+                      <input value={editCategoryName} onChange={(e) => setEditCategoryName(e.target.value)} className="w-full bg-white border border-gray-200 rounded-xl py-3 px-4 outline-none font-bold text-gray-800 text-xs" />
                     </div>
                    <div className="flex gap-3 pt-6">
                       <button type="button" onClick={() => setEditingCategory(null)} className="flex-1 bg-gray-100 text-gray-500 py-3 rounded-xl font-black uppercase text-[10px] tracking-widest">Cancel</button>
