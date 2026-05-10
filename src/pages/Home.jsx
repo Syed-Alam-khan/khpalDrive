@@ -101,6 +101,7 @@ export default function Home() {
               {!isFiltered && filteredCars.length > limit && (
                 <Link 
                   to="/all-cars"
+                  state={{ autoScroll: true }}
                   className="bg-[#4B2DBD] rounded-2xl flex flex-col items-center justify-center text-white cursor-pointer hover:bg-[#3B2396] transition-all p-4 group min-h-[150px]"
                 >
                   <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
