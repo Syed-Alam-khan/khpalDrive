@@ -172,7 +172,7 @@ export default function CarDetail() {
             </button>
           </div>
           <div className="space-y-1.5">
-            <h1 className="text-xl md:text-2xl font-black text-gray-900 tracking-tight uppercase">
+            <h1 className="text-lg md:text-xl font-black text-gray-900 tracking-tight uppercase">
               {car.category?.name || 'Luxury'} <span className="text-gray-300 mx-2">|</span> Model {car.model}
             </h1>
             <div className="flex flex-col gap-1">
