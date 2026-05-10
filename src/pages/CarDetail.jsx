@@ -78,7 +78,7 @@ export default function CarDetail() {
   };
 
   return (
-    <div className="max-w-5xl mx-auto w-full px-4 md:px-6 py-4 md:py-6 animate-in fade-in duration-700">
+    <div className="max-w-5xl mx-auto w-full px-4 md:px-6 py-4 md:py-6 pb-32 lg:pb-6 animate-in fade-in duration-700">
       {/* Breadcrumb */}
       <nav className="flex items-center gap-2 text-xs md:text-sm font-medium mb-5 text-gray-900">
         <Link to="/" className="hover:underline underline-offset-4">Home</Link>
@@ -91,11 +91,11 @@ export default function CarDetail() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-10">
         {/* Left: Gallery */}
         <div className="space-y-4">
-          <div className="relative group rounded-[1.2rem] overflow-hidden bg-gray-50 border-2 border-gray-100 shadow-md">
+          <div className="relative group rounded-[1.2rem] overflow-hidden bg-gray-50 border-2 border-gray-100 shadow-none">
             <img 
               src={getImageUrl(car.images?.[activeImage])} 
               alt={car.carName} 
-              className="w-full aspect-[4/3] md:aspect-[16/11] object-cover transition-transform duration-700 group-hover:scale-105 cursor-zoom-in" 
+              className="w-full aspect-[3/2] md:aspect-[16/9] object-cover transition-transform duration-700 group-hover:scale-105 cursor-zoom-in" 
               onClick={() => setIsFullScreenOpen(true)}
             />
             <div className="absolute bottom-3 right-3 bg-white/90 backdrop-blur-sm text-gray-900 px-3 py-1 rounded-full text-xs font-black shadow-sm">
@@ -205,7 +205,7 @@ export default function CarDetail() {
           )}
 
           {/* Seller Section */}
-          <div className="bg-white border-2 border-gray-100 p-4 rounded-[1.2rem] shadow-sm">
+          <div className="lg:relative fixed bottom-0 left-0 w-full lg:w-auto bg-white border-t-2 lg:border-2 border-gray-100 p-4 lg:rounded-[1.2rem] rounded-t-[1.5rem] lg:shadow-sm shadow-[0_-4px_20px_rgba(0,0,0,0.08)] z-40">
             <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
               {/* Seller Profile */}
               <div className="flex items-center gap-3 w-full sm:w-auto">

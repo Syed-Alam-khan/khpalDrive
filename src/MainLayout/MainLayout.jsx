@@ -7,6 +7,7 @@ const MainLayout = ({ children }) => {
   const location = useLocation();
   const isHomePage = location.pathname === '/';
   const isLoginPage = location.pathname === '/login';
+  const isDetailPage = location.pathname.startsWith('/detail/');
 
   return (
     <div className={`flex flex-col ${isLoginPage ? 'h-screen overflow-hidden' : 'min-h-screen'}`}>
@@ -14,7 +15,7 @@ const MainLayout = ({ children }) => {
       <main className="flex-grow pt-[56px] md:pt-[72px]">
         {children}
       </main>
-      {!isHomePage && <Footer />}
+      {(!isHomePage && !isDetailPage) && <Footer />}
     </div>
   );
 };
