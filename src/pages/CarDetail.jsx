@@ -238,7 +238,7 @@ export default function CarDetail() {
               {/* Seller Profile */}
               <div className="flex items-center gap-3 w-full sm:w-auto">
                 <div className="relative shrink-0">
-                  <div className="w-12 h-12 rounded-full border-2 border-[#4B2DBD]/10 overflow-hidden ring-2 ring-white shadow-sm">
+                  <div className="w-16 h-16 rounded-full border-2 border-[#4B2DBD]/10 overflow-hidden ring-2 ring-white shadow-sm">
                     {car.seller?.imageUrl ? (
                       <img src={car.seller.imageUrl.startsWith('http') ? car.seller.imageUrl : `http://localhost:3000/uploads/${car.seller.imageUrl}`} className="w-full h-full object-cover" alt="" />
                     ) : (
@@ -248,7 +248,7 @@ export default function CarDetail() {
                     )}
                   </div>
                 </div>
-                <div className="space-y-1">
+                <div className="space-y-2">
                   <div className="flex items-center gap-1">
                     <ShieldCheck size={12} className="text-[#25D366]" fill="currentColor" fillOpacity={0.15} />
                     <span className="text-[10px] font-black text-[#25D366] uppercase tracking-widest">Verified Seller</span>
