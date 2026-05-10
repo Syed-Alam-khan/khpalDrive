@@ -117,7 +117,7 @@ export default function CarDetail() {
             <img 
               src={getImageUrl(car.images?.[activeImage])} 
               alt={car.carName} 
-              className="w-full aspect-[3/2] md:aspect-[16/9] object-cover transition-transform duration-700 group-hover:scale-105 cursor-zoom-in" 
+              className="w-full aspect-[16/9] md:aspect-[21/9] object-cover transition-transform duration-700 group-hover:scale-105 cursor-zoom-in" 
               onClick={() => setIsFullScreenOpen(true)}
             />
             <div className="absolute bottom-3 right-3 bg-white/90 backdrop-blur-sm text-gray-900 px-3 py-1 rounded-full text-xs font-black shadow-sm">
