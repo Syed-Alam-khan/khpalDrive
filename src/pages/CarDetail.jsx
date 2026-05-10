@@ -14,7 +14,10 @@ import {
   ChevronLeft,
   ChevronRight,
   X,
-  Share2
+  Share2,
+  Milestone,
+  Car,
+  LayoutGrid
 } from 'lucide-react';
 
 
@@ -183,41 +186,21 @@ export default function CarDetail() {
 
           {/* Specs Grid */}
           <div className="grid grid-cols-3 gap-2">
-            <div className="bg-gray-100 p-3 rounded-xl border-2 border-gray-100/50 flex flex-col items-center text-center space-y-1.5">
-              <Gauge size={18} className="text-[#4B2DBD]" strokeWidth={2.5} />
-              <div className="space-y-0">
-                <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Engine</p>
-                <p className="font-black text-gray-900 text-sm md:text-base">{car.engineCC}</p>
-              </div>
-            </div>
-            <div className="bg-gray-100 p-3 rounded-xl border-2 border-gray-100/50 flex flex-col items-center text-center space-y-1.5">
-              <Fuel size={18} className="text-[#4B2DBD]" strokeWidth={2.5} />
-              <div className="space-y-0">
-                <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Fuel</p>
-                <p className="font-black text-gray-900 text-sm md:text-base">{car.fuelType}</p>
-              </div>
-            </div>
-            <div className="bg-gray-100 p-3 rounded-xl border-2 border-gray-100/50 flex flex-col items-center text-center space-y-1.5">
-              <Settings2 size={18} className="text-[#4B2DBD]" strokeWidth={2.5} />
-              <div className="space-y-0">
-                <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Trans.</p>
-                <p className="font-black text-gray-900 text-sm md:text-base">{car.transmission}</p>
-              </div>
-            </div>
-          </div>
-
-          {/* Details Row */}
-          <div className="flex flex-wrap gap-2">
             {[
-
-              { label: 'Mileage', value: car.mileage },
-              { label: 'Cond.', value: car.condition },
-              { label: 'Type', value: car.type },
-              { label: 'Cat.', value: car.category?.name || 'N/A' }
-            ].map((item, idx) => (
-              <div key={idx} className="flex items-center gap-1.5 border-2 border-gray-100 px-3 py-1.5 rounded-full text-[11px] font-bold text-gray-600 bg-white shadow-sm">
-                <span className="text-gray-400">{item.label}</span>
-                <span className="text-gray-900 font-black">{item.value}</span>
+              { label: 'Engine', value: car.engineCC, icon: Gauge },
+              { label: 'Fuel', value: car.fuelType, icon: Fuel },
+              { label: 'Trans.', value: car.transmission, icon: Settings2 },
+              { label: 'Mileage', value: car.mileage, icon: Milestone },
+              { label: 'Cond.', value: car.condition, icon: ShieldCheck },
+              { label: 'Type', value: car.type, icon: Car },
+              { label: 'Cat.', value: car.category?.name || 'N/A', icon: LayoutGrid }
+            ].map((spec, idx) => (
+              <div key={idx} className="bg-gray-100 p-3 rounded-xl border-2 border-gray-100/50 flex flex-col items-center text-center space-y-1.5">
+                <spec.icon size={18} className="text-[#4B2DBD]" strokeWidth={2.5} />
+                <div className="space-y-0">
+                  <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">{spec.label}</p>
+                  <p className="font-black text-gray-900 text-sm md:text-base">{spec.value}</p>
+                </div>
               </div>
             ))}
           </div>
