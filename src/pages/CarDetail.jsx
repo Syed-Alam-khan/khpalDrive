@@ -233,7 +233,7 @@ export default function CarDetail() {
           )}
 
           {/* Seller Section */}
-          <div className="lg:relative lg:mt-8 fixed bottom-0 left-0 w-full lg:w-auto bg-white border-t-2 lg:border-2 border-gray-100 p-4 lg:rounded-[1.2rem] rounded-t-[1.5rem] lg:shadow-sm shadow-[0_-4px_20px_rgba(0,0,0,0.08)] z-40">
+          <div className="lg:relative lg:mt-8 fixed bottom-0 left-0 w-full lg:w-auto bg-white p-4 lg:rounded-[1.2rem] rounded-t-[1.5rem] z-40">
             <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
               {/* Seller Profile */}
               <div className="flex items-center gap-3 w-full sm:w-auto">
@@ -262,7 +262,7 @@ export default function CarDetail() {
               <div className="flex items-center gap-2 w-full sm:w-auto">
                 <button 
                   onClick={handleWhatsApp}
-                  className="flex-1 sm:flex-none bg-[#25D366] hover:bg-[#20bd5c] text-white px-5 py-3 rounded-full font-black text-xs flex items-center justify-center gap-1.5 transition-all active:scale-95 shadow-md shadow-green-100"
+                  className="flex-1 sm:flex-none bg-[#25D366] hover:bg-[#20bd5c] text-white px-5 py-3 rounded-full font-black text-xs flex items-center justify-center gap-1.5 transition-all active:scale-95"
                 >
                   <MessageSquare size={16} fill="currentColor" />
                   WhatsApp
@@ -272,7 +272,7 @@ export default function CarDetail() {
                     const cleanPhone = (car.seller?.phoneNumber || '').replace(/\D/g, '');
                     window.location.href = `tel:${cleanPhone}`;
                   }}
-                  className="flex-1 sm:flex-none bg-white hover:bg-gray-50 text-gray-900 px-5 py-3 rounded-full font-black text-xs flex items-center justify-center gap-1.5 border border-gray-200 transition-all active:scale-95 shadow-sm"
+                  className="flex-1 sm:flex-none bg-white hover:bg-gray-50 text-gray-900 px-5 py-3 rounded-full font-black text-xs flex items-center justify-center gap-1.5 border border-gray-200 transition-all active:scale-95"
                 >
                   <Phone size={16} fill="currentColor" className="text-gray-400" />
                   Call Now
