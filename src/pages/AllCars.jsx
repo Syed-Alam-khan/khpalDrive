@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import SearchFilter from '../components/SearchFilter';
 import CarCard from '../components/CarCard';
 import { useCar } from '../context/CarContext';
@@ -11,6 +11,8 @@ export default function AllCars() {
   const { getAllCategories } = useCategory();
   const [filteredCars, setFilteredCars] = useState([]);
   const [visibleCount, setVisibleCount] = useState(12);
+  const location = useLocation();
+  const autoScroll = location.state?.autoScroll;
   
   useEffect(() => {
     getAllCars();
@@ -69,7 +71,7 @@ export default function AllCars() {
   };
 
   useEffect(() => {
-    if (!carsLoading && filteredCars.length > 0) {
+    if (!carsLoading && filteredCars.length > 0 && autoScroll) {
       setTimeout(() => {
         const target = document.getElementById('car-4');
         if (target) {
@@ -79,7 +81,7 @@ export default function AllCars() {
         }
       }, 500); // Wait for images/layout to settle
     }
-  }, [carsLoading, filteredCars.length]);
+  }, [carsLoading, filteredCars.length, autoScroll]);
 
   return (
     <div className="bg-white min-h-screen">
@@ -91,7 +93,7 @@ export default function AllCars() {
       {/* Browse Cars Section */}
       <div className="bg-white md:bg-[#FBF7F7]">
         <div className="max-w-7xl mx-auto px-4 md:px-12 pt-[10px] pb-16 md:py-16 ">
-          <div className="mb-6 md:mb-10 flex items-center gap-3 md:gap-6">
+          <div className="mb-1.5 md:mb-4 flex items-center gap-3 md:gap-6">
             <Link to="/" className="text-gray-900 hover:text-[#4B2DBD] transition-all flex items-center justify-center" title="Back to Home">
               <FaArrowLeft className="text-xl md:text-5xl" />
             </Link>

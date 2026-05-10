@@ -80,7 +80,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 md:px-12 pt-[10px] pb-24 md:py-16">
           <div className="flex justify-between items-center mb-4">
             <h2 className="text-xl md:text-5xl font-black text-gray-900 tracking-tight">Browse Cars</h2>
-            <Link to="/all-cars" className="text-gray-500 font-semibold flex items-center gap-2 hover:text-[#4B2DBD] transition-all">
+            <Link to="/all-cars" state={{ autoScroll: true }} className="text-gray-500 font-semibold flex items-center gap-2 hover:text-[#4B2DBD] transition-all">
               View All
               <FaChevronRight size={12} />
             </Link>

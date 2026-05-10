@@ -33,7 +33,7 @@ export default function Login() {
     <div className="min-h-screen flex bg-white font-sans text-gray-800 mt-[-56px] md:mt-[-72px]">
       {/* Left Side: Form */}
       <div className="w-full lg:w-[45%] flex flex-col justify-start pt-24 px-8 md:px-16 lg:px-24">
-        <div className="max-w-sm w-full mx-auto space-y-12">
+        <div className="max-w-sm w-full mx-auto space-y-4">
           
 
           {/* Form */}
@@ -98,7 +98,7 @@ export default function Login() {
           </form>
 
           {/* Links */}
-          <div className="pt-6 text-center text-sm font-bold">
+          <div className="pt-0 text-center text-sm font-bold">
             <p className="text-gray-400">
               Don't have account? <span onClick={() => navigate('/register')} className="text-[#4B2DBD] hover:underline cursor-pointer transition-colors ml-1">Sign Up Now</span>
             </p>
