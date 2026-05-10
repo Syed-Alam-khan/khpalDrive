@@ -292,8 +292,8 @@ const SearchFilter = ({ onSearch }) => {
                     <button 
                       key={t}
                       onClick={() => handleChange('type', t)}
-                      className={`px-4 py-2 rounded-xl text-[10px] font-black border transition-all ${
-                        filters.type === t ? 'bg-[#4B2DBD] text-white border-[#4B2DBD]' : 'bg-white text-gray-500 border-gray-100'
+                      className={`px-4 py-3 rounded-xl text-[10px] font-black border transition-all ${
+                        filters.type === t ? 'bg-[#4B2DBD] text-white border-[#4B2DBD]' : 'bg-[#F9FAFB] text-gray-500 border-[#E5E7EB]'
                       }`}
                     >
                       {t} {filters.type === t && '✓'}
@@ -310,8 +310,8 @@ const SearchFilter = ({ onSearch }) => {
                     <button 
                       key={f}
                       onClick={() => handleChange('fuelType', f)}
-                      className={`py-2 rounded-xl text-[10px] font-black border transition-all ${
-                        filters.fuelType === f ? 'bg-[#4B2DBD] text-white border-[#4B2DBD]' : 'bg-white text-gray-500 border-gray-100'
+                      className={`py-3 rounded-xl text-[10px] font-black border transition-all ${
+                        filters.fuelType === f ? 'bg-[#4B2DBD] text-white border-[#4B2DBD]' : 'bg-[#F9FAFB] text-gray-500 border-[#E5E7EB]'
                       }`}
                     >
                       {f}
@@ -325,7 +325,7 @@ const SearchFilter = ({ onSearch }) => {
             <div className="fixed bottom-0 left-0 w-full bg-white p-4 border-t border-gray-50 space-y-2 z-20">
               <button 
                 onClick={handleClear}
-                className="w-full bg-white text-gray-900 border-2 border-gray-100 py-3 rounded-xl font-black text-xs uppercase tracking-widest hover:bg-gray-50 transition-all"
+                className="w-full bg-[#F9FAFB] text-gray-900 border border-[#E5E7EB] py-3.5 rounded-xl font-black text-xs uppercase tracking-widest hover:bg-gray-50 transition-all"
               >
                 Clear all
               </button>
