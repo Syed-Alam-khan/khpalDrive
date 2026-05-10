@@ -93,9 +93,9 @@ export default function AllCars() {
         <div className="max-w-7xl mx-auto px-4 md:px-12 pt-[10px] pb-16 md:py-16 ">
           <div className="mb-6 md:mb-10 flex items-center gap-3 md:gap-6">
             <Link to="/" className="text-gray-900 hover:text-[#4B2DBD] transition-all flex items-center justify-center" title="Back to Home">
-              <FaArrowLeft className="text-2xl md:text-4xl" />
+              <FaArrowLeft className="text-xl md:text-5xl" />
             </Link>
-            <h1 className="text-2xl md:text-5xl font-black text-gray-900 tracking-tight">All Cars</h1>
+            <h1 className="text-xl md:text-5xl font-black text-gray-900 tracking-tight">All Cars</h1>
           </div>
 
           {carsLoading ? (
