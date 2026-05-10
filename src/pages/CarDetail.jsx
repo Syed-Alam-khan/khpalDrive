@@ -171,11 +171,11 @@ export default function CarDetail() {
               Share Vehicle
             </button>
           </div>
-          <div className="space-y-1.5">
+          <div className="space-y-1">
             <h1 className="text-lg md:text-xl font-black text-gray-900 tracking-tight uppercase">
               {car.category?.name || 'Luxury'} <span className="text-gray-300 mx-2">|</span> Model {car.model}
             </h1>
-            <div className="flex flex-col gap-1">
+            <div className="flex flex-col gap-0">
               <p className="text-sm md:text-lg font-bold text-gray-500 uppercase tracking-widest">
                 {car.carName}
               </p>
