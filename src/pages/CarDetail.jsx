@@ -160,19 +160,19 @@ export default function CarDetail() {
               <MapPin size={14} className="text-gray-400" />
               {car.location}
             </div>
+            <button 
+              onClick={handleShare}
+              className="bg-[#4B2DBD] text-white px-3 py-1.5 rounded-md font-black text-[10px] uppercase tracking-wider flex items-center gap-2 shadow-sm hover:bg-[#3B2396] transition-all"
+            >
+              <Share2 size={14} />
+              Share Vehicle
+            </button>
           </div>
           <div className="space-y-1">
             <div className="flex items-center justify-between gap-4">
               <h1 className="text-xl md:text-2xl font-black text-gray-900 tracking-tight uppercase">
                 {car.carName} {car.model}
               </h1>
-              <button 
-                onClick={handleShare}
-                className="w-10 h-10 bg-gray-50 text-gray-400 hover:text-[#4B2DBD] hover:bg-indigo-50 rounded-xl flex items-center justify-center transition-all shrink-0"
-                title="Share Listing"
-              >
-                <Share2 size={20} />
-              </button>
             </div>
             <div className="text-2xl md:text-3xl font-black text-[#4B2DBD] tracking-tight">
               PKR, {car.price?.toLocaleString()}
