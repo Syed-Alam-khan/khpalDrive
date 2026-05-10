@@ -46,7 +46,7 @@ export default function Login() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Enter your email"
-                className="w-full bg-[#F9FAFB] border border-[#E5E7EB] rounded-lg py-3 px-4 focus:bg-white focus:border-[#4B2DBD]/20 transition-all outline-none text-sm text-gray-800 font-bold placeholder:text-gray-400 placeholder:font-normal" 
+                className="w-full bg-white border border-[#E5E7EB] rounded-lg py-3 px-4 focus:bg-white focus:border-[#4B2DBD]/20 transition-all outline-none text-sm text-gray-800 font-bold placeholder:text-gray-400 placeholder:font-normal" 
               />
             </div>
             
@@ -59,7 +59,7 @@ export default function Login() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="Enter your password"
-                  className="w-full bg-[#F9FAFB] border border-[#E5E7EB] rounded-lg py-3 px-4 focus:bg-white focus:border-[#4B2DBD]/20 transition-all outline-none text-sm text-gray-800 font-bold placeholder:text-gray-400 placeholder:font-normal pr-12" 
+                  className="w-full bg-white border border-[#E5E7EB] rounded-lg py-3 px-4 focus:bg-white focus:border-[#4B2DBD]/20 transition-all outline-none text-sm text-gray-800 font-bold placeholder:text-gray-400 placeholder:font-normal pr-12" 
                 />
                 <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-[#4B2DBD] transition-colors">
                   {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}

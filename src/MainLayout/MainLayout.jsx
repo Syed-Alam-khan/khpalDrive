@@ -9,9 +9,9 @@ const MainLayout = ({ children }) => {
   const isLoginPage = location.pathname === '/login';
 
   return (
-    <div className={`flex flex-col ${isLoginPage ? 'h-screen overflow-hidden' : 'min-h-screen'}`}>
+    <div className={`flex flex-col bg-white ${isLoginPage ? 'h-screen overflow-hidden' : 'min-h-screen'}`}>
       <Header />
-      <main className="flex-grow pt-[56px] md:pt-[72px]">
+      <main className={`flex-grow pt-[56px] md:pt-[72px] ${isLoginPage ? 'bg-white' : ''}`}>
         {children}
       </main>
       {!isHomePage && <Footer />}
