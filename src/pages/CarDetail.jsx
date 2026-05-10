@@ -1,5 +1,6 @@
 import { useParams, Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import { toast } from 'react-toastify';
 import { useCar } from '../context/CarContext';
 import { 
   MapPin, 
@@ -12,7 +13,8 @@ import {
   MessageSquare,
   ChevronLeft,
   ChevronRight,
-  X
+  X,
+  Share2
 } from 'lucide-react';
 
 
@@ -75,6 +77,23 @@ export default function CarDetail() {
     
     const message = `Hi, I'm interested in your ${car.carName} (${car.model}) listed for PKR ${car.price?.toLocaleString()}.`;
     window.open(`https://wa.me/${phone}?text=${encodeURIComponent(message)}`, '_blank');
+  };
+
+  const handleShare = async () => {
+    const url = window.location.href;
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: `Check out this ${car.carName} on KhpalDrive`,
+          url: url
+        });
+      } catch (err) {
+        console.error('Share failed', err);
+      }
+    } else {
+      navigator.clipboard.writeText(url);
+      toast.success('Link copied to clipboard! 🔗');
+    }
   };
 
   return (
@@ -143,9 +162,18 @@ export default function CarDetail() {
             </div>
           </div>
           <div className="space-y-1">
-            <h1 className="text-xl md:text-2xl font-black text-gray-900 tracking-tight uppercase">
-              {car.carName} {car.model}
-            </h1>
+            <div className="flex items-center justify-between gap-4">
+              <h1 className="text-xl md:text-2xl font-black text-gray-900 tracking-tight uppercase">
+                {car.carName} {car.model}
+              </h1>
+              <button 
+                onClick={handleShare}
+                className="w-10 h-10 bg-gray-50 text-gray-400 hover:text-[#4B2DBD] hover:bg-indigo-50 rounded-xl flex items-center justify-center transition-all shrink-0"
+                title="Share Listing"
+              >
+                <Share2 size={20} />
+              </button>
+            </div>
             <div className="text-2xl md:text-3xl font-black text-[#4B2DBD] tracking-tight">
               PKR, {car.price?.toLocaleString()}
             </div>
@@ -205,7 +233,7 @@ export default function CarDetail() {
           )}
 
           {/* Seller Section */}
-          <div className="lg:relative fixed bottom-0 left-0 w-full lg:w-auto bg-white border-t-2 lg:border-2 border-gray-100 p-4 lg:rounded-[1.2rem] rounded-t-[1.5rem] lg:shadow-sm shadow-[0_-4px_20px_rgba(0,0,0,0.08)] z-40">
+          <div className="lg:relative lg:mt-8 fixed bottom-0 left-0 w-full lg:w-auto bg-white border-t-2 lg:border-2 border-gray-100 p-4 lg:rounded-[1.2rem] rounded-t-[1.5rem] lg:shadow-sm shadow-[0_-4px_20px_rgba(0,0,0,0.08)] z-40">
             <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
               {/* Seller Profile */}
               <div className="flex items-center gap-3 w-full sm:w-auto">

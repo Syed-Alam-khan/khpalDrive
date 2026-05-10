@@ -11,7 +11,8 @@ import {
   ChevronLeft, 
   ChevronRight,
   MoreHorizontal,
-  CheckCircle2
+  CheckCircle2,
+  Share2
 } from 'lucide-react';
 
 const ITEMS_PER_PAGE = 5;
@@ -78,6 +79,23 @@ export default function MyListings() {
       toast.success(response.message || 'Vehicle marked as SOLD! 🏁');
     } catch (err) {
       toast.error(err.response?.data?.message || 'Operation failed');
+    }
+  };
+
+  const handleShare = async (id) => {
+    const url = `${window.location.origin}/detail/${id}`;
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: 'Check out this car on KhpalDrive',
+          url: url
+        });
+      } catch (err) {
+        console.error('Share failed', err);
+      }
+    } else {
+      navigator.clipboard.writeText(url);
+      toast.success('Link copied to clipboard! 🔗');
     }
   };
 
@@ -236,6 +254,13 @@ export default function MyListings() {
                   </td>
                   <td className="px-6 py-4 text-right pr-6 md:pr-8">
                     <div className="flex items-center justify-end gap-1">
+                      <button 
+                        onClick={() => handleShare(item._id)}
+                        className="text-[#4B2DBD] hover:text-[#3b2396] transition-colors p-2 rounded-lg hover:bg-indigo-50"
+                        title="Share Listing"
+                      >
+                        <Share2 size={18} strokeWidth={2} />
+                      </button>
                       <button 
                         onClick={() => navigate(`/sell?edit=${item._id}`)}
                         className="text-indigo-600 hover:text-indigo-700 transition-colors p-2 rounded-lg hover:bg-indigo-50"
