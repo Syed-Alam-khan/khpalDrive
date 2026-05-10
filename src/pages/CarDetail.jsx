@@ -179,7 +179,7 @@ export default function CarDetail() {
               <p className="text-sm md:text-lg font-bold text-gray-500 uppercase tracking-widest">
                 {car.carName}
               </p>
-              <div className="text-2xl md:text-3xl font-black text-[#4B2DBD] tracking-tight">
+              <div className="text-lg md:text-xl font-black text-[#4B2DBD] tracking-tight">
                 PKR, {car.price?.toLocaleString()}
               </div>
             </div>
