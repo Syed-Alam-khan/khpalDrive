@@ -171,14 +171,17 @@ export default function CarDetail() {
               Share Vehicle
             </button>
           </div>
-          <div className="space-y-1">
-            <div className="flex items-center justify-between gap-4">
-              <h1 className="text-xl md:text-2xl font-black text-gray-900 tracking-tight uppercase">
+          <div className="space-y-1.5">
+            <h1 className="text-2xl md:text-4xl font-black text-gray-900 tracking-tight uppercase">
+              {car.category?.name || 'Luxury'}
+            </h1>
+            <div className="flex flex-col gap-1">
+              <p className="text-sm md:text-lg font-bold text-gray-500 uppercase tracking-widest">
                 {car.carName} {car.model}
-              </h1>
-            </div>
-            <div className="text-2xl md:text-3xl font-black text-[#4B2DBD] tracking-tight">
-              PKR, {car.price?.toLocaleString()}
+              </p>
+              <div className="text-2xl md:text-3xl font-black text-[#4B2DBD] tracking-tight">
+                PKR, {car.price?.toLocaleString()}
+              </div>
             </div>
           </div>
 
@@ -192,8 +195,7 @@ export default function CarDetail() {
               { label: 'Trans.', value: car.transmission, icon: Settings2 },
               { label: 'Mileage', value: car.mileage, icon: Milestone },
               { label: 'Cond.', value: car.condition, icon: ShieldCheck },
-              { label: 'Type', value: car.type, icon: Car },
-              { label: 'Cat.', value: car.category?.name || 'N/A', icon: LayoutGrid }
+              { label: 'Type', value: car.type, icon: Car }
             ].map((spec, idx) => (
               <div key={idx} className="bg-gray-100 p-3 rounded-xl border-2 border-gray-100/50 flex flex-col items-center text-center space-y-1.5">
                 <spec.icon size={18} className="text-[#4B2DBD]" strokeWidth={2.5} />
