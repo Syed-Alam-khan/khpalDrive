@@ -4,7 +4,7 @@ import SearchFilter from '../components/SearchFilter';
 import CarCard from '../components/CarCard';
 import { useCar } from '../context/CarContext';
 import { useCategory } from '../context/CategoryContext';
-import { FaCar, FaChevronLeft } from 'react-icons/fa';
+import { FaCar, FaChevronLeft, FaHome } from 'react-icons/fa';
 
 export default function AllCars() {
   const { cars, getAllCars, loading: carsLoading } = useCar();
@@ -93,8 +93,8 @@ export default function AllCars() {
         <div className="max-w-7xl mx-auto px-4 md:px-12 pt-[10px] pb-16 md:py-16 ">
           <div className="mb-4 flex justify-between items-center">
             <h1 className="text-xl md:text-5xl font-black text-gray-900 tracking-tight">All Cars</h1>
-            <Link to="/" className="text-gray-400 hover:text-[#4B2DBD] transition-all flex items-center gap-2 group">
-              <span className="text-xs md:text-sm font-black uppercase tracking-widest">Show Less</span>
+            <Link to="/" className="text-gray-400 hover:text-[#4B2DBD] transition-all flex items-center justify-center bg-gray-100 hover:bg-gray-200 rounded-full w-10 md:w-12 h-10 md:h-12 group shadow-sm" title="Back to Home">
+              <FaHome size={20} className="group-hover:scale-110 transition-transform" />
             </Link>
           </div>
 
