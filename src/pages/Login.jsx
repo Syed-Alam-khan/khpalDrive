@@ -45,7 +45,7 @@ export default function Login() {
                 type="email" 
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full bg-transparent py-2 outline-none text-gray-800 font-bold placeholder:text-gray-300" 
+                className="w-full bg-transparent py-3 outline-none text-gray-800 font-bold placeholder:text-gray-300" 
               />
             </div>
             
@@ -56,7 +56,7 @@ export default function Login() {
                 type={showPassword ? "text" : "password"} 
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full bg-transparent py-2 outline-none text-gray-800 font-bold placeholder:text-gray-300 pr-10" 
+                className="w-full bg-transparent py-3 outline-none text-gray-800 font-bold placeholder:text-gray-300 pr-10" 
               />
               <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-0 bottom-2 text-gray-400 hover:text-[#4B2DBD]">
                 {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}

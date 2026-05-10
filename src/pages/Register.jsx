@@ -117,7 +117,7 @@ export default function Register() {
         <p className="text-gray-500 text-sm font-medium">Manage your personal Identity & Security</p>
       </div>
 
-      <div className="max-w-lg w-full bg-white rounded-[2.5rem] border border-gray-200 p-4 md:p-6 shadow-xl">
+      <div className="max-w-lg w-full bg-[#F9FAFB] rounded-2xl border border-[#E5E7EB] p-4 md:p-6">
         <form onSubmit={handleRegister} className="space-y-3" noValidate>
           
           {/* Avatar Upload */}
@@ -150,7 +150,7 @@ export default function Register() {
                 placeholder="Enter your name" 
                 value={formData.name} 
                 onChange={(e) => setFormData({...formData, name: e.target.value})} 
-                className="w-full bg-[#E5E7EB]/50 border-2 border-transparent rounded-2xl py-1.5 px-4 focus:bg-white focus:border-[#7C3AED]/20 transition-all outline-none text-sm text-gray-800 placeholder:text-gray-400 shadow-sm" 
+                className="w-full bg-[#F9FAFB] border border-[#E5E7EB] rounded-lg py-3 px-4 focus:bg-white focus:border-[#7C3AED]/20 transition-all outline-none text-sm text-gray-800 placeholder:text-gray-400" 
               />
               {errors.name && <p className="text-red-500 text-[10px] font-bold mt-0.5 ml-1">* {errors.name}</p>}
             </div>
@@ -164,7 +164,7 @@ export default function Register() {
                   placeholder="Enter your email" 
                   value={formData.email} 
                   onChange={(e) => setFormData({...formData, email: e.target.value})} 
-                  className="w-full bg-[#E5E7EB]/50 border-2 border-transparent rounded-2xl py-1.5 px-4 focus:bg-white focus:border-[#7C3AED]/20 transition-all outline-none text-sm text-gray-800 placeholder:text-gray-400 shadow-sm" 
+                  className="w-full bg-[#F9FAFB] border border-[#E5E7EB] rounded-lg py-3 px-4 focus:bg-white focus:border-[#7C3AED]/20 transition-all outline-none text-sm text-gray-800 placeholder:text-gray-400" 
                 />
                 {errors.email && <p className="text-red-500 text-[10px] font-bold mt-0.5 ml-1">* {errors.email}</p>}
               </div>
@@ -176,7 +176,7 @@ export default function Register() {
                   placeholder="Enter your phone number" 
                   value={formData.phoneNumber} 
                   onChange={(e) => setFormData({...formData, phoneNumber: e.target.value})} 
-                  className="w-full bg-[#E5E7EB]/50 border-2 border-transparent rounded-2xl py-1.5 px-4 focus:bg-white focus:border-[#7C3AED]/20 transition-all outline-none text-sm text-gray-800 placeholder:text-gray-400 shadow-sm" 
+                  className="w-full bg-[#F9FAFB] border border-[#E5E7EB] rounded-lg py-3 px-4 focus:bg-white focus:border-[#7C3AED]/20 transition-all outline-none text-sm text-gray-800 placeholder:text-gray-400" 
                 />
                 {errors.phoneNumber && <p className="text-red-500 text-[10px] font-bold mt-0.5 ml-1">* {errors.phoneNumber}</p>}
               </div>
@@ -195,7 +195,7 @@ export default function Register() {
                     placeholder="Enter your password" 
                     value={formData.password} 
                     onChange={(e) => setFormData({...formData, password: e.target.value})} 
-                    className="w-full bg-[#E5E7EB]/50 border-2 border-transparent rounded-2xl py-1.5 px-4 focus:bg-white focus:border-[#7C3AED]/20 transition-all outline-none text-sm text-gray-800 placeholder:text-gray-400 pr-12 shadow-sm" 
+                    className="w-full bg-[#F9FAFB] border border-[#E5E7EB] rounded-lg py-3 px-4 focus:bg-white focus:border-[#7C3AED]/20 transition-all outline-none text-sm text-gray-800 placeholder:text-gray-400 pr-12" 
                   />
                   <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-[#7C3AED] transition-colors">
                     {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
@@ -212,7 +212,7 @@ export default function Register() {
                     placeholder="Confirm your password" 
                     value={formData.confirmPassword} 
                     onChange={(e) => setFormData({...formData, confirmPassword: e.target.value})} 
-                    className="w-full bg-[#E5E7EB]/50 border-2 border-transparent rounded-2xl py-1.5 px-4 focus:bg-white focus:border-[#7C3AED]/20 transition-all outline-none text-sm text-gray-800 placeholder:text-gray-400 pr-12 shadow-sm" 
+                    className="w-full bg-[#F9FAFB] border border-[#E5E7EB] rounded-lg py-3 px-4 focus:bg-white focus:border-[#7C3AED]/20 transition-all outline-none text-sm text-gray-800 placeholder:text-gray-400 pr-12" 
                   />
                   <button type="button" onClick={() => setShowConfirmPassword(!showConfirmPassword)} className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-[#7C3AED] transition-colors">
                     {showConfirmPassword ? <EyeOff size={18} /> : <Eye size={18} />}
