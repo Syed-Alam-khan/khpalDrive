@@ -73,7 +73,7 @@ const SearchFilter = ({ onSearch }) => {
                 ))}
               </select>
               <div className="absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none text-gray-400">
-                <FaChevronDown size={12} />
+                <FaChevronDown size={22} />
               </div>
             </div>
           </div>
@@ -95,7 +95,7 @@ const SearchFilter = ({ onSearch }) => {
                 <option value="Electric">Electric</option>
               </select>
               <div className="absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none text-gray-400">
-                <FaChevronDown size={12} />
+                <FaChevronDown size={22} />
               </div>
             </div>
           </div>
@@ -114,7 +114,7 @@ const SearchFilter = ({ onSearch }) => {
                 <option value="Manual">Manual</option>
               </select>
               <div className="absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none text-gray-400">
-                <FaChevronDown size={12} />
+                <FaChevronDown size={22} />
               </div>
             </div>
           </div>
@@ -133,7 +133,7 @@ const SearchFilter = ({ onSearch }) => {
                 <option value="New">New</option>
               </select>
               <div className="absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none text-gray-400">
-                <FaChevronDown size={12} />
+                <FaChevronDown size={22} />
               </div>
             </div>
           </div>
@@ -154,7 +154,7 @@ const SearchFilter = ({ onSearch }) => {
                 <option value="10000000">PKR 1 Crore</option>
               </select>
               <div className="absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none text-gray-400">
-                <FaChevronDown size={12} />
+                <FaChevronDown size={22} />
               </div>
             </div>
           </div>
@@ -195,7 +195,7 @@ const SearchFilter = ({ onSearch }) => {
               </span>
             )}
           </div>
-          <FaChevronDown size={10} className="text-gray-300" />
+          <FaChevronDown size={22} className="text-gray-300" />
         </button>
         {activeFiltersCount > 0 ? (
           <button 
@@ -279,7 +279,7 @@ const SearchFilter = ({ onSearch }) => {
                     ))}
                   </select>
                   <div className="absolute right-5 top-1/2 -translate-y-1/2 pointer-events-none text-gray-400">
-                    <FaChevronDown size={12} />
+                    <FaChevronDown size={22} />
                   </div>
                 </div>
               </div>
