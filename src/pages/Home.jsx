@@ -101,7 +101,7 @@ export default function Home() {
                   className="bg-[#4B2DBD] rounded-2xl flex flex-col items-center justify-center text-white cursor-pointer hover:bg-[#3B2396] transition-all p-6 group min-h-[200px]"
                 >
                   <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                    <FaChevronRight className="text-white rotate-90" size={20} />
+                    <FaChevronRight className="text-white" size={20} />
                   </div>
                   <span className="text-sm font-black uppercase tracking-widest">Show More</span>
                   <span className="text-[10px] font-bold text-white/60 mt-1">{filteredCars.length - limit} more available</span>

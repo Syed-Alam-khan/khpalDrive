@@ -20,13 +20,13 @@ export default function CarCard({ car }) {
         </div>
 
         {/* Car Info */}
-        <div className="p-3 md:p-4 flex items-center justify-between gap-2">
+        <div className="p-1.5 md:p-2.5 flex items-center justify-between gap-1 md:gap-2">
           {/* Text Content */}
           <div className="flex flex-col flex-1 min-w-0">
             <h3 className="text-sm md:text-base font-black text-gray-800 truncate">
               {car.carName}
             </h3>
-            <p className="text-[11px] font-black text-black uppercase tracking-widest mb-1">
+            <p className="text-[9px] md:text-[11px] font-black text-black uppercase tracking-widest">
               {car.category?.name || 'Luxury'}
             </p>
             <p className="text-[#4B2DBD] font-black text-sm md:text-base truncate">

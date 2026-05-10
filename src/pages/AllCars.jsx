@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import SearchFilter from '../components/SearchFilter';
 import CarCard from '../components/CarCard';
 import { useCar } from '../context/CarContext';
 import { useCategory } from '../context/CategoryContext';
-import { FaCar } from 'react-icons/fa';
+import { FaCar, FaChevronLeft } from 'react-icons/fa';
 
 export default function AllCars() {
   const { cars, getAllCars, loading: carsLoading } = useCar();
@@ -67,6 +68,19 @@ export default function AllCars() {
     setVisibleCount(prev => prev + 8);
   };
 
+  useEffect(() => {
+    if (!carsLoading && filteredCars.length > 0) {
+      setTimeout(() => {
+        const target = document.getElementById('car-4');
+        if (target) {
+          const yOffset = -100; // Account for any sticky headers or spacing
+          const y = target.getBoundingClientRect().top + window.pageYOffset + yOffset;
+          window.scrollTo({ top: y, behavior: 'smooth' });
+        }
+      }, 500); // Wait for images/layout to settle
+    }
+  }, [carsLoading, filteredCars.length]);
+
   return (
     <div className="bg-white min-h-screen">
       {/* Search Filter Section - Padded top for contrast */}
@@ -77,8 +91,11 @@ export default function AllCars() {
       {/* Browse Cars Section */}
       <div className="bg-white md:bg-[#FBF7F7]">
         <div className="max-w-7xl mx-auto px-4 md:px-12 pt-[10px] pb-16 md:py-16 ">
-          <div className="mb-3 ">
-            <h1 className="text-xl md:text-5xl font-black text-gray-900 tracking-tight">Browse Cars</h1>
+          <div className="mb-10 flex justify-between items-center">
+            <h1 className="text-xl md:text-5xl font-black text-gray-900 tracking-tight">All Cars</h1>
+            <Link to="/" className="text-gray-400 hover:text-[#4B2DBD] transition-all flex items-center gap-2 group">
+              <span className="text-xs md:text-sm font-black uppercase tracking-widest">Show Less</span>
+            </Link>
           </div>
 
           {carsLoading ? (
@@ -90,8 +107,10 @@ export default function AllCars() {
           ) : (
             <>
               <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-8">
-                {filteredCars.slice(0, visibleCount).map(car => (
-                  <CarCard key={car._id} car={car} />
+                {filteredCars.slice(0, visibleCount).map((car, index) => (
+                  <div key={car._id} id={`car-${index}`}>
+                    <CarCard car={car} />
+                  </div>
                 ))}
               </div>
               
