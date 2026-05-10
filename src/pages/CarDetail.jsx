@@ -97,7 +97,7 @@ export default function CarDetail() {
   };
 
   return (
-    <div className="max-w-5xl mx-auto w-full px-4 md:px-6 py-4 md:py-6 pb-32 lg:pb-6 animate-in fade-in duration-700">
+    <div className="max-w-5xl mx-auto w-full px-4 md:px-6 py-4 md:py-6 pb-48 lg:pb-6 animate-in fade-in duration-700">
       {/* Breadcrumb */}
       <nav className="flex items-center gap-2 text-xs md:text-sm font-medium mb-5 text-gray-900">
         <Link to="/" className="hover:underline underline-offset-4">Home</Link>
