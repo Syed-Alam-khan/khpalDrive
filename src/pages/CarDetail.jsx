@@ -172,14 +172,14 @@ export default function CarDetail() {
             </button>
           </div>
           <div className="space-y-1.5">
-            <h1 className="text-2xl md:text-4xl font-black text-gray-900 tracking-tight uppercase">
+            <h1 className="text-xl md:text-2xl font-black text-gray-900 tracking-tight uppercase">
               {car.category?.name || 'Luxury'} <span className="text-gray-300 mx-2">|</span> Model {car.model}
             </h1>
             <div className="flex flex-col gap-1">
               <p className="text-sm md:text-lg font-bold text-gray-500 uppercase tracking-widest">
                 {car.carName}
               </p>
-              <div className="text-lg md:text-xl font-black text-[#4B2DBD] tracking-tight">
+              <div className="text-2xl md:text-3xl font-black text-[#4B2DBD] tracking-tight">
                 PKR, {car.price?.toLocaleString()}
               </div>
             </div>
