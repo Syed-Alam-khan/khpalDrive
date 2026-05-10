@@ -91,11 +91,11 @@ export default function AllCars() {
       {/* Browse Cars Section */}
       <div className="bg-white md:bg-[#FBF7F7]">
         <div className="max-w-7xl mx-auto px-4 md:px-12 pt-[10px] pb-16 md:py-16 ">
-          <div className="mb-4 flex justify-between items-center">
-            <h1 className="text-xl md:text-5xl font-black text-gray-900 tracking-tight">All Cars</h1>
-            <Link to="/" className="text-gray-400 hover:text-[#4B2DBD] transition-all flex items-center justify-center bg-gray-100 hover:bg-gray-200 rounded-full w-10 md:w-12 h-10 md:h-12 group shadow-sm" title="Back to Home">
-              <FaHome size={20} className="group-hover:scale-110 transition-transform" />
+          <div className="mb-6 md:mb-10 flex items-center gap-3 md:gap-6">
+            <Link to="/" className="text-gray-900 hover:text-[#4B2DBD] transition-all flex items-center justify-center" title="Back to Home">
+              <FaChevronLeft className="text-2xl md:text-4xl" />
             </Link>
+            <h1 className="text-2xl md:text-5xl font-black text-gray-900 tracking-tight">All Cars</h1>
           </div>
 
           {carsLoading ? (

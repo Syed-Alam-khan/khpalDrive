@@ -211,10 +211,10 @@ export default function Header() {
 
       {/* Fixed Bottom Sell Button for Mobile */}
       {isHomePage && (
-        <div className="md:hidden fixed bottom-0 left-0 w-full z-40 bg-white p-4 pb-8 border-t border-gray-100 shadow-[0_-10px_30px_rgba(0,0,0,0.08)]">
+        <div className="md:hidden fixed bottom-0 left-0 w-full z-40 bg-white p-4 pb-4 border-t border-gray-100 shadow-[0_-10px_30px_rgba(0,0,0,0.08)]">
           <Link 
             to={userInfo ? "/sell" : "/register"} 
-            className="w-full bg-[#4B2DBD] text-white py-4 rounded-lg font-black text-lg uppercase tracking-widest flex items-center justify-center active:scale-[0.98] transition-all shadow-lg shadow-indigo-100"
+            className="w-full bg-[#4B2DBD] text-white py-2.5 rounded-lg font-black text-base uppercase tracking-widest flex items-center justify-center active:scale-[0.98] transition-all shadow-lg shadow-indigo-100"
           >
             Sell my Car
           </Link>
