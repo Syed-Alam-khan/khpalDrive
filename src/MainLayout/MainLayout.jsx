@@ -11,10 +11,14 @@ const MainLayout = ({ children }) => {
   return (
     <div className={`flex flex-col bg-white ${isLoginPage ? 'h-screen overflow-hidden' : 'min-h-screen'}`}>
       <Header />
-      <main className={`flex-grow pt-[56px] md:pt-[72px] ${isLoginPage ? 'bg-white' : ''}`}>
+      <main className="flex-grow pt-[56px] md:pt-[72px]">
         {children}
       </main>
-      {!isHomePage && <Footer />}
+      {!isHomePage && (
+        <div className={isLoginPage ? 'bg-white' : ''}>
+          <Footer isDark={isLoginPage} />
+        </div>
+      )}
     </div>
   );
 };

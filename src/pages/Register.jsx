@@ -91,7 +91,7 @@ export default function Register() {
 
   if (isSuccess) {
     return (
-      <div className="min-h-screen bg-[#F3F4F6] flex flex-col items-center justify-center py-12 px-4 animate-in fade-in zoom-in-95 duration-500">
+      <div className="min-h-screen bg-white flex flex-col items-center justify-center py-12 px-4 animate-in fade-in zoom-in-95 duration-500">
         <div className="max-w-md w-full bg-white rounded-[2.5rem] border border-gray-200 p-12 shadow-2xl text-center space-y-8">
           <div className="flex justify-center">
             <div className="w-24 h-24 bg-emerald-50 rounded-full flex items-center justify-center text-emerald-500">
@@ -110,7 +110,7 @@ export default function Register() {
   }
 
   return (
-    <div className="min-h-screen bg-[#F3F4F6] flex flex-col items-center justify-center py-6 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-white flex flex-col items-center justify-center py-6 px-4 sm:px-6 lg:px-8">
       {/* Header */}
       <div className="text-center mb-4">
         <h1 className="text-2xl font-black text-gray-800 uppercase tracking-tight">Registration</h1>
