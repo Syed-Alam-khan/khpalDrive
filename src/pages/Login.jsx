@@ -38,62 +38,69 @@ export default function Login() {
 
           {/* Form */}
           <form onSubmit={handleLogin} className="space-y-8 pt-4">
-            <div className="space-y-1 border-b-2 border-gray-200 focus-within:border-[#4B2DBD] transition-colors">
-              <label className="text-xs font-semibold text-gray-400 uppercase tracking-widest">Email Address</label>
+            <div className="space-y-2">
+              <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1 ml-1">Email Address</label>
               <input 
                 required 
                 type="email" 
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full bg-transparent py-3 outline-none text-gray-800 font-bold placeholder:text-gray-300" 
+                placeholder="Enter your email"
+                className="w-full bg-[#F9FAFB] border border-[#E5E7EB] rounded-lg py-3 px-4 focus:bg-white focus:border-[#4B2DBD]/20 transition-all outline-none text-sm text-gray-800 font-bold placeholder:text-gray-400" 
               />
             </div>
             
-            <div className="space-y-1 border-b-2 border-gray-200 focus-within:border-[#4B2DBD] transition-colors relative">
-              <label className="text-xs font-semibold text-gray-400 uppercase tracking-widest">Password</label>
-              <input 
-                required 
-                type={showPassword ? "text" : "password"} 
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="w-full bg-transparent py-3 outline-none text-gray-800 font-bold placeholder:text-gray-300 pr-10" 
-              />
-              <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-0 bottom-2 text-gray-400 hover:text-[#4B2DBD]">
-                {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
-              </button>
+            <div className="space-y-2 relative">
+              <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1 ml-1">Password</label>
+              <div className="relative">
+                <input 
+                  required 
+                  type={showPassword ? "text" : "password"} 
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="Enter your password"
+                  className="w-full bg-[#F9FAFB] border border-[#E5E7EB] rounded-lg py-3 px-4 focus:bg-white focus:border-[#4B2DBD]/20 transition-all outline-none text-sm text-gray-800 font-bold placeholder:text-gray-400 pr-12" 
+                />
+                <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-[#4B2DBD] transition-colors">
+                  {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                </button>
+              </div>
             </div>
 
-            <div className="flex items-center justify-between">
-              <label className="flex items-center gap-2 cursor-pointer group">
-                <div className="relative">
-                  <input 
-                    type="checkbox" 
-                    className="sr-only peer"
-                    checked={rememberLogin}
-                    onChange={() => setRememberLogin(!rememberLogin)}
-                  />
-                  <div className="w-5 h-5 border-2 border-gray-300 rounded-md peer-checked:bg-[#4B2DBD] peer-checked:border-[#4B2DBD] transition-all"></div>
-                  <svg className="absolute top-1 left-1 w-3 h-3 text-white hidden peer-checked:block" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="4">
-                    <path d="M5 13l4 4L19 7" />
-                  </svg>
-                </div>
-                <span className="text-sm font-semibold text-gray-500 group-hover:text-gray-700 transition-colors">Remember login</span>
-              </label>
+            <div className="space-y-6">
+              <div className="flex items-center justify-between">
+                <label className="flex items-center gap-2 cursor-pointer group">
+                  <div className="relative">
+                    <input 
+                      type="checkbox" 
+                      className="sr-only peer"
+                      checked={rememberLogin}
+                      onChange={() => setRememberLogin(!rememberLogin)}
+                    />
+                    <div className="w-5 h-5 border-2 border-gray-300 rounded-md peer-checked:bg-[#4B2DBD] peer-checked:border-[#4B2DBD] transition-all"></div>
+                    <svg className="absolute top-1 left-1 w-3 h-3 text-white hidden peer-checked:block" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="4">
+                      <path d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                  <span className="text-sm font-semibold text-gray-500 group-hover:text-gray-700 transition-colors">Remember login</span>
+                </label>
+                <span className="text-xs font-bold text-gray-400 hover:text-[#4B2DBD] cursor-pointer transition-colors">Forgot Password?</span>
+              </div>
 
               <button 
                 type="submit" 
                 disabled={loading}
-                className="bg-[#4B2DBD] hover:bg-[#3a2291] text-white px-10 py-3 rounded-full font-bold transition-all shadow-lg shadow-indigo-100 active:scale-95 disabled:opacity-50 uppercase tracking-widest text-sm"
+                className="w-full bg-[#4B2DBD] hover:bg-[#3a2291] text-white py-3.5 rounded-lg font-bold transition-all shadow-lg shadow-indigo-100 active:scale-95 disabled:opacity-50 uppercase tracking-widest text-sm"
               >
-                {loading ? '...' : 'Login'}
+                {loading ? 'Processing...' : 'Login Now →'}
               </button>
             </div>
           </form>
 
           {/* Links */}
-          <div className="space-y-4 pt-4 text-sm font-semibold">
+          <div className="pt-6 text-center text-sm font-bold">
             <p className="text-gray-400">
-              Don't have account ? <span onClick={() => navigate('/register')} className="text-gray-500 hover:text-[#4B2DBD] underline cursor-pointer transition-colors">Sign Up</span>
+              Don't have account? <span onClick={() => navigate('/register')} className="text-[#4B2DBD] hover:underline cursor-pointer transition-colors ml-1">Sign Up Now</span>
             </p>
           </div>
 

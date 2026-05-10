@@ -78,18 +78,18 @@ export default function AllCars() {
       <div className="bg-white md:bg-[#FBF7F7]">
         <div className="max-w-7xl mx-auto px-4 md:px-12 pt-[10px] pb-16 md:py-16 ">
           <div className="mb-3 ">
-            <h1 className="text-sm md:text-3xl font-bold text-gray-900">Browse Cars</h1>
+            <h1 className="text-xl md:text-5xl font-black text-gray-900 tracking-tight">Browse Cars</h1>
           </div>
 
           {carsLoading ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-8">
               {[1, 2, 3, 4, 5, 6, 7, 8].map(i => (
                 <div key={i} className="bg-gray-100 rounded-2xl aspect-[4/5] animate-pulse border"></div>
               ))}
             </div>
           ) : (
             <>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-8">
                 {filteredCars.slice(0, visibleCount).map(car => (
                   <CarCard key={car._id} car={car} />
                 ))}

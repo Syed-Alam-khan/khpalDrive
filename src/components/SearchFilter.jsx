@@ -57,9 +57,9 @@ const SearchFilter = ({ onSearch }) => {
     <div className={`max-w-7xl mx-auto mt-8 mb-[5px] md:-mt-12 md:mb-0 relative px-4 md:px-12 ${isMobileModalOpen ? 'z-[100]' : 'z-10'}`}>
       {/* Desktop Filter (Hidden on Mobile) */}
       <div className="hidden md:flex flex-row items-stretch gap-4 mb-4">
-        <div className="flex-1 bg-white rounded-xl border-2 border-gray-200 flex flex-row items-center overflow-hidden shadow-sm">
+        <div className="flex-1 bg-[#F9FAFB] rounded-xl border-2 border-[#E5E7EB] flex flex-row items-center overflow-hidden">
           {/* Marka Filter */}
-          <div className="flex-1 w-full p-2 border-r-2 border-gray-200 last:border-r-0 relative group">
+          <div className="flex-1 w-full p-3 border-r-2 border-[#E5E7EB] last:border-r-0 relative group">
             <label className="block text-[10px] text-gray-400 font-black uppercase tracking-widest mb-1 ml-1">Marka</label>
             <div className="relative">
               <select 
@@ -79,7 +79,7 @@ const SearchFilter = ({ onSearch }) => {
           </div>
 
           {/* Fuel Type Filter */}
-          <div className="flex-1 w-full p-2 border-r-2 border-gray-200 last:border-r-0 relative group">
+          <div className="flex-1 w-full p-3 border-r-2 border-[#E5E7EB] last:border-r-0 relative group">
             <label className="block text-[10px] text-gray-400 font-black uppercase tracking-widest mb-1 ml-1">Fuel Type</label>
             <div className="relative">
               <select 
@@ -101,7 +101,7 @@ const SearchFilter = ({ onSearch }) => {
           </div>
 
           {/* Transmission Filter */}
-          <div className="flex-1 w-full p-2 border-r-2 border-gray-200 last:border-r-0 relative group">
+          <div className="flex-1 w-full p-3 border-r-2 border-[#E5E7EB] last:border-r-0 relative group">
             <label className="block text-[10px] text-gray-400 font-black uppercase tracking-widest mb-1 ml-1">Trans.</label>
             <div className="relative">
               <select 
@@ -120,7 +120,7 @@ const SearchFilter = ({ onSearch }) => {
           </div>
 
           {/* Condition Filter */}
-          <div className="flex-1 w-full p-2 border-r-2 border-gray-200 last:border-r-0 relative group">
+          <div className="flex-1 w-full p-3 border-r-2 border-[#E5E7EB] last:border-r-0 relative group">
             <label className="block text-[10px] text-gray-400 font-black uppercase tracking-widest mb-1 ml-1">Condition</label>
             <div className="relative">
               <select 
@@ -139,7 +139,7 @@ const SearchFilter = ({ onSearch }) => {
           </div>
 
           {/* Price Range Filter */}
-          <div className="flex-1 w-full p-2 relative group">
+          <div className="flex-1 w-full p-3 relative group">
             <label className="block text-[10px] text-gray-400 font-black uppercase tracking-widest mb-1 ml-1">Max Price</label>
             <div className="relative">
               <select 
@@ -164,7 +164,7 @@ const SearchFilter = ({ onSearch }) => {
         <div className="flex gap-2">
           <button 
             onClick={() => onSearch(filters)}
-            className="bg-[#4B2DBD] text-white px-8 py-2 rounded-xl flex items-center justify-center gap-3 hover:bg-[#3B2396] transition-all font-black shadow-lg shadow-purple-100 min-w-[140px]"
+            className="bg-[#4B2DBD] text-white px-8 py-2 rounded-xl flex items-center justify-center gap-3 hover:bg-[#3B2396] transition-all font-black min-w-[140px]"
           >
             <FaSearch size={14} />
             <span className="text-sm uppercase tracking-widest">Search</span>
@@ -184,7 +184,7 @@ const SearchFilter = ({ onSearch }) => {
       <div className="md:hidden flex gap-1.5">
         <button 
           onClick={() => setIsMobileModalOpen(true)}
-          className="flex-1 bg-white border-2 border-gray-100 rounded-xl py-2.5 px-3 flex items-center justify-between font-black text-gray-800 shadow-sm"
+          className="flex-1 bg-[#F9FAFB] border-2 border-[#E5E7EB] rounded-xl py-3.5 px-5 flex items-center justify-between font-black text-gray-800"
         >
           <div className="flex items-center gap-2">
             <FaFilter className="text-[#4B2DBD]" size={12} />
@@ -200,7 +200,7 @@ const SearchFilter = ({ onSearch }) => {
         {activeFiltersCount > 0 ? (
           <button 
             onClick={handleClear}
-            className="bg-red-500 text-white w-12 rounded-xl flex items-center justify-center shadow-lg shadow-red-100 animate-in zoom-in duration-300"
+            className="bg-red-500 text-white w-12 rounded-xl flex items-center justify-center animate-in zoom-in duration-300"
             title="Clear Filters"
           >
             <RotateCcw size={16} />
@@ -208,7 +208,7 @@ const SearchFilter = ({ onSearch }) => {
         ) : (
           <button 
             onClick={() => onSearch(filters)}
-            className="bg-[#4B2DBD] text-white w-12 rounded-xl flex items-center justify-center shadow-lg shadow-purple-100 animate-in zoom-in duration-300"
+            className="bg-[#4B2DBD] text-white w-12 rounded-xl flex items-center justify-center animate-in zoom-in duration-300"
             title="Search"
           >
             <FaSearch size={16} />
@@ -219,7 +219,7 @@ const SearchFilter = ({ onSearch }) => {
       {/* Mobile Filter Modal (Full Screen Overlay) */}
       {isMobileModalOpen && (
         <div className="fixed inset-0 z-[100] bg-black/60 backdrop-blur-sm animate-in fade-in duration-300">
-          <div className="absolute bottom-0 left-0 w-full bg-white rounded-t-3xl p-6 max-h-[90vh] overflow-y-auto animate-in slide-in-from-bottom-full duration-500 shadow-2xl">
+          <div className="absolute bottom-0 left-0 w-full bg-white rounded-t-3xl p-6 max-h-[90vh] overflow-y-auto animate-in slide-in-from-bottom-full duration-500">
             {/* Modal Header */}
             <div className="flex items-center justify-between mb-8 sticky top-0 bg-white z-10 pb-2">
               <button 
@@ -249,7 +249,7 @@ const SearchFilter = ({ onSearch }) => {
                       placeholder="Min Price (PKR)"
                       value={filters.minPrice}
                       onChange={(e) => handleChange('minPrice', e.target.value)}
-                      className="w-full bg-white border border-gray-100 rounded-xl py-3 px-4 text-sm font-bold focus:bg-white focus:border-[#4B2DBD] outline-none transition-all"
+                      className="w-full bg-[#F9FAFB] border border-[#E5E7EB] rounded-xl py-3 px-4 text-sm font-bold focus:bg-white focus:border-[#4B2DBD] outline-none transition-all"
                     />
                   </div>
                   <div className="relative">
@@ -258,7 +258,7 @@ const SearchFilter = ({ onSearch }) => {
                       placeholder="Max Price (PKR)"
                       value={filters.maxPrice}
                       onChange={(e) => handleChange('maxPrice', e.target.value)}
-                      className="w-full bg-white border border-gray-100 rounded-xl py-3 px-4 text-sm font-bold focus:bg-white focus:border-[#4B2DBD] outline-none transition-all"
+                      className="w-full bg-[#F9FAFB] border border-[#E5E7EB] rounded-xl py-3 px-4 text-sm font-bold focus:bg-white focus:border-[#4B2DBD] outline-none transition-all"
                     />
                   </div>
                 </div>
@@ -271,7 +271,7 @@ const SearchFilter = ({ onSearch }) => {
                   <select 
                     value={filters.marka}
                     onChange={(e) => handleChange('marka', e.target.value)}
-                    className="w-full bg-white border border-gray-100 rounded-xl py-3 px-4 text-sm font-bold focus:bg-white focus:border-[#4B2DBD] outline-none appearance-none transition-all text-gray-800"
+                    className="w-full bg-[#F9FAFB] border border-[#E5E7EB] rounded-xl py-3 px-4 text-sm font-bold focus:bg-white focus:border-[#4B2DBD] outline-none appearance-none transition-all text-gray-800"
                   >
                     <option value="">Select Category</option>
                     {categories.map(cat => (
@@ -331,7 +331,7 @@ const SearchFilter = ({ onSearch }) => {
               </button>
               <button 
                 onClick={handleApplyMobile}
-                className="w-full bg-[#4B2DBD] text-white py-3 rounded-xl font-black text-xs uppercase tracking-widest shadow-lg shadow-purple-100 active:scale-[0.98] transition-all"
+                className="w-full bg-[#4B2DBD] text-white py-3 rounded-xl font-black text-xs uppercase tracking-widest active:scale-[0.98] transition-all"
               >
                 Apply ({activeFiltersCount})
               </button>

@@ -239,7 +239,7 @@ export default function Register() {
             <button 
               type="submit" 
               disabled={loading} 
-              className="w-full bg-[#7C3AED] hover:bg-[#6D28D9] text-white py-3.5 rounded-2xl font-black text-lg transition-all active:scale-[0.98] shadow-lg shadow-purple-200 disabled:opacity-50 uppercase tracking-widest"
+              className="w-full bg-[#7C3AED] hover:bg-[#6D28D9] text-white py-3.5 rounded-2xl font-black text-lg transition-all active:scale-[0.98] disabled:opacity-50 uppercase tracking-widest"
             >
               {loading ? 'Processing...' : 'Register'}
             </button>
