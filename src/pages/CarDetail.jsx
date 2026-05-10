@@ -145,7 +145,7 @@ export default function CarDetail() {
               <button 
                 key={i} 
                 onClick={() => setActiveImage(i)}
-                className={`aspect-square rounded-lg overflow-hidden border-2 transition-all p-0.5 ${activeImage === i ? 'border-[#4B2DBD]' : 'border-transparent hover:border-gray-200'}`}
+                className={`aspect-square rounded-lg overflow-hidden border-2 transition-all p-0.5 ${activeImage === i ? 'border-[#4B2DBD]' : 'border-gray-200 hover:border-gray-300'}`}
               >
                 <img src={getImageUrl(img)} className="w-full h-full object-cover rounded-md" alt="" />
               </button>
