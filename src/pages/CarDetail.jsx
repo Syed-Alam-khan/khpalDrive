@@ -156,13 +156,13 @@ export default function CarDetail() {
         {/* Right: Info */}
         <div className="space-y-5">
           <div className="flex flex-wrap items-center gap-2">
-            <div className="bg-white border border-gray-100 px-2.5 py-1.5 rounded-md text-gray-500 font-bold text-xs uppercase tracking-wider flex items-center gap-1.5 shadow-sm">
+            <div className="bg-white border border-gray-100 px-3 py-1.5 rounded-md text-gray-500 font-bold text-[10px] md:text-xs uppercase tracking-wider flex items-center gap-1.5">
               <MapPin size={14} className="text-gray-400" />
               {car.location}
             </div>
             <button 
               onClick={handleShare}
-              className="bg-[#4B2DBD] text-white px-3 py-1.5 rounded-md font-black text-[10px] uppercase tracking-wider flex items-center gap-2 shadow-sm hover:bg-[#3B2396] transition-all"
+              className="bg-[#4B2DBD] text-white px-3 py-1.5 rounded-md font-bold text-[10px] md:text-xs uppercase tracking-wider flex items-center gap-2 hover:bg-[#3B2396] transition-all"
             >
               <Share2 size={14} />
               Share Vehicle
