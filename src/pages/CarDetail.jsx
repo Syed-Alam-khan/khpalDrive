@@ -177,7 +177,7 @@ export default function CarDetail() {
             </h1>
             <div className="flex flex-col gap-1">
               <p className="text-sm md:text-lg font-bold text-gray-500 uppercase tracking-widest">
-                {car.carName} {car.model}
+                {car.carName} <span className="text-gray-300 mx-2">|</span> Model {car.model}
               </p>
               <div className="text-2xl md:text-3xl font-black text-[#4B2DBD] tracking-tight">
                 PKR, {car.price?.toLocaleString()}
