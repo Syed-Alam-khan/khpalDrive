@@ -91,7 +91,7 @@ export default function AllCars() {
       {/* Browse Cars Section */}
       <div className="bg-white md:bg-[#FBF7F7]">
         <div className="max-w-7xl mx-auto px-4 md:px-12 pt-[10px] pb-16 md:py-16 ">
-          <div className="mb-10 flex justify-between items-center">
+          <div className="mb-4 flex justify-between items-center">
             <h1 className="text-xl md:text-5xl font-black text-gray-900 tracking-tight">All Cars</h1>
             <Link to="/" className="text-gray-400 hover:text-[#4B2DBD] transition-all flex items-center gap-2 group">
               <span className="text-xs md:text-sm font-black uppercase tracking-widest">Show Less</span>

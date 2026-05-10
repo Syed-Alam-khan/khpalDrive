@@ -77,7 +77,7 @@ export default function Header() {
 
         {/* Right Side Navigation & Actions */}
         <div className="hidden md:flex items-center gap-10">
-          <nav className="flex items-center gap-10 font-bold text-sm uppercase tracking-wide">
+          <nav className="flex items-center gap-10 font-bold text-[15px] uppercase tracking-wide">
             <NavLink to="/" className={activeClass}>
               Home
             </NavLink>
@@ -90,14 +90,22 @@ export default function Header() {
             {userInfo && (
               <NavLink 
                 to="/listings" 
-                className="bg-white/10 text-white px-5 py-2 rounded-full font-bold text-[11px] uppercase tracking-wider hover:bg-white/20 transition-all border border-white/20"
+                className="bg-white/10 text-white px-5 py-2 rounded-full font-bold text-[12px] uppercase tracking-wider hover:bg-white/20 transition-all border border-white/20"
               >
                 My Listing
               </NavLink>
             )}
+            {!userInfo && (
+              <Link 
+                to="/login" 
+                className="text-white font-bold text-[12px] uppercase tracking-wider hover:text-[#94D227] transition-colors"
+              >
+                Login
+              </Link>
+            )}
             <Link 
               to={userInfo ? "/sell" : "/register"} 
-              className="bg-[#94D227] text-white px-6 py-2 rounded-full font-bold text-[11px] uppercase tracking-wider hover:bg-[#85bd23] transition-all border border-[#94D227] shadow-lg shadow-black/10"
+              className="bg-[#94D227] text-white px-6 py-2 rounded-full font-bold text-[12px] uppercase tracking-wider hover:bg-[#85bd23] transition-all border border-[#94D227] shadow-lg shadow-black/10"
             >
               Sell my Car
             </Link>
@@ -152,7 +160,7 @@ export default function Header() {
           ) : (
             <Link 
               to="/login" 
-              className="bg-white/10 text-white px-4 py-1.5 rounded-full font-bold text-[10px] uppercase tracking-wider border border-white/20 active:bg-white/20 transition-all"
+              className="bg-[#94D227] text-white px-4 py-1.5 rounded-full font-bold text-[11px] uppercase tracking-wider border border-[#94D227] active:bg-[#85bd23] transition-all"
             >
               Login
             </Link>
@@ -203,10 +211,10 @@ export default function Header() {
 
       {/* Fixed Bottom Sell Button for Mobile */}
       {isHomePage && (
-        <div className="md:hidden fixed bottom-0 left-0 w-full z-40">
+        <div className="md:hidden fixed bottom-0 left-0 w-full z-40 bg-white p-4 pb-8 border-t border-gray-100 shadow-[0_-10px_30px_rgba(0,0,0,0.08)]">
           <Link 
             to={userInfo ? "/sell" : "/register"} 
-            className="w-full bg-[#94D227] text-white py-4 font-black text-sm uppercase tracking-widest flex items-center justify-center shadow-[0_-4px_15px_rgba(0,0,0,0.1)] active:bg-[#85bd23] transition-colors"
+            className="w-full bg-[#4B2DBD] text-white py-4 rounded-lg font-black text-lg uppercase tracking-widest flex items-center justify-center active:scale-[0.98] transition-all shadow-lg shadow-indigo-100"
           >
             Sell my Car
           </Link>

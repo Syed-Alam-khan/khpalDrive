@@ -12,6 +12,7 @@ export default function Home() {
   const { getAllCategories } = useCategory();
   const [filteredCars, setFilteredCars] = useState([]);
   const [limit, setLimit] = useState(9);
+  const [isFiltered, setIsFiltered] = useState(false);
   
   useEffect(() => {
     getAllCars();
@@ -23,6 +24,8 @@ export default function Home() {
   }, [cars]);
 
   const handleSearch = (filters) => {
+    const hasFilter = Object.values(filters).some(val => val !== '' && val !== null && val !== undefined);
+    setIsFiltered(hasFilter);
     let result = cars;
     
     if (filters.marka) {
@@ -74,8 +77,8 @@ export default function Home() {
 
 
       <div className="bg-white md:bg-[#FBF7F7]">
-        <div className="max-w-7xl mx-auto px-4 md:px-12 pt-[10px] pb-16 md:py-16">
-          <div className="flex justify-between items-center mb-10">
+        <div className="max-w-7xl mx-auto px-4 md:px-12 pt-[10px] pb-32 md:py-16">
+          <div className="flex justify-between items-center mb-4">
             <h2 className="text-xl md:text-5xl font-black text-gray-900 tracking-tight">Browse Cars</h2>
             <Link to="/all-cars" className="text-gray-500 font-semibold flex items-center gap-2 hover:text-[#4B2DBD] transition-all">
               View All
@@ -90,22 +93,22 @@ export default function Home() {
               ))}
             </div>
           ) : (
-            <div className="grid grid-cols-2 mt-[-25px] md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-8">
-              {filteredCars.slice(0, limit).map(car => (
+            <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-8">
+              {filteredCars.slice(0, isFiltered ? filteredCars.length : limit).map(car => (
                 <CarCard key={car._id} car={car} />
               ))}
               
-              {filteredCars.length > limit && (
-                <div 
-                  onClick={() => setLimit(filteredCars.length)}
-                  className="bg-[#4B2DBD] rounded-2xl flex flex-col items-center justify-center text-white cursor-pointer hover:bg-[#3B2396] transition-all p-6 group min-h-[200px]"
+              {!isFiltered && filteredCars.length > limit && (
+                <Link 
+                  to="/all-cars"
+                  className="bg-[#4B2DBD] rounded-2xl flex flex-col items-center justify-center text-white cursor-pointer hover:bg-[#3B2396] transition-all p-4 group min-h-[150px]"
                 >
-                  <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                    <FaChevronRight className="text-white" size={20} />
+                  <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                    <FaChevronRight className="text-white" size={18} />
                   </div>
-                  <span className="text-sm font-black uppercase tracking-widest">Show More</span>
-                  <span className="text-[10px] font-bold text-white/60 mt-1">{filteredCars.length - limit} more available</span>
-                </div>
+                  <span className="text-xs font-black uppercase tracking-widest">Show More</span>
+                  <span className="text-[9px] font-bold text-white/60 mt-1">{filteredCars.length - limit} more available</span>
+                </Link>
               )}
             </div>
           )}
