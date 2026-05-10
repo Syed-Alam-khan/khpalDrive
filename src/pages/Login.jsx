@@ -30,14 +30,14 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen flex bg-white font-sans text-gray-800 mt-[-56px] md:mt-[-72px]">
+    <div className="flex bg-white font-sans text-gray-800 flex-1 overflow-hidden">
       {/* Left Side: Form */}
-      <div className="w-full lg:w-[45%] flex flex-col justify-start pt-24 px-8 md:px-16 lg:px-24">
+      <div className="w-full lg:w-[45%] flex flex-col justify-start pt-8 md:pt-12 px-8 md:px-16 lg:px-24 overflow-y-auto">
         <div className="max-w-sm w-full mx-auto space-y-4">
           
 
           {/* Form */}
-          <form onSubmit={handleLogin} className="space-y-8 pt-4">
+          <form onSubmit={handleLogin} className="space-y-3 pt-4">
             <div className="space-y-2">
               <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1 ml-1">Email Address</label>
               <input 
@@ -46,7 +46,7 @@ export default function Login() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Enter your email"
-                className="w-full bg-[#F9FAFB] border border-[#E5E7EB] rounded-lg py-3 px-4 focus:bg-white focus:border-[#4B2DBD]/20 transition-all outline-none text-sm text-gray-800 font-bold placeholder:text-gray-400" 
+                className="w-full bg-[#F9FAFB] border border-[#E5E7EB] rounded-lg py-3 px-4 focus:bg-white focus:border-[#4B2DBD]/20 transition-all outline-none text-sm text-gray-800 font-bold placeholder:text-gray-400 placeholder:font-normal" 
               />
             </div>
             
@@ -59,7 +59,7 @@ export default function Login() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="Enter your password"
-                  className="w-full bg-[#F9FAFB] border border-[#E5E7EB] rounded-lg py-3 px-4 focus:bg-white focus:border-[#4B2DBD]/20 transition-all outline-none text-sm text-gray-800 font-bold placeholder:text-gray-400 pr-12" 
+                  className="w-full bg-[#F9FAFB] border border-[#E5E7EB] rounded-lg py-3 px-4 focus:bg-white focus:border-[#4B2DBD]/20 transition-all outline-none text-sm text-gray-800 font-bold placeholder:text-gray-400 placeholder:font-normal pr-12" 
                 />
                 <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-[#4B2DBD] transition-colors">
                   {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
@@ -90,7 +90,7 @@ export default function Login() {
               <button 
                 type="submit" 
                 disabled={loading}
-                className="w-full bg-[#4B2DBD] hover:bg-[#3a2291] text-white py-3.5 rounded-lg font-bold transition-all shadow-lg shadow-indigo-100 active:scale-95 disabled:opacity-50 uppercase tracking-widest text-sm"
+                className="w-full bg-[#4B2DBD] hover:bg-[#3a2291] text-white py-3.5 rounded-lg font-bold transition-all active:scale-95 disabled:opacity-50 uppercase tracking-widest text-sm"
               >
                 {loading ? 'Processing...' : 'Login Now →'}
               </button>

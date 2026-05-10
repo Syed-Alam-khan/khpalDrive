@@ -6,9 +6,10 @@ import Footer from '../components/Footer';
 const MainLayout = ({ children }) => {
   const location = useLocation();
   const isHomePage = location.pathname === '/';
+  const isLoginPage = location.pathname === '/login';
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className={`flex flex-col ${isLoginPage ? 'h-screen overflow-hidden' : 'min-h-screen'}`}>
       <Header />
       <main className="flex-grow pt-[56px] md:pt-[72px]">
         {children}

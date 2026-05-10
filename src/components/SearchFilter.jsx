@@ -187,7 +187,7 @@ const SearchFilter = ({ onSearch }) => {
           className="flex-1 bg-[#F9FAFB] border-2 border-[#E5E7EB] rounded-xl py-3.5 px-5 flex items-center justify-between font-black text-gray-800"
         >
           <div className="flex items-center gap-2">
-            <FaFilter className="text-[#4B2DBD]" size={12} />
+            <FaFilter className="text-[#4B2DBD]" size={16} />
             <span className="text-[12px] uppercase tracking-widest">Filters</span>
             {activeFiltersCount > 0 && (
               <span className="bg-[#4B2DBD] text-white text-[9px] w-4 h-4 rounded-full flex items-center justify-center">
