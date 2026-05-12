@@ -160,8 +160,8 @@ export default function MyListings() {
 
       {/* Filters & Search */}
       <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4 mb-8">
-        <div className="w-full lg:w-auto overflow-x-auto no-scrollbar -mx-4 px-4 py-1">
-          <div className="flex items-center gap-2 p-1 bg-gray-50 rounded-full border border-gray-100 w-max">
+        <div className="w-full lg:w-auto py-1">
+          <div className="flex items-center justify-between lg:justify-start gap-1 p-1 bg-gray-50 rounded-full border border-gray-100 w-full lg:w-max">
             {[
               { id: 'All', label: 'All' },
               { id: 'Active', label: 'Active' },
@@ -175,12 +175,12 @@ export default function MyListings() {
                 <button
                   key={tab.id}
                   onClick={() => { setFilter(tab.id); setCurrentPage(1); }}
-                  className={`relative px-6 py-2 rounded-full text-xs md:text-sm font-black transition-all flex items-center gap-2 whitespace-nowrap ${
+                  className={`relative px-3 md:px-6 py-2 rounded-full text-[10px] md:text-sm font-black transition-all flex items-center justify-center gap-1.5 whitespace-nowrap flex-1 lg:flex-none ${
                     filter === tab.id ? 'bg-black text-white' : 'text-gray-500 hover:bg-gray-100'
                   }`}
                 >
                   {tab.label}
-                  <span className={`text-[10px] px-1.5 py-0.5 rounded-md min-w-[18px] text-center ${
+                  <span className={`text-[9px] px-1.5 py-0.5 rounded-md min-w-[16px] text-center ${
                     filter === tab.id ? 'bg-white/20 text-white' : 'bg-gray-200 text-gray-500'
                   }`}>
                     {count}

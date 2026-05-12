@@ -148,7 +148,7 @@ export default function Header() {
         <div className="md:hidden flex items-center gap-4">
           {userInfo ? (
             <button 
-              onClick={() => navigate('/settings')}
+              onClick={() => { navigate('/settings'); setIsMenuOpen(false); }}
               className="w-9 h-9 bg-white/10 rounded-full flex items-center justify-center border-2 border-white/30 overflow-hidden active:scale-95 transition-all"
             >
               {getProfileImage() ? (
@@ -160,6 +160,7 @@ export default function Header() {
           ) : (
             <Link 
               to="/login" 
+              onClick={() => setIsMenuOpen(false)}
               className="bg-[#94D227] text-white px-4 py-1.5 rounded-full font-bold text-[11px] uppercase tracking-wider border border-[#94D227] active:bg-[#85bd23] transition-all"
             >
               Login
