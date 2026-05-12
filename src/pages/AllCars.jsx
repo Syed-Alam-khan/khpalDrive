@@ -120,7 +120,7 @@ export default function AllCars() {
                 <div className="mt-20 pb-20 flex justify-center">
                   <button 
                     onClick={showMore}
-                    className="bg-[#94D227] text-white px-16 py-5 rounded-[40px] font-bold text-2xl hover:opacity-90 transition-all shadow-sm"
+                    className="bg-[#94D227] text-white px-16 py-5 rounded-[40px] font-bold text-2xl hover:opacity-90 transition-all"
                   >
                     Show more
                   </button>

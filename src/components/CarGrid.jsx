@@ -18,7 +18,7 @@ export default function CarGrid({ cars }) {
       <div className="mt-20 flex justify-center">
         <button 
           onClick={() => setIsExpanded(!isExpanded)}
-          className="bg-blue-600 hover:bg-blue-700 text-white px-16 py-5 rounded-3xl font-black transition-all active:scale-95 shadow-2xl shadow-blue-200 text-lg flex items-center gap-3"
+          className="bg-blue-600 hover:bg-blue-700 text-white px-16 py-5 rounded-3xl font-black transition-all active:scale-95 text-lg flex items-center gap-3"
         >
           {isExpanded ? 'Show less' : 'Show all'}
           <svg 

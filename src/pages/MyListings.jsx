@@ -18,7 +18,7 @@ import {
 const ITEMS_PER_PAGE = 5;
 
 export default function MyListings() {
-  const { userCars, getUserCars, deleteCar, markAsSold, loading } = useCar();
+  const { userCars, getUserCars, deleteCar, markAsSold, reactivateCar, loading } = useCar();
   const [listings, setListings] = useState([]);
   const [filter, setFilter] = useState('All');
   const [searchQuery, setSearchQuery] = useState('');
@@ -79,6 +79,15 @@ export default function MyListings() {
       toast.success(response.message || 'Vehicle marked as SOLD! 🏁');
     } catch (err) {
       toast.error(err.response?.data?.message || 'Operation failed');
+    }
+  };
+
+  const handleReactivate = async (id) => {
+    try {
+      const response = await reactivateCar(id);
+      toast.success(response.message || 'Vehicle is LIVE again! 🚀');
+    } catch (err) {
+      toast.error(err.response?.data?.message || 'Reactivation failed');
     }
   };
 
@@ -143,10 +152,9 @@ export default function MyListings() {
         </div>
         <Link 
           to="/sell" 
-          className="bg-[#A3E635] hover:bg-[#8fd12a] text-white px-4 md:px-6 py-2 md:py-3 rounded-full font-bold flex items-center gap-2 transition-all shadow-lg shadow-lime-100 text-xs md:text-sm"
+          className="bg-[#A3E635] hover:bg-[#8fd12a] text-white px-5 py-2.5 rounded-xl font-bold transition-all text-xs md:text-sm"
         >
-          <Plus size={18} strokeWidth={3} />
-          Post <span className="hidden xs:inline">New Car</span>
+          Sell my Car
         </Link>
       </div>
 
@@ -168,7 +176,7 @@ export default function MyListings() {
                   key={tab.id}
                   onClick={() => { setFilter(tab.id); setCurrentPage(1); }}
                   className={`relative px-5 py-1.5 rounded-full text-xs md:text-sm font-bold transition-all flex items-center gap-2 whitespace-nowrap ${
-                    filter === tab.id ? 'bg-[#4B2DBD] text-white shadow-md' : 'text-gray-500 hover:bg-gray-100'
+                    filter === tab.id ? 'bg-black text-white' : 'text-gray-500 hover:bg-gray-100'
                   }`}
                 >
                   {tab.label}
@@ -195,9 +203,10 @@ export default function MyListings() {
         </div>
       </div>
 
-      {/* Table Section */}
-      <div className="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden mb-10">
-        <div className="overflow-x-auto no-scrollbar">
+      {/* List Section */}
+      <div className="bg-transparent md:bg-white md:border md:border-gray-200 md:rounded-xl overflow-hidden mb-10">
+        {/* Desktop Table View */}
+        <div className="hidden md:block overflow-x-auto no-scrollbar">
           <table className="w-full text-left whitespace-nowrap">
             <thead>
               <tr className="bg-white border-b border-gray-200">
@@ -213,7 +222,7 @@ export default function MyListings() {
                 <tr key={item._id} className="odd:bg-gray-50/80 even:bg-white hover:bg-gray-100/50 transition-colors">
                   <td className="px-6 py-4">
                     <div className="flex items-center gap-4">
-                      <div className="w-10 h-10 rounded-full overflow-hidden shrink-0 bg-gray-100 shadow-sm">
+                      <div className="w-10 h-10 rounded-full overflow-hidden shrink-0 bg-gray-100">
                           <img src={getImageUrl(item.images?.[0])} className="w-full h-full object-cover" alt="" />
                       </div>
                       <div className="space-y-0.5">
@@ -233,17 +242,25 @@ export default function MyListings() {
                   </td>
                   <td className="px-6 py-4 text-center">
                     <div className="flex flex-col items-center gap-1.5">
-                      <div className={`inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium ${
-                        item.status === 'sold' ? 'bg-gray-100 text-gray-700' : 
-                        item.status === 'pending' ? 'bg-orange-50 text-orange-600' :
-                        'bg-emerald-50 text-emerald-600'
+                      <div className={`inline-flex items-center px-2.5 py-1 rounded-full text-xs font-black uppercase tracking-wider text-white ${
+                        item.status === 'sold' || item.status === 'pending' ? 'bg-black' : 'bg-[#A3E635]'
                       }`}>
                         {item.status === 'sold' ? 'Sold' : item.status === 'pending' ? 'Pending' : 'Active'}
                       </div>
-                      {item.status !== 'sold' && (
+                      
+                      {item.status === 'sold' ? (
+                        <button 
+                          onClick={() => handleReactivate(item._id)} 
+                          className="bg-[#A3E635] hover:bg-[#8fd12a] text-white px-3 py-1.5 rounded-lg transition-all flex items-center justify-center gap-1.5 text-[10px] font-black uppercase tracking-wider"
+                          title="Re-Active listing"
+                        >
+                          <Plus size={12} strokeWidth={3} />
+                          Re-Active
+                        </button>
+                      ) : (
                         <button 
                           onClick={() => handleMarkSold(item._id)} 
-                          className="text-emerald-600 hover:text-emerald-700 transition-colors flex items-center gap-1 text-[10px] font-bold uppercase tracking-tight"
+                          className="bg-[#4B2DBD] hover:bg-[#3b2396] text-white px-3 py-1.5 rounded-lg transition-all flex items-center justify-center gap-1.5 text-[10px] font-black uppercase tracking-wider"
                           title="Mark as Sold"
                         >
                           <CheckCircle2 size={12} strokeWidth={3} />
@@ -289,6 +306,75 @@ export default function MyListings() {
           </table>
         </div>
 
+        {/* Mobile Card View */}
+        <div className="md:hidden flex flex-col gap-3 mb-6">
+          {currentListings.length > 0 ? currentListings.map((item) => (
+            <div key={item._id} className="bg-white border-2 border-gray-200 rounded-2xl overflow-hidden flex items-center p-2 gap-3">
+              {/* Image Section */}
+              <div className="relative w-24 h-20 shrink-0 bg-gray-50 rounded-lg overflow-hidden">
+                <img src={getImageUrl(item.images?.[0])} className="w-full h-full object-cover" alt={item.model} />
+                <div className="absolute inset-0 bg-black/5"></div>
+              </div>
+
+              {/* Content Section */}
+              <div className="flex-1 min-w-0 flex flex-col h-20 justify-between py-0.5">
+                <div className="flex justify-between items-start gap-2">
+                  <div className="min-w-0">
+                    <h3 className="font-bold text-[11px] text-gray-900 truncate leading-tight uppercase">{item.model}</h3>
+                    <p className="text-[#4B2DBD] font-black text-[10px]">PKR {item.price?.toLocaleString()}</p>
+                  </div>
+                  <div className={`px-1.5 py-0.5 rounded text-[7px] font-black uppercase tracking-tighter shrink-0 text-white ${
+                    item.status === 'sold' || item.status === 'pending' ? 'bg-black' : 'bg-[#A3E635]'
+                  }`}>
+                    {item.status === 'sold' ? 'Sold' : item.status === 'pending' ? 'Pending' : 'Active'}
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-1.5 overflow-hidden">
+                  <span className="text-[8px] text-gray-400 font-bold uppercase truncate">
+                    {item.fuelType} · {item.transmission} · {item.location || 'N/A'}
+                  </span>
+                </div>
+
+                {/* Compact Actions */}
+                <div className="flex items-center justify-between gap-2">
+                  <div className="flex items-center gap-1">
+                    <button onClick={() => handleShare(item._id)} className="p-1 text-gray-400 hover:text-[#4B2DBD]">
+                      <Share2 size={12} />
+                    </button>
+                    <button onClick={() => navigate(`/sell?edit=${item._id}`)} className="p-1 text-gray-400 hover:text-indigo-600">
+                      <Edit2 size={12} />
+                    </button>
+                    <button onClick={() => handleDelete(item._id)} className="p-1 text-gray-400 hover:text-red-500">
+                      <Trash2 size={12} />
+                    </button>
+                  </div>
+                  
+                  {item.status === 'sold' ? (
+                    <button 
+                      onClick={() => handleReactivate(item._id)} 
+                      className="px-3 py-1 rounded-md text-[8px] font-black uppercase tracking-widest transition-all bg-[#A3E635] hover:bg-[#8fd12a] text-white"
+                    >
+                      Re-Active
+                    </button>
+                  ) : (
+                    <button 
+                      onClick={() => handleMarkSold(item._id)} 
+                      className="px-3 py-1 rounded-md text-[8px] font-black uppercase tracking-widest transition-all bg-[#4B2DBD] hover:bg-[#3b2396] text-white"
+                    >
+                      Mark Sold
+                    </button>
+                  )}
+                </div>
+              </div>
+            </div>
+          )) : (
+            <div className="py-12 text-center text-gray-400 font-medium text-xs bg-white rounded-xl border border-dashed border-gray-200">
+                No listings found.
+            </div>
+          )}
+        </div>
+
         {/* Pagination Footer */}
         {totalPages > 1 && (
           <div className="px-6 py-4 bg-white border-t border-gray-200 flex items-center justify-between">
@@ -312,7 +398,7 @@ export default function MyListings() {
                     onClick={() => handlePageChange(i + 1)}
                     className={`w-8 h-8 rounded-lg text-sm font-medium transition-all ${
                       currentPage === i + 1 
-                        ? 'bg-[#4B2DBD] text-white shadow-sm' 
+                        ? 'bg-[#4B2DBD] text-white' 
                         : 'text-gray-600 hover:bg-gray-50 border border-transparent'
                     }`}
                   >

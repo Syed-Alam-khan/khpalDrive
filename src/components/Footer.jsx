@@ -22,16 +22,16 @@ const Footer = () => {
 
         {/* Social */}
         <div className="flex gap-1.5 md:gap-3">
-          <a href="#" className="w-6 h-6 md:w-8 md:h-8 bg-white rounded-full flex items-center justify-center text-[#4B2DBD] hover:bg-opacity-90 transition-all shadow-md">
+          <a href="#" className="w-6 h-6 md:w-8 md:h-8 bg-white rounded-full flex items-center justify-center text-[#4B2DBD] hover:bg-opacity-90 transition-all">
             <FaWhatsapp size={12} className="md:w-[16px] md:h-[16px]" />
           </a>
-          <a href="#" className="w-6 h-6 md:w-8 md:h-8 bg-white rounded-full flex items-center justify-center text-[#4B2DBD] hover:bg-opacity-90 transition-all shadow-md">
+          <a href="#" className="w-6 h-6 md:w-8 md:h-8 bg-white rounded-full flex items-center justify-center text-[#4B2DBD] hover:bg-opacity-90 transition-all">
             <FaInstagram size={12} className="md:w-[16px] md:h-[16px]" />
           </a>
-          <a href="#" className="w-6 h-6 md:w-8 md:h-8 bg-white rounded-full flex items-center justify-center text-[#4B2DBD] hover:bg-opacity-90 transition-all shadow-md">
+          <a href="#" className="w-6 h-6 md:w-8 md:h-8 bg-white rounded-full flex items-center justify-center text-[#4B2DBD] hover:bg-opacity-90 transition-all">
             <FaFacebookF size={10} className="md:w-[14px] md:h-[14px]" />
           </a>
-          <a href="#" className="w-6 h-6 md:w-8 md:h-8 bg-white rounded-full flex items-center justify-center text-[#4B2DBD] hover:bg-opacity-90 transition-all shadow-md">
+          <a href="#" className="w-6 h-6 md:w-8 md:h-8 bg-white rounded-full flex items-center justify-center text-[#4B2DBD] hover:bg-opacity-90 transition-all">
             <FaTiktok size={10} className="md:w-[14px] md:h-[14px]" />
           </a>
         </div>

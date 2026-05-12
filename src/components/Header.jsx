@@ -105,7 +105,7 @@ export default function Header() {
             )}
             <Link 
               to={userInfo ? "/sell" : "/register"} 
-              className="bg-[#94D227] text-white px-6 py-2 rounded-full font-bold text-[12px] uppercase tracking-wider hover:bg-[#85bd23] transition-all border border-[#94D227] shadow-lg shadow-black/10"
+              className="bg-[#94D227] text-white px-6 py-2 rounded-full font-bold text-[12px] uppercase tracking-wider hover:bg-[#85bd23] transition-all border border-[#94D227]"
             >
               Sell my Car
             </Link>
@@ -114,7 +114,7 @@ export default function Header() {
               <div className="relative ml-2" ref={dropdownRef}>
                 <button 
                   onClick={() => setIsProfileDropdownOpen(!isProfileDropdownOpen)}
-                  className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center border-2 border-white/30 overflow-hidden hover:border-white transition-all shadow-md"
+                  className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center border-2 border-white/30 overflow-hidden hover:border-white transition-all"
                 >
                   {getProfileImage() ? (
                     <img src={getProfileImage()} alt="profile" className="w-full h-full object-cover" />
@@ -123,7 +123,7 @@ export default function Header() {
                   )}
                 </button>
                 {isProfileDropdownOpen && (
-                  <div className="absolute right-0 mt-3 w-56 bg-white text-gray-900 rounded-2xl shadow-2xl border border-gray-100 py-3 overflow-hidden animate-in fade-in slide-in-from-top-2 duration-300">
+                  <div className="absolute right-0 mt-3 w-56 bg-white text-gray-900 rounded-2xl border border-gray-100 py-3 overflow-hidden animate-in fade-in slide-in-from-top-2 duration-300">
                     <div className="px-5 py-2 border-b mb-1">
                       <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Logged in as</p>
                       <p className="text-sm font-black text-[#4B2DBD]">{userInfo.user?.name}</p>
@@ -149,7 +149,7 @@ export default function Header() {
           {userInfo ? (
             <button 
               onClick={() => navigate('/settings')}
-              className="w-9 h-9 bg-white/10 rounded-full flex items-center justify-center border-2 border-white/30 overflow-hidden active:scale-95 transition-all shadow-sm"
+              className="w-9 h-9 bg-white/10 rounded-full flex items-center justify-center border-2 border-white/30 overflow-hidden active:scale-95 transition-all"
             >
               {getProfileImage() ? (
                 <img src={getProfileImage()} alt="profile" className="w-full h-full object-cover" />
@@ -173,17 +173,17 @@ export default function Header() {
 
       {/* Mobile Menu */}
       {isMenuOpen && (
-        <div className="md:hidden absolute top-full left-0 w-full bg-[#4B2DBD] border-t border-white/10 py-6 px-6 flex flex-col gap-3 shadow-xl rounded-b-3xl">
+        <div className="md:hidden absolute top-full left-0 w-full bg-[#4B2DBD] border-t border-white/10 py-6 px-6 flex flex-col gap-3 rounded-b-3xl">
           <NavLink 
             to="/" 
-            className={({ isActive }) => `block w-full px-5 py-3.5 rounded-2xl font-bold text-sm uppercase tracking-wider transition-all ${isActive ? 'bg-[#94D227] text-white shadow-md' : 'bg-white/10 text-white hover:bg-white/20'}`}
+            className={({ isActive }) => `block w-full px-5 py-3.5 rounded-2xl font-bold text-sm uppercase tracking-wider transition-all ${isActive ? 'bg-[#94D227] text-white' : 'bg-white/10 text-white hover:bg-white/20'}`}
             onClick={() => setIsMenuOpen(false)}
           >
             Home
           </NavLink>
           <NavLink 
             to="/all-cars" 
-            className={({ isActive }) => `block w-full px-5 py-3.5 rounded-2xl font-bold text-sm uppercase tracking-wider transition-all ${isActive ? 'bg-[#94D227] text-white shadow-md' : 'bg-white/10 text-white hover:bg-white/20'}`}
+            className={({ isActive }) => `block w-full px-5 py-3.5 rounded-2xl font-bold text-sm uppercase tracking-wider transition-all ${isActive ? 'bg-[#94D227] text-white' : 'bg-white/10 text-white hover:bg-white/20'}`}
             onClick={() => setIsMenuOpen(false)}
           >
             All Cars
@@ -192,7 +192,7 @@ export default function Header() {
           {userInfo && (
             <NavLink 
               to="/listings" 
-              className={({ isActive }) => `block w-full px-5 py-3.5 rounded-2xl font-bold text-sm uppercase tracking-wider transition-all ${isActive ? 'bg-[#94D227] text-white shadow-md' : 'bg-white/10 text-white hover:bg-white/20'}`}
+              className={({ isActive }) => `block w-full px-5 py-3.5 rounded-2xl font-bold text-sm uppercase tracking-wider transition-all ${isActive ? 'bg-[#94D227] text-white' : 'bg-white/10 text-white hover:bg-white/20'}`}
               onClick={() => setIsMenuOpen(false)}
             >
               My Listing
@@ -211,10 +211,10 @@ export default function Header() {
 
       {/* Fixed Bottom Sell Button for Mobile */}
       {isHomePage && (
-        <div className="md:hidden fixed bottom-0 left-0 w-full z-40 bg-white p-4 pb-4 border-t border-gray-100 shadow-[0_-10px_30px_rgba(0,0,0,0.08)]">
+        <div className="md:hidden fixed bottom-0 left-0 w-full z-40 bg-white p-4 pb-4 border-t border-gray-100">
           <Link 
             to={userInfo ? "/sell" : "/register"} 
-            className="w-full bg-[#4B2DBD] text-white py-3 rounded-lg font-black text-base uppercase tracking-widest flex items-center justify-center active:scale-[0.98] transition-all shadow-lg shadow-indigo-100"
+            className="w-full bg-[#4B2DBD] text-white py-3 rounded-lg font-black text-base uppercase tracking-widest flex items-center justify-center active:scale-[0.98] transition-all"
           >
             Sell my Car
           </Link>

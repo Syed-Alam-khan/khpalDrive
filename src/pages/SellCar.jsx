@@ -198,7 +198,7 @@ export default function SellCar() {
   if (isSuccess) {
     return (
       <div className="min-h-screen bg-[#F3F4F6]/50 flex flex-col items-center justify-center p-4">
-        <div className="bg-white p-10 rounded-[2.5rem] shadow-2xl shadow-purple-100 max-w-lg w-full text-center space-y-6 animate-in zoom-in-95 duration-500">
+        <div className="bg-white p-10 rounded-[2.5rem] max-w-lg w-full text-center space-y-6 animate-in zoom-in-95 duration-500">
            <div className="w-20 h-20 bg-emerald-50 rounded-full flex items-center justify-center mx-auto">
              <span className="text-4xl">🎉</span>
            </div>
@@ -276,7 +276,7 @@ export default function SellCar() {
         {/* Step 1: Basic Info */}
         {step === 1 && (
           <div className="space-y-4 animate-in slide-in-from-bottom-4 duration-500">
-            <div className="bg-white p-6 md:p-8 rounded-[2rem] shadow-lg border border-gray-100">
+            <div className="bg-white p-6 md:p-8 rounded-[2rem] border border-gray-100">
               <div className="flex items-center gap-2.5 mb-8">
                 <div className="w-1.5 h-5 bg-[#4B2DBD] rounded-full"></div>
                 <h2 className="text-[11px] font-black text-[#4B2DBD] uppercase tracking-widest">Basic Information</h2>
@@ -330,7 +330,7 @@ export default function SellCar() {
                 </div>
               </div>
             </div>
-            <button type="button" onClick={nextStep} className="w-full bg-[#4B2DBD] text-white py-4 rounded-xl font-black text-base flex items-center justify-center gap-2 hover:bg-[#3b2396] transition-all shadow-lg shadow-purple-100 active:scale-[0.98]">
+            <button type="button" onClick={nextStep} className="w-full bg-[#4B2DBD] text-white py-4 rounded-xl font-black text-base flex items-center justify-center gap-2 hover:bg-[#3b2396] transition-all active:scale-[0.98]">
               Continue <ArrowRight size={18} />
             </button>
           </div>
@@ -339,7 +339,7 @@ export default function SellCar() {
         {/* Step 2: Technical Details */}
         {step === 2 && (
           <div className="space-y-4 animate-in slide-in-from-bottom-4 duration-500">
-            <div className="bg-white p-6 md:p-8 rounded-[2rem] shadow-lg border border-gray-100">
+            <div className="bg-white p-6 md:p-8 rounded-[2rem] border border-gray-100">
               <div className="flex items-center gap-2.5 mb-6">
                 <div className="w-1.5 h-5 bg-[#4B2DBD] rounded-full"></div>
                 <h2 className="text-[11px] font-black text-[#4B2DBD] uppercase tracking-widest">Fuel & Transmission</h2>
@@ -418,7 +418,7 @@ export default function SellCar() {
               </div>
             </div>
 
-            <div className="bg-white p-6 md:p-8 rounded-[2rem] shadow-lg border border-gray-100">
+            <div className="bg-white p-6 md:p-8 rounded-[2rem] border border-gray-100">
               <div className="flex items-center gap-2.5 mb-6">
                 <div className="w-1.5 h-5 bg-[#4B2DBD] rounded-full"></div>
                 <h2 className="text-[11px] font-black text-[#4B2DBD] uppercase tracking-widest">Technical Details</h2>
@@ -463,7 +463,7 @@ export default function SellCar() {
 
               <div className="space-y-2">
                 <label className="text-[9px] font-black text-gray-400 uppercase tracking-widest ml-1">Description (Optional)</label>
-                <textarea name="description" rows="3" value={formData.description} onChange={handleChange} placeholder="Any extra info..." className="w-full bg-gray-50/50 border border-gray-200 rounded-2xl py-3.5 px-5 focus:bg-white outline-none font-medium text-xs transition-all resize-none shadow-inner"></textarea>
+                <textarea name="description" rows="3" value={formData.description} onChange={handleChange} placeholder="Any extra info..." className="w-full bg-gray-50/50 border border-gray-200 rounded-2xl py-3.5 px-5 focus:bg-white outline-none font-medium text-xs transition-all resize-none"></textarea>
               </div>
             </div>
             
@@ -471,7 +471,7 @@ export default function SellCar() {
               <button type="button" onClick={prevStep} className="flex-1 bg-white text-gray-400 border border-gray-200 py-4 rounded-xl font-black text-base hover:bg-gray-50 transition-all active:scale-[0.98]">
                 ← Back
               </button>
-              <button type="button" onClick={nextStep} className="flex-[2] bg-[#4B2DBD] text-white py-4 rounded-xl font-black text-base flex items-center justify-center gap-2 hover:bg-[#3b2396] transition-all shadow-lg active:scale-[0.98]">
+              <button type="button" onClick={nextStep} className="flex-[2] bg-[#4B2DBD] text-white py-4 rounded-xl font-black text-base flex items-center justify-center gap-2 hover:bg-[#3b2396] transition-all active:scale-[0.98]">
                 Continue <ArrowRight size={18} />
               </button>
             </div>
@@ -505,7 +505,7 @@ export default function SellCar() {
               </div>
             </div>
 
-            <div className="bg-white p-6 md:p-8 rounded-[2rem] shadow-lg border border-gray-100">
+            <div className="bg-white p-6 md:p-8 rounded-[2rem] border border-gray-100">
               <div className="flex items-center justify-between mb-6">
                 <div className="flex items-center gap-2.5">
                   <div className="w-1.5 h-5 bg-[#4B2DBD] rounded-full"></div>
@@ -516,7 +516,7 @@ export default function SellCar() {
               <div className="space-y-8">
                 <label className="w-full h-48 bg-gray-50/50 border-2 border-dashed border-gray-200 rounded-[2rem] hover:bg-purple-50/30 hover:border-[#4B2DBD]/20 transition-all flex flex-col items-center justify-center gap-3 cursor-pointer group relative overflow-hidden">
                   <input type="file" multiple accept="image/*" onChange={handleFileChange} className="absolute inset-0 opacity-0 cursor-pointer" />
-                  <div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center shadow-md group-hover:scale-110 transition-transform">
+                  <div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform">
                     <ImageIcon className="text-[#4B2DBD]" size={24} />
                   </div>
                   <div className="text-center">
@@ -528,7 +528,7 @@ export default function SellCar() {
 
                 <div className="grid grid-cols-3 md:grid-cols-5 gap-3">
                   {previews.map((url, i) => (
-                    <div key={i} className="relative group aspect-square rounded-xl overflow-hidden border border-gray-100 shadow-sm bg-gray-50">
+                    <div key={i} className="relative group aspect-square rounded-xl overflow-hidden border border-gray-100 bg-gray-50">
                       <img src={url} className="w-full h-full object-cover" alt="" />
                       
                       {/* Controls Overlay */}
@@ -536,21 +536,21 @@ export default function SellCar() {
                         <button 
                           type="button"
                           onClick={() => moveFile(i, 'left')} 
-                          className={`w-6 h-6 bg-white/90 text-[#4B2DBD] rounded-full flex items-center justify-center shadow-md hover:bg-white transition-all ${i === 0 ? 'invisible' : ''}`}
+                          className={`w-6 h-6 bg-white/90 text-[#4B2DBD] rounded-full flex items-center justify-center hover:bg-white transition-all ${i === 0 ? 'invisible' : ''}`}
                         >
                           <ChevronLeft size={14} strokeWidth={3} />
                         </button>
                         <button 
                           type="button"
                           onClick={() => moveFile(i, 'right')} 
-                          className={`w-6 h-6 bg-white/90 text-[#4B2DBD] rounded-full flex items-center justify-center shadow-md hover:bg-white transition-all ${i === previews.length - 1 ? 'invisible' : ''}`}
+                          className={`w-6 h-6 bg-white/90 text-[#4B2DBD] rounded-full flex items-center justify-center hover:bg-white transition-all ${i === previews.length - 1 ? 'invisible' : ''}`}
                         >
                           <ChevronRight size={14} strokeWidth={3} />
                         </button>
                       </div>
 
                       {/* Delete Button */}
-                      <button type="button" onClick={() => removeFile(i)} className="absolute top-1.5 right-1.5 w-6 h-6 bg-red-500/80 text-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity backdrop-blur-sm shadow-lg hover:bg-red-600">
+                      <button type="button" onClick={() => removeFile(i)} className="absolute top-1.5 right-1.5 w-6 h-6 bg-red-500/80 text-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity backdrop-blur-sm hover:bg-red-600">
                         <X size={12} strokeWidth={3} />
                       </button>
 
@@ -565,7 +565,7 @@ export default function SellCar() {
               <button type="button" onClick={prevStep} className="flex-1 bg-white text-gray-400 border border-gray-200 py-4 rounded-xl font-black text-base hover:bg-gray-50 transition-all active:scale-[0.98]">
                 ← Back
               </button>
-              <button type="button" onClick={nextStep} className="flex-[2] bg-[#4B2DBD] text-white py-4 rounded-xl font-black text-base flex items-center justify-center gap-2 hover:bg-[#3b2396] transition-all shadow-lg active:scale-[0.98]">
+              <button type="button" onClick={nextStep} className="flex-[2] bg-[#4B2DBD] text-white py-4 rounded-xl font-black text-base flex items-center justify-center gap-2 hover:bg-[#3b2396] transition-all active:scale-[0.98]">
                 Review Listing <ArrowRight size={18} />
               </button>
             </div>
@@ -576,7 +576,7 @@ export default function SellCar() {
         {step === 4 && (
           <div className="space-y-6 animate-in slide-in-from-bottom-4 duration-500">
             {/* Review Cards */}
-            <div className="bg-white p-6 md:p-8 rounded-[2rem] shadow-xl border border-gray-100">
+            <div className="bg-white p-6 md:p-8 rounded-[2rem] border border-gray-100">
               <div className="flex items-center justify-between mb-6">
                 <div className="flex items-center gap-3">
                   <div className="w-1.5 h-5 bg-[#4B2DBD] rounded-full"></div>
@@ -653,7 +653,7 @@ export default function SellCar() {
             </div>
 
             {/* Photos Review */}
-            <div className="bg-white p-6 md:p-8 rounded-[2rem] shadow-xl border border-gray-100">
+            <div className="bg-white p-6 md:p-8 rounded-[2rem] border border-gray-100">
               <div className="flex items-center justify-between mb-6">
                 <div className="flex items-center gap-3">
                   <div className="w-1.5 h-5 bg-[#4B2DBD] rounded-full"></div>
@@ -698,7 +698,7 @@ export default function SellCar() {
               <button 
                 type="submit"
                 disabled={loading} 
-                className={`flex-[3] bg-emerald-500 text-white py-4 rounded-xl font-black text-lg flex items-center justify-center gap-2 hover:bg-emerald-600 transition-all shadow-lg active:scale-95 ${loading ? 'opacity-50' : ''}`}
+                className={`flex-[3] bg-emerald-500 text-white py-4 rounded-xl font-black text-lg flex items-center justify-center gap-2 hover:bg-emerald-600 transition-all active:scale-95 ${loading ? 'opacity-50' : ''}`}
               >
                 {loading ? 'Processing...' : editId ? 'Update My Car Now →' : 'Post My Car Now →'}
               </button>

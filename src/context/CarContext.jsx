@@ -136,6 +136,26 @@ export function CarProvider({ children }) {
     }
   };
 
+  // Reactivate car
+  const reactivateCar = async (carId) => {
+    setLoading(true);
+    setError(null);
+    try {
+      const { data } = await API.put(`/cars/reactivate/${carId}`);
+      // Update userCars by finding and updating the car
+      setUserCars(userCars.map(car => 
+        car._id === carId ? { ...car, status: 'unsold' } : car
+      ));
+      return data;
+    } catch (err) {
+      const errorMsg = err.response?.data?.message || 'Failed to reactivate car.';
+      setError(errorMsg);
+      throw err;
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const value = {
     cars,
     userCars,
@@ -149,6 +169,7 @@ export function CarProvider({ children }) {
     deleteCar,
     markAsSold,
     updateCar,
+    reactivateCar,
   };
 
   return <CarContext.Provider value={value}>{children}</CarContext.Provider>;

@@ -113,14 +113,14 @@ export default function CarDetail() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-10">
         {/* Left: Gallery */}
         <div className="space-y-4">
-          <div className="relative group rounded-[1.2rem] overflow-hidden bg-gray-50 border-2 border-gray-100 shadow-none">
+          <div className="relative group rounded-[1.2rem] overflow-hidden bg-gray-50 border-2 border-gray-100">
             <img 
               src={getImageUrl(car.images?.[activeImage])} 
               alt={car.carName} 
               className="w-full aspect-[16/9] md:aspect-[21/9] object-cover transition-transform duration-700 group-hover:scale-105 cursor-zoom-in" 
               onClick={() => setIsFullScreenOpen(true)}
             />
-            <div className="absolute bottom-3 right-3 bg-white/90 backdrop-blur-sm text-gray-900 px-3 py-1 rounded-full text-xs font-black shadow-sm">
+            <div className="absolute bottom-3 right-3 bg-white/90 backdrop-blur-sm text-gray-900 px-3 py-1 rounded-full text-xs font-black">
                {activeImage + 1} / {car.images?.length || 1}
             </div>
             
@@ -128,13 +128,13 @@ export default function CarDetail() {
               <>
                 <button 
                   onClick={() => setActiveImage(prev => prev === 0 ? car.images.length - 1 : prev - 1)}
-                  className="absolute left-3 top-1/2 -translate-y-1/2 p-1.5 bg-white/80 hover:bg-white rounded-full shadow-md opacity-0 group-hover:opacity-100 transition-opacity"
+                  className="absolute left-3 top-1/2 -translate-y-1/2 p-1.5 bg-white/80 hover:bg-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
                 >
                   <ChevronLeft size={18} />
                 </button>
                 <button 
                   onClick={() => setActiveImage(prev => prev === car.images.length - 1 ? 0 : prev + 1)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 p-1.5 bg-white/80 hover:bg-white rounded-full shadow-md opacity-0 group-hover:opacity-100 transition-opacity"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 p-1.5 bg-white/80 hover:bg-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
                 >
                   <ChevronRight size={18} />
                 </button>
@@ -223,7 +223,7 @@ export default function CarDetail() {
               {/* Seller Profile */}
               <div className="flex items-center gap-3 w-full sm:w-auto">
                 <div className="relative shrink-0">
-                  <div className="w-16 h-16 rounded-full border-2 border-[#4B2DBD]/10 overflow-hidden ring-2 ring-white shadow-sm">
+                  <div className="w-16 h-16 rounded-full border-2 border-[#4B2DBD]/10 overflow-hidden ring-2 ring-white">
                     {car.seller?.imageUrl ? (
                       <img src={car.seller.imageUrl.startsWith('http') ? car.seller.imageUrl : `http://localhost:3000/uploads/${car.seller.imageUrl}`} className="w-full h-full object-cover" alt="" />
                     ) : (
@@ -284,7 +284,7 @@ export default function CarDetail() {
           <div className="relative w-full max-w-5xl px-4 flex items-center justify-center" onClick={(e) => e.stopPropagation()}>
              <img 
                src={getImageUrl(car.images?.[activeImage])} 
-               className="max-w-full max-h-[90vh] object-contain rounded-lg shadow-2xl animate-in zoom-in duration-500"
+               className="max-w-full max-h-[90vh] object-contain rounded-lg animate-in zoom-in duration-500"
                alt=""
              />
              

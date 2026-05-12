@@ -12,7 +12,7 @@ export default function SearchBar({ searchQuery, onSearchChange, onOpenFilter })
           placeholder="Search for your car..." 
           value={searchQuery}
           onChange={(e) => onSearchChange(e.target.value)}
-          className="w-full bg-gray-100 border-2 border-transparent rounded-2xl py-4 md:py-5 pl-14 md:pl-16 pr-14 text-gray-800 font-bold focus:bg-white focus:border-blue-200 transition-all outline-none text-sm md:text-lg shadow-sm"
+          className="w-full bg-gray-100 border-2 border-transparent rounded-2xl py-4 md:py-5 pl-14 md:pl-16 pr-14 text-gray-800 font-bold focus:bg-white focus:border-blue-200 transition-all outline-none text-sm md:text-lg"
         />
         
         {/* Clear Search Button if active */}
@@ -33,7 +33,7 @@ export default function SearchBar({ searchQuery, onSearchChange, onOpenFilter })
       
       <button 
         onClick={onOpenFilter}
-        className="md:flex bg-blue-50 hover:bg-blue-100 text-blue-600 border-2 border-white px-10 py-5 rounded-2xl font-black transition-all flex items-center justify-center gap-2 shadow-sm active:scale-95"
+        className="md:flex bg-blue-50 hover:bg-blue-100 text-blue-600 border-2 border-white px-10 py-5 rounded-2xl font-black transition-all flex items-center justify-center gap-2 active:scale-95"
       >
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M3 6h18"/><path d="M7 12h10"/><path d="M10 18h4"/></svg>
         Advanced Filter

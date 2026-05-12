@@ -132,7 +132,7 @@ export default function Settings() {
 
         <form onSubmit={handleSubmit} className="space-y-6">
           {/* Card 1: Personal Information */}
-          <div className="bg-white rounded-[2rem] md:rounded-[2.5rem] border border-gray-200 p-6 md:p-10 shadow-xl shadow-gray-200/50">
+          <div className="bg-white rounded-[2rem] md:rounded-[2.5rem] border border-gray-200 p-6 md:p-10">
             <div className="flex items-center gap-3 mb-8">
                 <div className="w-1.5 h-5 bg-[#4B2DBD] rounded-full"></div>
                 <h2 className="text-[11px] font-black text-[#4B2DBD] uppercase tracking-widest flex items-center gap-2">
@@ -144,7 +144,7 @@ export default function Settings() {
               {/* Avatar Upload */}
               <div className="flex flex-col items-center gap-4">
                 <div className="relative">
-                  <div className="w-24 h-24 md:w-28 md:h-28 rounded-full bg-gray-50 border-4 border-white shadow-md overflow-hidden flex items-center justify-center group">
+                  <div className="w-24 h-24 md:w-28 md:h-28 rounded-full bg-gray-50 border-4 border-white overflow-hidden flex items-center justify-center group">
                     {imagePreview ? (
                       <img src={imagePreview} alt="Avatar" className="w-full h-full object-cover" />
                     ) : (
@@ -153,7 +153,7 @@ export default function Settings() {
                       </div>
                     )}
                   </div>
-                  <label className="absolute bottom-0 right-0 bg-[#4B2DBD] text-white p-2 rounded-xl cursor-pointer shadow-lg hover:scale-110 transition-transform border-2 border-white">
+                  <label className="absolute bottom-0 right-0 bg-[#4B2DBD] text-white p-2 rounded-xl cursor-pointer hover:scale-110 transition-transform border-2 border-white">
                     <Camera size={14} strokeWidth={3} />
                     <input type="file" className="hidden" accept="image/*" onChange={handleImageChange} />
                   </label>
@@ -187,7 +187,7 @@ export default function Settings() {
           </div>
 
           {/* Card 2: Security Verification */}
-          <div className="bg-white rounded-[2rem] md:rounded-[2.5rem] border border-gray-200 p-6 md:p-10 shadow-xl shadow-gray-200/50">
+          <div className="bg-white rounded-[2rem] md:rounded-[2.5rem] border border-gray-200 p-6 md:p-10">
             <div className="flex items-center gap-3 mb-8">
                 <div className="w-1.5 h-5 bg-[#4B2DBD] rounded-full"></div>
                 <h2 className="text-[11px] font-black text-[#4B2DBD] uppercase tracking-widest flex items-center gap-2">
@@ -260,7 +260,7 @@ export default function Settings() {
             <button 
               type="submit" 
               disabled={submitting} 
-              className="w-full bg-[#4B2DBD] hover:bg-[#3b2396] text-white py-5 rounded-2xl font-black text-base transition-all active:scale-[0.98] shadow-lg shadow-purple-100 disabled:opacity-50 uppercase tracking-[0.2em]"
+              className="w-full bg-[#4B2DBD] hover:bg-[#3b2396] text-white py-5 rounded-2xl font-black text-base transition-all active:scale-[0.98] disabled:opacity-50 uppercase tracking-[0.2em]"
             >
               {submitting ? 'Updating Account...' : 'Save All Changes'}
             </button>

@@ -92,7 +92,7 @@ export default function Register() {
   if (isSuccess) {
     return (
       <div className="min-h-screen bg-white flex flex-col items-center justify-center py-12 px-4 animate-in fade-in zoom-in-95 duration-500">
-        <div className="max-w-md w-full bg-white rounded-[2.5rem] border border-gray-200 p-12 shadow-2xl text-center space-y-8">
+        <div className="max-w-md w-full bg-white rounded-[2.5rem] border border-gray-200 p-12 text-center space-y-8">
           <div className="flex justify-center">
             <div className="w-24 h-24 bg-emerald-50 rounded-full flex items-center justify-center text-emerald-500">
               <CheckCircle2 size={64} strokeWidth={1.5} />

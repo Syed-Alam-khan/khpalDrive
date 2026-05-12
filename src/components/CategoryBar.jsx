@@ -18,7 +18,7 @@ export default function CategoryBar({ categories, activeCategory, onSelectCatego
           <button 
             key={cat}
             onClick={() => onSelectCategory(cat)}
-            className={`${activeCategory === cat ? 'bg-blue-600 text-white shadow-lg shadow-blue-100 scale-105' : 'bg-white text-gray-500 hover:text-blue-600 border border-gray-100'} px-6 md:px-8 py-3 rounded-full md:rounded-2xl font-black whitespace-nowrap transition-all text-xs md:text-sm active:scale-95 shadow-sm`}
+            className={`${activeCategory === cat ? 'bg-blue-600 text-white scale-105' : 'bg-white text-gray-500 hover:text-blue-600 border border-gray-100'} px-6 md:px-8 py-3 rounded-full md:rounded-2xl font-black whitespace-nowrap transition-all text-xs md:text-sm active:scale-95`}
           >
             {cat}
           </button>
@@ -27,7 +27,7 @@ export default function CategoryBar({ categories, activeCategory, onSelectCatego
         {allCategories.length > 8 && (
           <button 
             onClick={() => setIsExpanded(!isExpanded)}
-            className="bg-gray-50 text-gray-800 hover:bg-gray-100 border border-gray-200 px-6 md:px-8 py-3 rounded-full md:rounded-2xl font-black whitespace-nowrap flex items-center gap-2 transition-all group shadow-sm active:scale-95 text-xs md:text-sm"
+            className="bg-gray-50 text-gray-800 hover:bg-gray-100 border border-gray-200 px-6 md:px-8 py-3 rounded-full md:rounded-2xl font-black whitespace-nowrap flex items-center gap-2 transition-all group active:scale-95 text-xs md:text-sm"
           >
             <span className="group-hover:text-blue-600 transition-colors">{isExpanded ? 'Show Less' : 'More Categories'}</span>
             <svg 

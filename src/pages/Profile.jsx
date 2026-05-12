@@ -47,16 +47,16 @@ export default function Profile() {
     <div className="max-w-4xl mx-auto w-full px-6 md:px-12 mt-6 md:mt-12 mb-20 animate-in fade-in duration-500">
       <div className="flex flex-col items-center mb-16">
          <div className="md:hidden w-full mb-10 flex justify-between items-center">
-            <button onClick={() => window.history.back()} className="p-2 -ml-2 text-gray-800 active:scale-90 bg-white shadow-sm rounded-xl">
+            <button onClick={() => window.history.back()} className="p-2 -ml-2 text-gray-800 active:scale-90 bg-white rounded-xl">
                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="m15 18-6-6 6-6"/></svg>
             </button>
-            <button className="p-2 -mr-2 text-gray-800 active:scale-90 bg-white shadow-sm rounded-xl">
+            <button className="p-2 -mr-2 text-gray-800 active:scale-90 bg-white rounded-xl">
                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
             </button>
          </div>
          
          <div className="relative mb-6">
-            <div className="w-28 h-28 bg-blue-50 rounded-full flex items-center justify-center text-blue-600 font-black text-3xl border-4 border-white shadow-xl overflow-hidden">
+            <div className="w-28 h-28 bg-blue-50 rounded-full flex items-center justify-center text-blue-600 font-black text-3xl border-4 border-white overflow-hidden">
               {user?.imageUrl ? (
                 <img src={getImageUrl(user.imageUrl)} className="w-full h-full object-cover" alt="Profile" />
               ) : (
@@ -76,7 +76,7 @@ export default function Profile() {
             
             <button 
               onClick={() => navigate('/settings')} 
-              className="mt-6 bg-blue-600 hover:bg-blue-700 text-white px-8 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all active:scale-95 shadow-lg shadow-blue-100"
+              className="mt-6 bg-blue-600 hover:bg-blue-700 text-white px-8 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all active:scale-95"
             >
               Edit Profile
             </button>
@@ -91,7 +91,7 @@ export default function Profile() {
          
          <div className="space-y-5">
             {listings.map(item => (
-               <div key={item._id} className="bg-white border border-gray-100 p-5 rounded-[2rem] flex items-center gap-5 shadow-xl shadow-gray-200/20 hover:border-blue-100 transition-all group">
+               <div key={item._id} className="bg-white border border-gray-100 p-5 rounded-[2rem] flex items-center gap-5 hover:border-blue-100 transition-all group">
                   <div className="w-24 h-24 bg-gray-50 rounded-[1.5rem] overflow-hidden shrink-0 border border-gray-100">
                      <img src={getImageUrl(item.images?.[0])} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="" />
                   </div>

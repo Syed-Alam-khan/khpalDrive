@@ -195,14 +195,14 @@ export default function AdminDashboard() {
             <button 
               disabled={current === 1} 
               onClick={() => onPageChange(current - 1)}
-              className="p-2 bg-white border border-gray-100 rounded-lg disabled:opacity-30 active:scale-95 transition-all shadow-sm"
+              className="p-2 bg-white border border-gray-100 rounded-lg disabled:opacity-30 active:scale-95 transition-all"
             >
                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><path d="m15 18-6-6 6-6"/></svg>
             </button>
             <button 
               disabled={current === totalPages} 
               onClick={() => onPageChange(current + 1)}
-              className="p-2 bg-white border border-gray-100 rounded-lg disabled:opacity-30 active:scale-95 transition-all shadow-sm"
+              className="p-2 bg-white border border-gray-100 rounded-lg disabled:opacity-30 active:scale-95 transition-all"
             >
                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><path d="m9 18 6-6-6-6"/></svg>
             </button>
@@ -259,7 +259,7 @@ export default function AdminDashboard() {
                 {loading ? 'Updating System...' : 'Database Connected'}
              </p>
           </div>
-          <div className="flex items-center gap-4 bg-white px-4 py-2 rounded-xl border border-gray-100 shadow-sm">
+          <div className="flex items-center gap-4 bg-white px-4 py-2 rounded-xl border border-gray-100">
              <div className="text-right">
                 <div className="font-black text-gray-900 text-xs uppercase">{(() => { const u = JSON.parse(localStorage.getItem('userInfo') || '{}'); return u.user?.name || u.name || 'Admin Console'; })()}</div>
                 <div className="text-[9px] font-bold text-blue-500 uppercase tracking-widest">Active</div>
@@ -277,7 +277,7 @@ export default function AdminDashboard() {
 
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
           {stats.map(s => (
-            <div key={s.label} className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
+            <div key={s.label} className="bg-white p-6 rounded-2xl border border-gray-100">
               <div className="text-[9px] font-black text-gray-400 uppercase tracking-widest mb-1">{s.label}</div>
               <div className={`text-2xl font-black ${s.color}`}>{s.value}</div>
             </div>
@@ -286,7 +286,7 @@ export default function AdminDashboard() {
 
         {activeTab === 'Overview' && (
            <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
-              <div className="xl:col-span-2 bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+              <div className="xl:col-span-2 bg-white rounded-2xl border border-gray-100 overflow-hidden">
                  <div className="px-6 py-4 border-b border-gray-50 bg-gray-50/50">
                     <h2 className="text-xs font-black text-gray-900 uppercase tracking-widest">Recent Activity</h2>
                  </div>
@@ -321,7 +321,7 @@ export default function AdminDashboard() {
         )}
 
         {activeTab === 'Manage Users' && (
-           <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+           <div className="bg-white rounded-2xl border border-gray-100 overflow-hidden">
               <div className="px-6 py-4 border-b border-gray-50 bg-gray-50/50 flex justify-between items-center">
                  <h2 className="text-xs font-black text-gray-900 uppercase tracking-widest">User Registry</h2>
                  <div className="text-[9px] font-black text-blue-600 bg-blue-50 px-3 py-1 rounded-md">{users.length} Records</div>
@@ -368,7 +368,7 @@ export default function AdminDashboard() {
         )}
 
         {activeTab === 'Manage Cars' && (
-           <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+           <div className="bg-white rounded-2xl border border-gray-100 overflow-hidden">
               <div className="px-6 py-4 border-b border-gray-50 bg-gray-50/50 flex justify-between items-center">
                  <h2 className="text-xs font-black text-gray-900 uppercase tracking-widest">Market Inventory</h2>
                  <div className="text-[9px] font-black text-amber-600 bg-amber-50 px-3 py-1 rounded-md">{cars.length} Items</div>
@@ -413,7 +413,7 @@ export default function AdminDashboard() {
 
         {activeTab === 'Categories' && (
            <div className="space-y-6">
-              <div className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
+              <div className="bg-white p-6 rounded-2xl border border-gray-100">
                  <h2 className="text-xs font-black text-gray-900 uppercase tracking-widest mb-4">Add Taxonomy</h2>
                  <form onSubmit={handleCreateCategory} className="flex gap-4">
                     <input value={newCategoryName} onChange={(e) => setNewCategoryName(e.target.value)} placeholder="NEW CATEGORY..." className="flex-1 bg-white border border-gray-200 rounded-xl px-4 py-3 text-[11px] font-black uppercase outline-none focus:border-blue-500 transition-colors" />
@@ -422,7 +422,7 @@ export default function AdminDashboard() {
                     </button>
                  </form>
               </div>
-              <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+              <div className="bg-white rounded-2xl border border-gray-100 overflow-hidden">
                  <div className="px-6 py-4 border-b border-gray-50 bg-gray-50/50 flex justify-between items-center">
                     <h2 className="text-xs font-black text-gray-900 uppercase tracking-widest">Category Registry</h2>
                     <div className="text-[9px] font-black text-gray-500 bg-gray-100 px-3 py-1 rounded-md">{categories.length} Total</div>
@@ -457,7 +457,7 @@ export default function AdminDashboard() {
 
         {editingUser && (
           <div className="fixed inset-0 z-[60] bg-black/40 backdrop-blur-sm flex items-center justify-center p-4">
-             <div className="bg-white w-full max-w-lg rounded-2xl p-8 shadow-2xl relative">
+             <div className="bg-white w-full max-w-lg rounded-2xl p-8 relative">
                 <h2 className="text-xl font-black text-gray-900 uppercase mb-6">Edit Identity</h2>
                 <form onSubmit={handleUpdateUser} className="space-y-4">
                    <div className="grid grid-cols-2 gap-4">
@@ -492,7 +492,7 @@ export default function AdminDashboard() {
 
         {editingCategory && (
           <div className="fixed inset-0 z-[60] bg-black/40 backdrop-blur-sm flex items-center justify-center p-4">
-             <div className="bg-white w-full max-w-lg rounded-2xl p-8 shadow-2xl relative">
+             <div className="bg-white w-full max-w-lg rounded-2xl p-8 relative">
                 <h2 className="text-xl font-black text-gray-900 uppercase mb-6">Edit Category</h2>
                 <form onSubmit={handleUpdateCategory} className="space-y-4">
                     <div className="space-y-1">
