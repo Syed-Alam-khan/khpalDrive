@@ -152,14 +152,14 @@ export default function MyListings() {
         </div>
         <Link 
           to="/sell" 
-          className="bg-[#A3E635] hover:bg-[#8fd12a] text-white px-5 py-2.5 rounded-xl font-bold transition-all text-xs md:text-sm"
+          className="bg-[#4B2DBD] hover:bg-[#3b2396] text-white px-4 py-2 rounded-xl font-black transition-all text-xs md:text-sm"
         >
           Sell my Car
         </Link>
       </div>
 
       {/* Filters & Search */}
-      <div className="flex flex-col lg:flex-row justify-between items-center gap-4 mb-8">
+      <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4 mb-8">
         <div className="w-full lg:w-auto overflow-x-auto no-scrollbar -mx-4 px-4 py-1">
           <div className="flex items-center gap-2 p-1 bg-gray-50 rounded-full border border-gray-100 w-max">
             {[
@@ -175,12 +175,12 @@ export default function MyListings() {
                 <button
                   key={tab.id}
                   onClick={() => { setFilter(tab.id); setCurrentPage(1); }}
-                  className={`relative px-5 py-1.5 rounded-full text-xs md:text-sm font-bold transition-all flex items-center gap-2 whitespace-nowrap ${
+                  className={`relative px-6 py-2 rounded-full text-xs md:text-sm font-black transition-all flex items-center gap-2 whitespace-nowrap ${
                     filter === tab.id ? 'bg-black text-white' : 'text-gray-500 hover:bg-gray-100'
                   }`}
                 >
                   {tab.label}
-                  <span className={`text-[9px] px-1.5 py-0.5 rounded-md min-w-[18px] text-center ${
+                  <span className={`text-[10px] px-1.5 py-0.5 rounded-md min-w-[18px] text-center ${
                     filter === tab.id ? 'bg-white/20 text-white' : 'bg-gray-200 text-gray-500'
                   }`}>
                     {count}
@@ -251,7 +251,7 @@ export default function MyListings() {
                       {item.status === 'sold' ? (
                         <button 
                           onClick={() => handleReactivate(item._id)} 
-                          className="bg-[#A3E635] hover:bg-[#8fd12a] text-white px-3 py-1.5 rounded-lg transition-all flex items-center justify-center gap-1.5 text-[10px] font-black uppercase tracking-wider"
+                          className="bg-[#A3E635] hover:bg-[#8fd12a] text-white px-3 py-3 rounded-lg transition-all flex items-center justify-center gap-1.5 text-[10px] font-black uppercase tracking-wider"
                           title="Re-Active listing"
                         >
                           <Plus size={12} strokeWidth={3} />
@@ -260,7 +260,7 @@ export default function MyListings() {
                       ) : (
                         <button 
                           onClick={() => handleMarkSold(item._id)} 
-                          className="bg-[#4B2DBD] hover:bg-[#3b2396] text-white px-3 py-1.5 rounded-lg transition-all flex items-center justify-center gap-1.5 text-[10px] font-black uppercase tracking-wider"
+                          className="bg-[#4B2DBD] hover:bg-[#3b2396] text-white px-3 py-3 rounded-lg transition-all flex items-center justify-center gap-1.5 text-[10px] font-black uppercase tracking-wider"
                           title="Mark as Sold"
                         >
                           <CheckCircle2 size={12} strokeWidth={3} />
@@ -353,14 +353,14 @@ export default function MyListings() {
                   {item.status === 'sold' ? (
                     <button 
                       onClick={() => handleReactivate(item._id)} 
-                      className="px-3 py-1 rounded-md text-[8px] font-black uppercase tracking-widest transition-all bg-[#A3E635] hover:bg-[#8fd12a] text-white"
+                      className="px-3 py-2 rounded-md text-[8px] font-black uppercase tracking-widest transition-all bg-[#A3E635] hover:bg-[#8fd12a] text-white"
                     >
                       Re-Active
                     </button>
                   ) : (
                     <button 
                       onClick={() => handleMarkSold(item._id)} 
-                      className="px-3 py-1 rounded-md text-[8px] font-black uppercase tracking-widest transition-all bg-[#4B2DBD] hover:bg-[#3b2396] text-white"
+                      className="px-3 py-2 rounded-md text-[8px] font-black uppercase tracking-widest transition-all bg-[#4B2DBD] hover:bg-[#3b2396] text-white"
                     >
                       Mark Sold
                     </button>
