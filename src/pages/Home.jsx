@@ -102,13 +102,13 @@ export default function Home() {
                 <Link 
                   to="/all-cars"
                   state={{ autoScroll: true }}
-                  className="bg-[#4B2DBD] rounded-2xl flex flex-col items-center justify-center text-white cursor-pointer hover:bg-[#3B2396] transition-all p-4 group min-h-[150px]"
+                  className="bg-gray-100 rounded-2xl flex flex-col items-center justify-center text-gray-600 cursor-pointer hover:bg-gray-200 transition-all p-4 group min-h-[150px]"
                 >
-                  <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
-                    <FaChevronRight className="text-white" size={18} />
+                  <div className="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                    <FaChevronRight className="text-gray-400" size={18} />
                   </div>
                   <span className="text-xs font-black uppercase tracking-widest">Show More</span>
-                  <span className="text-[9px] font-bold text-white/60 mt-1">{filteredCars.length - limit} more available</span>
+                  <span className="text-[9px] font-bold text-gray-400 mt-1">{filteredCars.length - limit} more available</span>
                 </Link>
               )}
             </div>
