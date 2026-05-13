@@ -335,7 +335,7 @@ export default function SellCar() {
                       {categories.map(c => (
                         <option key={c._id} value={c._id}>{c.name}</option>
                       ))}
-                      <option value="other">+ Other (Add New)</option>
+                      <option value="other" style={{ color: '#4B2DBD', fontWeight: 'bold' }}>Other (Add New)</option>
                     </select>
                     <ChevronRight size={14} className="absolute right-5 top-1/2 -translate-y-1/2 text-gray-400 rotate-90" />
                   </div>
