@@ -261,7 +261,7 @@ export default function SellCar() {
     <div className="min-h-screen bg-[#F3F4F6]/50">
       <form onSubmit={handleSubmit} noValidate>
       {/* Header Banner */}
-      <div className="bg-[#4B2DBD] pt-14 pb-2 md:pt-32 md:pb-8 px-4 text-left md:text-center relative overflow-hidden">
+      <div className="bg-[#4B2DBD] pt-6 pb-2 md:pt-32 md:pb-8 px-4 text-left md:text-center relative overflow-hidden">
         {/* Background Decorative Circles */}
         <div className="absolute top-[-100px] right-[-100px] w-64 h-64 bg-white/5 rounded-full blur-3xl"></div>
         <div className="absolute bottom-[-50px] left-[-50px] w-48 h-48 bg-white/5 rounded-full blur-2xl"></div>
