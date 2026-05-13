@@ -188,7 +188,7 @@ const SearchFilter = ({ onSearch }) => {
         >
           <div className="flex items-center gap-2">
             <FaFilter className="text-[#4B2DBD]" size={16} />
-            <span className="text-[12px] uppercase tracking-widest">Filters</span>
+            <span className="text-sm uppercase tracking-widest">Filters</span>
             {activeFiltersCount > 0 && (
               <span className="bg-[#4B2DBD] text-white text-[9px] w-4 h-4 rounded-full flex items-center justify-center">
                 {activeFiltersCount}
@@ -224,11 +224,11 @@ const SearchFilter = ({ onSearch }) => {
             <div className="flex items-center justify-between mb-8 sticky top-0 bg-white z-10 pb-2">
               <button 
                 onClick={handleClear}
-                className="text-red-500 font-black text-xs uppercase tracking-widest"
+                className="text-red-500 font-black text-sm uppercase tracking-widest"
               >
                 Reset
               </button>
-              <h2 className="text-gray-900 font-black text-base uppercase tracking-[0.2em]">Filters</h2>
+              <h2 className="text-gray-900 font-black text-lg uppercase tracking-[0.2em]">Filters</h2>
               <button 
                 onClick={() => setIsMobileModalOpen(false)}
                 className="w-8 h-8 bg-gray-50 rounded-full flex items-center justify-center text-gray-400"
@@ -241,7 +241,7 @@ const SearchFilter = ({ onSearch }) => {
             <div className="space-y-8 pb-48">
               {/* Price Range */}
               <div className="space-y-4">
-                <h3 className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">Price Range</h3>
+                <h3 className="text-[12px] font-black text-gray-400 uppercase tracking-widest ml-1">Price Range</h3>
                 <div className="grid grid-cols-2 gap-3">
                   <div className="relative">
                     <input 
@@ -266,7 +266,7 @@ const SearchFilter = ({ onSearch }) => {
 
               {/* Category Dropdown (Real API Data) */}
               <div className="space-y-4">
-                <h3 className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">Car Category</h3>
+                <h3 className="text-[12px] font-black text-gray-400 uppercase tracking-widest ml-1">Car Category</h3>
                 <div className="relative">
                   <select 
                     value={filters.marka}
@@ -286,13 +286,13 @@ const SearchFilter = ({ onSearch }) => {
 
               {/* Car Type / Status */}
               <div className="space-y-4">
-                <h3 className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">Car Type</h3>
+                <h3 className="text-[12px] font-black text-gray-400 uppercase tracking-widest ml-1">Car Type</h3>
                 <div className="flex flex-wrap gap-2">
                   {['Non Cut', 'Cut', 'Import', 'Local'].map(t => (
                     <button 
                       key={t}
                       onClick={() => handleChange('type', t)}
-                      className={`px-4 py-3 rounded-xl text-[10px] font-black border transition-all ${
+                      className={`px-4 py-3 rounded-xl text-[12px] font-black border transition-all ${
                         filters.type === t ? 'bg-[#4B2DBD] text-white border-[#4B2DBD]' : 'bg-[#F9FAFB] text-gray-500 border-[#E5E7EB]'
                       }`}
                     >
@@ -304,13 +304,13 @@ const SearchFilter = ({ onSearch }) => {
 
               {/* Fuel Type */}
               <div className="space-y-4">
-                <h3 className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">Fuel Type</h3>
+                <h3 className="text-[12px] font-black text-gray-400 uppercase tracking-widest ml-1">Fuel Type</h3>
                 <div className="grid grid-cols-3 gap-2">
                   {['Petrol', 'Diesel', 'CNG', 'Hybrid'].map(f => (
                     <button 
                       key={f}
                       onClick={() => handleChange('fuelType', f)}
-                      className={`py-3 rounded-xl text-[10px] font-black border transition-all ${
+                      className={`py-3 rounded-xl text-[12px] font-black border transition-all ${
                         filters.fuelType === f ? 'bg-[#4B2DBD] text-white border-[#4B2DBD]' : 'bg-[#F9FAFB] text-gray-500 border-[#E5E7EB]'
                       }`}
                     >
@@ -325,13 +325,13 @@ const SearchFilter = ({ onSearch }) => {
             <div className="fixed bottom-0 left-0 w-full bg-white p-4 border-t border-gray-50 space-y-2 z-20">
               <button 
                 onClick={handleClear}
-                className="w-full bg-[#F9FAFB] text-gray-900 border border-[#E5E7EB] py-3.5 rounded-xl font-black text-xs uppercase tracking-widest hover:bg-gray-50 transition-all"
+                className="w-full bg-[#F9FAFB] text-gray-900 border border-[#E5E7EB] py-3.5 rounded-xl font-black text-sm uppercase tracking-widest hover:bg-gray-50 transition-all"
               >
                 Clear all
               </button>
               <button 
                 onClick={handleApplyMobile}
-                className="w-full bg-[#4B2DBD] text-white py-3 rounded-xl font-black text-xs uppercase tracking-widest active:scale-[0.98] transition-all"
+                className="w-full bg-[#4B2DBD] text-white py-4 rounded-xl font-black text-sm uppercase tracking-widest active:scale-[0.98] transition-all"
               >
                 Apply ({activeFiltersCount})
               </button>

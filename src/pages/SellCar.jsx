@@ -35,7 +35,7 @@ export default function SellCar() {
   const [searchParams] = useSearchParams();
   const editId = searchParams.get('edit');
   
-  const { categories, getAllCategories } = useCategory();
+  const { categories, getAllCategories, userAddCategory } = useCategory();
   const { addCar, updateCar, getSingleCar, loading } = useCar();
   
   const [step, setStep] = useState(1);
@@ -54,6 +54,8 @@ export default function SellCar() {
     category: '',
     mileage: ''
   });
+  const [isOtherCategory, setIsOtherCategory] = useState(false);
+  const [newCategoryName, setNewCategoryName] = useState('');
   const [files, setFiles] = useState([]);
   const [previews, setPreviews] = useState([]);
 
@@ -92,7 +94,16 @@ export default function SellCar() {
   }, [editId]);
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    if (name === 'category' && value === 'other') {
+      setIsOtherCategory(true);
+      setFormData({ ...formData, category: 'other' });
+    } else if (name === 'category') {
+      setIsOtherCategory(false);
+      setFormData({ ...formData, category: value });
+    } else {
+      setFormData({ ...formData, [name]: value });
+    }
   };
 
   const setManualValue = (name, value) => {
@@ -136,6 +147,9 @@ export default function SellCar() {
     if (step === 1) {
       if (!formData.model.trim()) newErrors.model = "Car Model is required";
       if (!formData.category) newErrors.category = "Please select a category";
+      if (formData.category === 'other' && !newCategoryName.trim()) {
+        newErrors.newCategory = "Please enter category name";
+      }
       if (!formData.price) newErrors.price = "Asking Price is required";
       if (!formData.location.trim()) newErrors.location = "Location is required";
     }
@@ -173,8 +187,26 @@ export default function SellCar() {
     e.preventDefault();
     
     const data = new FormData();
+    
+    let finalCategory = formData.category;
+    
+    // Handle "Other" category creation
+    if (formData.category === 'other') {
+      try {
+        const newCat = await userAddCategory(newCategoryName);
+        finalCategory = newCat._id;
+      } catch (err) {
+        toast.error("Failed to create new category");
+        return;
+      }
+    }
+
     Object.keys(formData).forEach(key => {
-      data.append(key, formData[key]);
+      if (key === 'category') {
+        data.append(key, finalCategory);
+      } else {
+        data.append(key, formData[key]);
+      }
     });
     
     files.forEach(file => {
@@ -303,11 +335,31 @@ export default function SellCar() {
                       {categories.map(c => (
                         <option key={c._id} value={c._id}>{c.name}</option>
                       ))}
+                      <option value="other">+ Other (Add New)</option>
                     </select>
                     <ChevronRight size={14} className="absolute right-5 top-1/2 -translate-y-1/2 text-gray-400 rotate-90" />
                   </div>
                   {errors.category && <p className="text-red-500 text-[10px] font-bold mt-1 ml-1">* {errors.category}</p>}
                 </div>
+
+                {isOtherCategory && (
+                  <div className="space-y-2 animate-in slide-in-from-top-2 duration-300">
+                    <label className="text-[9px] font-black text-[#4B2DBD] uppercase tracking-widest ml-1 flex items-center gap-0.5">
+                      New Category Name <span className="text-red-500">*</span>
+                    </label>
+                    <div className="relative">
+                      <input 
+                        type="text" 
+                        value={newCategoryName} 
+                        onChange={(e) => setNewCategoryName(e.target.value)} 
+                        placeholder="e.g. Sports Car" 
+                        className="w-full bg-white border border-[#4B2DBD]/30 rounded-xl py-4 pl-12 pr-6 focus:ring-2 focus:ring-[#4B2DBD]/5 focus:border-[#4B2DBD] outline-none font-bold text-base transition-all" 
+                      />
+                      <Plus className="absolute left-4 top-1/2 -translate-y-1/2 text-[#4B2DBD]" size={14} />
+                    </div>
+                    {errors.newCategory && <p className="text-red-500 text-[10px] font-bold mt-1 ml-1">* {errors.newCategory}</p>}
+                  </div>
+                )}
                 <div className="space-y-2">
                   <label className="text-[9px] font-black text-gray-400 uppercase tracking-widest ml-1 flex items-center gap-0.5">
                     Asking Price (PKR) <span className="text-red-500">*</span>
@@ -596,7 +648,10 @@ export default function SellCar() {
                 <div className="p-4 rounded-2xl bg-gray-50/50 border border-gray-100">
                   <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1">Category</p>
                   <p className="text-[12px] font-black text-gray-900">
-                    {categories.find(c => c._id === formData.category)?.name || 'Car'}
+                    {formData.category === 'other' 
+                      ? newCategoryName 
+                      : (categories.find(c => c._id === formData.category)?.name || 'Car')
+                    }
                   </p>
                 </div>
                 <div className="p-4 rounded-2xl bg-[#4B2DBD]/5 border border-[#4B2DBD]/20">

@@ -78,6 +78,29 @@ export function CategoryProvider({ children }) {
     }
   };
 
+  // User adds a category (when selecting 'Other')
+  const userAddCategory = async (name) => {
+    setLoading(true);
+    setError(null);
+    try {
+      const { data } = await API.post('/categories/user-add-category', { name });
+      const newCat = data.category;
+      setCategories(prev => {
+        if (!prev.find(c => c._id === newCat._id)) {
+          return [...prev, newCat];
+        }
+        return prev;
+      });
+      return newCat;
+    } catch (err) {
+      const errorMsg = err.response?.data?.message || 'Failed to add category.';
+      setError(errorMsg);
+      throw err;
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const value = {
     categories,
     loading,
@@ -86,6 +109,7 @@ export function CategoryProvider({ children }) {
     addCategory,
     updateCategory,
     deleteCategory,
+    userAddCategory,
   };
 
   return <CategoryContext.Provider value={value}>{children}</CategoryContext.Provider>;
