@@ -261,15 +261,15 @@ export default function SellCar() {
     <div className="min-h-screen bg-[#F3F4F6]/50">
       <form onSubmit={handleSubmit} noValidate>
       {/* Header Banner */}
-      <div className="bg-[#4B2DBD] pt-3 pb-6 md:pt-12 md:pb-20 px-4 text-left md:text-center relative overflow-hidden">
+      <div className="bg-[#4B2DBD] pt-14 pb-2 md:pt-32 md:pb-8 px-4 text-left md:text-center relative overflow-hidden">
         {/* Background Decorative Circles */}
         <div className="absolute top-[-100px] right-[-100px] w-64 h-64 bg-white/5 rounded-full blur-3xl"></div>
         <div className="absolute bottom-[-50px] left-[-50px] w-48 h-48 bg-white/5 rounded-full blur-2xl"></div>
 
-        <h1 className="text-xl md:text-5xl font-black text-white mb-4 md:mb-4 relative z-10 tracking-tight">
+        <h1 className="text-xl md:text-5xl font-black text-white mb-2 md:mb-4 relative z-10 tracking-tight">
           {editId ? 'Update Your Car' : 'Post Your Car'}
         </h1>
-        <p className="hidden md:block text-purple-100 text-xl font-medium mb-12 relative z-10">
+        <p className="hidden md:block text-purple-100 text-xl font-medium mb-8 relative z-10">
           {editId ? 'Update your listing details below' : 'Fill in the details below — it takes less than 2 minutes'}
         </p>
         

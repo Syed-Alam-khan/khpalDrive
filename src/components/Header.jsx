@@ -8,18 +8,12 @@ export default function Header() {
   const navigate = useNavigate();
   const location = useLocation();
   const isHomePage = location.pathname === '/';
-  const { logout } = useUser();
+  const { user, logout } = useUser();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
-  const [userInfo, setUserInfo] = useState(null);
   const dropdownRef = useRef(null);
 
-  useEffect(() => {
-    const data = localStorage.getItem('userInfo');
-    if (data) {
-      setUserInfo(JSON.parse(data));
-    }
-  }, []);
+  // Remove the useEffect that loads userInfo from localStorage manually
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -44,7 +38,6 @@ export default function Header() {
       if (result.isConfirmed) {
         try {
           await logout();
-          setUserInfo(null);
           setIsProfileDropdownOpen(false);
           setIsMenuOpen(false);
           navigate('/login');
@@ -58,9 +51,12 @@ export default function Header() {
   };
 
   const getProfileImage = () => {
-    if (userInfo?.user?.imageUrl) {
-      if (userInfo.user.imageUrl.startsWith('http')) return userInfo.user.imageUrl;
-      return `http://localhost:3000/uploads/${userInfo.user.imageUrl}`;
+    if (user?.imageUrl) {
+      if (user.imageUrl.startsWith('http')) return user.imageUrl;
+      const base = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+        ? 'http://localhost:3000'
+        : 'https://khpaldrivebackend-production.up.railway.app';
+      return `${base}/uploads/${user.imageUrl}`;
     }
     return null;
   };
@@ -87,7 +83,7 @@ export default function Header() {
           </nav>
 
           <div className="flex items-center gap-4">
-            {userInfo && (
+            {user && (
               <NavLink 
                 to="/listings" 
                 className="bg-white/10 text-white px-5 py-2 rounded-full font-bold text-[12px] uppercase tracking-wider hover:bg-white/20 transition-all border border-white/20"
@@ -95,7 +91,7 @@ export default function Header() {
                 My Listing
               </NavLink>
             )}
-            {!userInfo && (
+            {!user && (
               <Link 
                 to="/login" 
                 className="text-white font-bold text-[12px] uppercase tracking-wider hover:text-[#94D227] transition-colors"
@@ -104,13 +100,13 @@ export default function Header() {
               </Link>
             )}
             <Link 
-              to={userInfo ? "/sell" : "/register"} 
+              to={user ? "/sell" : "/register"} 
               className="bg-[#94D227] text-white px-6 py-2 rounded-full font-bold text-[12px] uppercase tracking-wider hover:bg-[#85bd23] transition-all border border-[#94D227]"
             >
               Sell my Car
             </Link>
             
-            {userInfo && (
+            {user && (
               <div className="relative ml-2" ref={dropdownRef}>
                 <button 
                   onClick={() => setIsProfileDropdownOpen(!isProfileDropdownOpen)}
@@ -119,14 +115,14 @@ export default function Header() {
                   {getProfileImage() ? (
                     <img src={getProfileImage()} alt="profile" className="w-full h-full object-cover" />
                   ) : (
-                    <span className="font-bold text-sm">{userInfo.user?.name?.charAt(0)}</span>
+                    <span className="font-bold text-sm">{user?.name?.charAt(0)}</span>
                   )}
                 </button>
                 {isProfileDropdownOpen && (
                   <div className="absolute right-0 mt-3 w-56 bg-white text-gray-900 rounded-2xl border border-gray-100 py-3 overflow-hidden animate-in fade-in slide-in-from-top-2 duration-300">
                     <div className="px-5 py-2 border-b mb-1">
                       <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Logged in as</p>
-                      <p className="text-sm font-black text-[#4B2DBD]">{userInfo.user?.name}</p>
+                      <p className="text-sm font-black text-[#4B2DBD]">{user?.name}</p>
                     </div>
                     <Link 
                       to="/settings" 
@@ -146,7 +142,7 @@ export default function Header() {
 
         {/* Mobile Profile & Toggle */}
         <div className="md:hidden flex items-center gap-4">
-          {userInfo ? (
+          {user ? (
             <button 
               onClick={() => { navigate('/settings'); setIsMenuOpen(false); }}
               className="w-9 h-9 bg-white/10 rounded-full flex items-center justify-center border-2 border-white/30 overflow-hidden active:scale-95 transition-all"
@@ -154,7 +150,7 @@ export default function Header() {
               {getProfileImage() ? (
                 <img src={getProfileImage()} alt="profile" className="w-full h-full object-cover" />
               ) : (
-                <span className="font-bold text-sm">{userInfo.user?.name?.charAt(0)}</span>
+                <span className="font-bold text-sm">{user?.name?.charAt(0)}</span>
               )}
             </button>
           ) : (
@@ -190,7 +186,7 @@ export default function Header() {
             All Cars
           </NavLink>
           
-          {userInfo && (
+          {user && (
             <NavLink 
               to="/listings" 
               className={({ isActive }) => `block w-full px-5 py-3.5 rounded-2xl font-bold text-sm uppercase tracking-wider transition-all ${isActive ? 'bg-[#94D227] text-white' : 'bg-white/10 text-white hover:bg-white/20'}`}
@@ -199,7 +195,7 @@ export default function Header() {
               My Listing
             </NavLink>
           )}
-          {userInfo && (
+          {user && (
              <button 
                onClick={handleLogout} 
                className="block w-full text-left px-5 py-3.5 rounded-2xl font-bold text-sm uppercase tracking-wider transition-all bg-red-500/20 text-red-100 hover:bg-red-500/30"
@@ -214,7 +210,7 @@ export default function Header() {
       {isHomePage && (
         <div className="md:hidden fixed bottom-0 left-0 w-full z-40 bg-white p-4 pb-4 border-t border-gray-100">
           <Link 
-            to={userInfo ? "/sell" : "/register"} 
+            to={user ? "/sell" : "/register"} 
             className="w-full bg-[#4B2DBD] text-white py-3 rounded-lg font-black text-base uppercase tracking-widest flex items-center justify-center active:scale-[0.98] transition-all"
           >
             Sell my Car
