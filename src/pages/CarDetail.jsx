@@ -78,7 +78,7 @@ export default function CarDetail() {
       phone = '92' + phone;
     }
     
-    const message = `Hi, I'm interested in your ${car.carName} (${car.model}) listed for PKR ${car.price?.toLocaleString()}.`;
+    const message = `Hi, I'm interested in your ${car.category?.name || car.carName} (${car.model}) listed for PKR ${car.price?.toLocaleString()}.`;
     window.open(`https://wa.me/${phone}?text=${encodeURIComponent(message)}`, '_blank');
   };
 

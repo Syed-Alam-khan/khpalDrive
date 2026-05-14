@@ -14,6 +14,21 @@ export default function Login() {
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    if (!email) {
+      toast.error("Email address is required");
+      document.getElementsByName('email')[0]?.focus();
+      return;
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      toast.error("Please enter a valid email address");
+      document.getElementsByName('email')[0]?.focus();
+      return;
+    }
+    if (!password) {
+      toast.error("Password is required");
+      document.getElementsByName('password')[0]?.focus();
+      return;
+    }
     try {
       const data = await login(email, password);
       toast.success(data.message || 'Login successful!');
@@ -43,6 +58,7 @@ export default function Login() {
               <input 
                 required 
                 type="email" 
+                name="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Enter your email"
@@ -56,6 +72,7 @@ export default function Login() {
                 <input 
                   required 
                   type={showPassword ? "text" : "password"} 
+                  name="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="Enter your password"

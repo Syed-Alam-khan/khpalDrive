@@ -34,9 +34,21 @@ export default function Register() {
     const newErrors = {};
 
     // Custom Validation Logic
-    if (!formData.name) newErrors.name = "Full name is required";
-    if (!formData.email) newErrors.email = "Email address is required";
-    if (!formData.phoneNumber) newErrors.phoneNumber = "Phone number is required";
+    if (!formData.name) {
+      newErrors.name = "Full name is required";
+    } else if (!/^[A-Za-z\s]+$/.test(formData.name)) {
+      newErrors.name = "Name can only contain letters and spaces";
+    }
+    if (!formData.email) {
+      newErrors.email = "Email address is required";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      newErrors.email = "Please enter a valid email address";
+    }
+    if (!formData.phoneNumber) {
+      newErrors.phoneNumber = "Phone number is required";
+    } else if (!/^03\d{9}$/.test(formData.phoneNumber)) {
+      newErrors.phoneNumber = "Enter a valid 11-digit Pakistan phone number (e.g., 03001234567)";
+    }
     if (!formData.password) newErrors.password = "Password is required";
     if (formData.password && formData.password !== formData.confirmPassword) {
       newErrors.confirmPassword = "Passwords do not match";
@@ -45,6 +57,13 @@ export default function Register() {
 
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
+      // Focus the first error field
+      const firstErrorField = Object.keys(newErrors)[0];
+      const element = document.getElementsByName(firstErrorField)[0];
+      if (element) {
+        element.focus();
+        element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
       return;
     }
 
@@ -147,6 +166,7 @@ export default function Register() {
               <input 
                 required 
                 type="text" 
+                name="name"
                 placeholder="Enter your name" 
                 value={formData.name} 
                 onChange={(e) => setFormData({...formData, name: e.target.value})} 
@@ -161,6 +181,7 @@ export default function Register() {
                 <input 
                   required 
                   type="email" 
+                  name="email"
                   placeholder="Enter your email" 
                   value={formData.email} 
                   onChange={(e) => setFormData({...formData, email: e.target.value})} 
@@ -173,9 +194,13 @@ export default function Register() {
                 <input 
                   required 
                   type="text" 
-                  placeholder="Enter your phone number" 
+                  name="phoneNumber"
+                  placeholder="e.g. 03001234567" 
                   value={formData.phoneNumber} 
-                  onChange={(e) => setFormData({...formData, phoneNumber: e.target.value})} 
+                  onChange={(e) => {
+                    const val = e.target.value.replace(/\D/g, '').slice(0, 11);
+                    setFormData({...formData, phoneNumber: val});
+                  }} 
                   className="w-full bg-[#F9FAFB] border border-[#E5E7EB] rounded-lg py-3 px-4 focus:bg-white focus:border-[#4B2DBD]/20 transition-all outline-none text-sm text-gray-800 placeholder:text-gray-400" 
                 />
                 {errors.phoneNumber && <p className="text-red-500 text-[10px] font-bold mt-0.5 ml-1">* {errors.phoneNumber}</p>}
@@ -192,6 +217,7 @@ export default function Register() {
                   <input 
                     required 
                     type={showPassword ? "text" : "password"} 
+                    name="password"
                     placeholder="Enter your password" 
                     value={formData.password} 
                     onChange={(e) => setFormData({...formData, password: e.target.value})} 
@@ -209,6 +235,7 @@ export default function Register() {
                   <input 
                     required 
                     type={showConfirmPassword ? "text" : "password"} 
+                    name="confirmPassword"
                     placeholder="Confirm your password" 
                     value={formData.confirmPassword} 
                     onChange={(e) => setFormData({...formData, confirmPassword: e.target.value})} 

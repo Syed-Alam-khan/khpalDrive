@@ -51,6 +51,10 @@ export default function Home() {
       result = result.filter(car => car.type?.toLowerCase() === filters.type.toLowerCase());
     }
 
+    if (filters.location) {
+      result = result.filter(car => car.location?.toLowerCase().includes(filters.location.toLowerCase()));
+    }
+
     if (filters.priceRange) {
       result = result.filter(car => car.price <= Number(filters.priceRange));
     }
@@ -63,8 +67,21 @@ export default function Home() {
       result = result.filter(car => car.price <= Number(filters.maxPrice));
     }
 
+    if (filters.search) {
+      const query = filters.search.toLowerCase();
+      result = result.filter(car => 
+        car.carName?.toLowerCase().includes(query) || 
+        car.category?.name?.toLowerCase().includes(query) ||
+        car.description?.toLowerCase().includes(query) ||
+        car.location?.toLowerCase().includes(query) ||
+        car.model?.toString().toLowerCase().includes(query)
+      );
+    }
+
     setFilteredCars(result);
   };
+
+  const uniqueLocations = [...new Set(cars.map(car => car.location).filter(Boolean))].sort();
 
   return (
     <div className="bg-white min-h-screen">
@@ -72,7 +89,7 @@ export default function Home() {
       <Hero />
       
       {/* Search Filter Section */}
-      <SearchFilter onSearch={handleSearch} />
+      <SearchFilter onSearch={handleSearch} locations={uniqueLocations} />
       
 
 

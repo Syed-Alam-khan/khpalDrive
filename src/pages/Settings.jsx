@@ -76,15 +76,28 @@ export default function Settings() {
     e.preventDefault();
     if (submitting) return;
 
+    if (!/^[A-Za-z\s]+$/.test(formData.name.trim())) {
+      toast.error("Name can only contain letters and spaces");
+      document.getElementsByName('name')[0]?.focus();
+      return;
+    }
+
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email.trim())) {
+      toast.error("Please enter a valid email address");
+      return;
+    }
+
     const hasPasswordChanged = formData.password.trim() !== '';
     
     if (hasPasswordChanged) {
         if (!formData.oldPassword.trim()) {
             toast.error('Current password is required to set a new password');
+            document.getElementsByName('oldPassword')[0]?.focus();
             return;
         }
         if (formData.password !== formData.confirmPassword) {
             toast.error('New passwords do not match');
+            document.getElementsByName('confirmPassword')[0]?.focus();
             return;
         }
     }

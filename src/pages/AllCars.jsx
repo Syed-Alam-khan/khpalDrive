@@ -50,6 +50,10 @@ export default function AllCars() {
       result = result.filter(car => car.type?.toLowerCase() === filters.type.toLowerCase());
     }
 
+    if (filters.location) {
+      result = result.filter(car => car.location?.toLowerCase().includes(filters.location.toLowerCase()));
+    }
+
     if (filters.priceRange) {
       result = result.filter(car => car.price <= Number(filters.priceRange));
     }
@@ -83,11 +87,13 @@ export default function AllCars() {
     }
   }, [carsLoading, filteredCars.length, autoScroll]);
 
+  const uniqueLocations = [...new Set(cars.map(car => car.location).filter(Boolean))].sort();
+
   return (
     <div className="bg-white min-h-screen">
       {/* Search Filter Section - Padded top for contrast */}
       <div className="pt-0 md:pt-24 bg-gray-50/30">
-        <SearchFilter onSearch={handleSearch} />
+        <SearchFilter onSearch={handleSearch} locations={uniqueLocations} />
       </div>
 
       {/* Browse Cars Section */}

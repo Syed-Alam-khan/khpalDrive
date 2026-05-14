@@ -3,7 +3,7 @@ import { useCategory } from '../context/CategoryContext';
 import { FaSearch, FaChevronDown, FaTimes, FaFilter, FaRedo } from 'react-icons/fa';
 import { X, RotateCcw } from 'lucide-react';
 
-const SearchFilter = ({ onSearch }) => {
+const SearchFilter = ({ onSearch, locations = [] }) => {
   const { categories } = useCategory();
   const [isMobileModalOpen, setIsMobileModalOpen] = useState(false);
   const [filters, setFilters] = useState({
@@ -14,8 +14,11 @@ const SearchFilter = ({ onSearch }) => {
     priceRange: '',
     minPrice: '',
     maxPrice: '',
-    type: ''
+    type: '',
+    location: '',
+    search: ''
   });
+  const [isSearchVisible, setIsSearchVisible] = useState(false);
 
   const handleChange = (name, value) => {
     setFilters(prev => ({ ...prev, [name]: value }));
@@ -30,9 +33,12 @@ const SearchFilter = ({ onSearch }) => {
       priceRange: '',
       minPrice: '',
       maxPrice: '',
-      type: ''
+      type: '',
+      location: '',
+      search: ''
     };
     setFilters(cleared);
+    setIsSearchVisible(false);
     if (!isMobileModalOpen) onSearch(cleared);
   };
 
@@ -138,6 +144,26 @@ const SearchFilter = ({ onSearch }) => {
             </div>
           </div>
 
+          {/* Location Filter */}
+          <div className="flex-1 w-full p-3 border-r-2 border-[#E5E7EB] last:border-r-0 relative group">
+            <label className="block text-[10px] text-gray-400 font-black uppercase tracking-widest mb-1 ml-1">City</label>
+            <div className="relative">
+              <select 
+                className="w-full bg-transparent font-black text-sm outline-none cursor-pointer appearance-none pr-8 text-gray-800"
+                value={filters.location}
+                onChange={(e) => handleChange('location', e.target.value)}
+              >
+                <option value="">All Cities</option>
+                {locations.map(loc => (
+                  <option key={loc} value={loc}>{loc}</option>
+                ))}
+              </select>
+              <div className="absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none text-gray-400">
+                <FaChevronDown size={18} />
+              </div>
+            </div>
+          </div>
+
           {/* Price Range Filter */}
           <div className="flex-1 w-full p-3 relative group">
             <label className="block text-[10px] text-gray-400 font-black uppercase tracking-widest mb-1 ml-1">Max Price</label>
@@ -181,39 +207,88 @@ const SearchFilter = ({ onSearch }) => {
         </div>
       </div>
 
-      <div className="md:hidden flex gap-1.5">
-        <button 
-          onClick={() => setIsMobileModalOpen(true)}
-          className="flex-1 bg-[#F9FAFB] border-2 border-[#E5E7EB] rounded-xl py-3.5 px-5 flex items-center justify-between font-black text-gray-800"
-        >
-          <div className="flex items-center gap-2">
-            <FaFilter className="text-[#4B2DBD]" size={16} />
-            <span className="text-sm uppercase tracking-widest">Filters</span>
-            {activeFiltersCount > 0 && (
-              <span className="bg-[#4B2DBD] text-white text-[9px] w-4 h-4 rounded-full flex items-center justify-center">
-                {activeFiltersCount}
-              </span>
-            )}
-          </div>
-          <FaChevronDown size={18} className="text-gray-300" />
-        </button>
-        {activeFiltersCount > 0 ? (
-          <button 
-            onClick={handleClear}
-            className="bg-red-500 text-white w-12 rounded-xl flex items-center justify-center animate-in zoom-in duration-300"
-            title="Clear Filters"
-          >
-            <RotateCcw size={16} />
-          </button>
-        ) : (
-          <button 
-            onClick={() => onSearch(filters)}
-            className="bg-[#4B2DBD] text-white w-12 rounded-xl flex items-center justify-center animate-in zoom-in duration-300"
-            title="Search"
-          >
-            <FaSearch size={16} />
-          </button>
-        )}
+      <div className="md:hidden flex flex-col gap-3">
+        <div className="flex gap-1.5">
+          {!isSearchVisible && (
+            <button 
+              onClick={() => setIsMobileModalOpen(true)}
+              className="flex-1 bg-[#F9FAFB] border-2 border-[#E5E7EB] rounded-xl py-3.5 px-5 flex items-center justify-between font-black text-gray-800"
+            >
+              <div className="flex items-center gap-2">
+                <FaFilter className="text-[#4B2DBD]" size={16} />
+                <span className="text-sm uppercase tracking-widest">Filters</span>
+                {activeFiltersCount > 0 && (
+                  <span className="bg-[#4B2DBD] text-white text-[9px] w-4 h-4 rounded-full flex items-center justify-center">
+                    {activeFiltersCount}
+                  </span>
+                )}
+              </div>
+              <FaChevronDown size={18} className="text-gray-300" />
+            </button>
+          )}
+
+          {isSearchVisible ? (
+            <div className="flex-1 flex gap-2 animate-in slide-in-from-right duration-300">
+              <div className="relative flex-1">
+                <input
+                  autoFocus
+                  type="text"
+                  placeholder="Search cars..."
+                  value={filters.search}
+                  onChange={(e) => {
+                    const val = e.target.value;
+                    handleChange('search', val);
+                    onSearch({ ...filters, search: val });
+                  }}
+                  className="w-full bg-[#F9FAFB] border-2 border-[#4B2DBD] rounded-xl py-3.5 px-10 text-sm font-bold outline-none"
+                />
+                <FaSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-[#4B2DBD]" size={14} />
+                {filters.search && (
+                  <button 
+                    onClick={() => {
+                      handleChange('search', '');
+                      onSearch({ ...filters, search: '' });
+                    }}
+                    className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400"
+                  >
+                    <FaTimes size={14} />
+                  </button>
+                )}
+              </div>
+              <button 
+                onClick={() => {
+                  setIsSearchVisible(false);
+                  if (filters.search) {
+                    handleChange('search', '');
+                    onSearch({ ...filters, search: '' });
+                  }
+                }}
+                className="bg-gray-100 text-gray-400 w-12 rounded-xl flex items-center justify-center"
+              >
+                <FaTimes size={16} />
+              </button>
+            </div>
+          ) : (
+            <div className="flex gap-1.5">
+              {activeFiltersCount > 0 && (
+                <button 
+                  onClick={handleClear}
+                  className="bg-red-500 text-white w-12 rounded-xl flex items-center justify-center animate-in zoom-in duration-300"
+                  title="Clear Filters"
+                >
+                  <RotateCcw size={16} />
+                </button>
+              )}
+              <button 
+                onClick={() => setIsSearchVisible(true)}
+                className="bg-[#4B2DBD] text-white w-12 rounded-xl flex items-center justify-center animate-in zoom-in duration-300"
+                title="Search"
+              >
+                <FaSearch size={16} />
+              </button>
+            </div>
+          )}
+        </div>
       </div>
 
       {/* Mobile Filter Modal (Full Screen Overlay) */}
@@ -276,6 +351,26 @@ const SearchFilter = ({ onSearch }) => {
                     <option value="">Select Category</option>
                     {categories.map(cat => (
                       <option key={cat._id} value={cat.name}>{cat.name}</option>
+                    ))}
+                  </select>
+                  <div className="absolute right-5 top-1/2 -translate-y-1/2 pointer-events-none text-gray-400">
+                    <FaChevronDown size={18} />
+                  </div>
+                </div>
+              </div>
+
+              {/* Location Filter */}
+              <div className="space-y-4">
+                <h3 className="text-[12px] font-black text-gray-400 uppercase tracking-widest ml-1">City / Location</h3>
+                <div className="relative">
+                  <select 
+                    value={filters.location}
+                    onChange={(e) => handleChange('location', e.target.value)}
+                    className="w-full bg-[#F9FAFB] border border-[#E5E7EB] rounded-xl py-3 px-4 text-sm font-bold focus:bg-white focus:border-[#4B2DBD] outline-none appearance-none transition-all text-gray-800"
+                  >
+                    <option value="">Select City</option>
+                    {locations.map(loc => (
+                      <option key={loc} value={loc}>{loc}</option>
                     ))}
                   </select>
                   <div className="absolute right-5 top-1/2 -translate-y-1/2 pointer-events-none text-gray-400">

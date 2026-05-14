@@ -170,6 +170,13 @@ export default function SellCar() {
 
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
+      // Focus the first error field
+      const firstErrorField = Object.keys(newErrors)[0];
+      const element = document.getElementsByName(firstErrorField)[0] || document.getElementById(firstErrorField);
+      if (element) {
+        element.focus();
+        element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
       return;
     }
     
