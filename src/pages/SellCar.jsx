@@ -162,11 +162,11 @@ export default function SellCar() {
       if (!formData.mileage.trim()) newErrors.mileage = "Mileage is required";
     }
     
-    // if (step === 3) {
-    //   if (files.length === 0 && previews.length === 0) {
-    //     newErrors.files = "Please upload at least one photo of your car";
-    //   }
-    // }
+    if (step === 3) {
+      if (files.length === 0 && previews.length === 0) {
+        newErrors.files = "Please upload at least one photo of your car";
+      }
+    }
 
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
@@ -174,8 +174,12 @@ export default function SellCar() {
       const firstErrorField = Object.keys(newErrors)[0];
       const element = document.getElementsByName(firstErrorField)[0] || document.getElementById(firstErrorField);
       if (element) {
-        element.focus();
-        element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        if (element.type === 'file') {
+          element.parentElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        } else {
+          element.focus();
+          element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
       }
       return;
     }
@@ -574,7 +578,7 @@ export default function SellCar() {
               </div>
               <div className="space-y-8">
                 <label className="w-full h-48 bg-gray-50/50 border-2 border-dashed border-gray-200 rounded-[2rem] hover:bg-purple-50/30 hover:border-[#4B2DBD]/20 transition-all flex flex-col items-center justify-center gap-3 cursor-pointer group relative overflow-hidden">
-                  <input type="file" multiple accept="image/*" onChange={handleFileChange} className="absolute inset-0 opacity-0 cursor-pointer" />
+                  <input name="files" type="file" multiple accept="image/*" onChange={handleFileChange} className="absolute inset-0 opacity-0 cursor-pointer" />
                   <div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform">
                     <ImageIcon className="text-[#4B2DBD]" size={24} />
                   </div>

@@ -61,8 +61,12 @@ export default function Register() {
       const firstErrorField = Object.keys(newErrors)[0];
       const element = document.getElementsByName(firstErrorField)[0];
       if (element) {
-        element.focus();
-        element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        if (element.type === 'file') {
+          element.parentElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        } else {
+          element.focus();
+          element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
       }
       return;
     }
@@ -153,10 +157,11 @@ export default function Register() {
               </div>
               <label className="absolute bottom-0 right-0 bg-[#4B2DBD] text-white p-2 rounded-full cursor-pointer hover:scale-110 transition-transform border-2 border-white">
                 <Camera size={16} strokeWidth={3} />
-                <input type="file" className="hidden" accept="image/*" onChange={handleFileChange} />
+                <input name="file" type="file" className="hidden" accept="image/*" onChange={handleFileChange} />
               </label>
             </div>
             <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Update Profile Identity</p>
+            <div id="file-error-anchor"></div>
             {errors.file && <p className="text-red-500 text-[10px] font-bold mt-1 ml-1">* {errors.file}</p>}
           </div>
 
