@@ -2,7 +2,20 @@ import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useAutoPart } from '../context/AutoPartContext';
-import { FaPhoneAlt, FaWhatsapp, FaArrowLeft, FaCar, FaMapMarkerAlt, FaCalendarAlt, FaCog } from 'react-icons/fa';
+import { 
+  MapPin, 
+  Calendar, 
+  ShieldCheck, 
+  Phone, 
+  MessageSquare,
+  ChevronLeft,
+  ChevronRight,
+  X,
+  Settings2,
+  Car,
+  LayoutGrid,
+  Tag
+} from 'lucide-react';
 
 export default function PartDetail() {
   const { id } = useParams();
@@ -10,6 +23,7 @@ export default function PartDetail() {
   const [part, setPart] = useState(null);
   const [loading, setLoading] = useState(true);
   const [activeImage, setActiveImage] = useState(0);
+  const [isFullScreenOpen, setIsFullScreenOpen] = useState(false);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -26,15 +40,28 @@ export default function PartDetail() {
     fetchPart();
   }, [id]);
 
-  if (loading) {
-    return <div className="min-h-screen flex items-center justify-center">Loading...</div>;
-  }
+  useEffect(() => {
+    if (isFullScreenOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => { document.body.style.overflow = 'unset'; };
+  }, [isFullScreenOpen]);
+
+  if (loading) return (
+    <div className="flex flex-col items-center justify-center min-h-[60vh] gap-4">
+      <div className="w-12 h-12 border-4 border-[#4B2DBD] border-t-transparent rounded-full animate-spin"></div>
+      <p className="text-[10px] font-black text-gray-400 uppercase tracking-[0.3em]">Retrieving Part Data...</p>
+    </div>
+  );
 
   if (!part) {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center bg-gray-50">
-        <h2 className="text-2xl font-black text-gray-900 mb-4">Part Not Found</h2>
-        <Link to="/" className="text-[#4B2DBD] font-bold hover:underline">Go back home</Link>
+      <div className="flex flex-col items-center justify-center min-h-[60vh] gap-6 text-center px-6">
+         <div className="text-6xl font-black text-gray-100 uppercase">404</div>
+         <p className="font-black text-gray-400 uppercase tracking-widest text-sm">Part listing not found.</p>
+         <button onClick={() => window.history.back()} className="bg-[#4B2DBD] text-white px-8 py-3 rounded-2xl font-black text-xs uppercase">Go Back</button>
       </div>
     );
   }
@@ -66,170 +93,222 @@ export default function PartDetail() {
   };
 
   return (
-    <div className="bg-white min-h-screen pb-20">
-      {/* Top Banner */}
-      <div className="bg-[#4B2DBD] pt-6 pb-6 px-4 md:px-12 text-white shadow-sm relative overflow-hidden">
-        <div className="max-w-7xl mx-auto flex items-center gap-4 relative z-10">
-          <Link to="/" className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center hover:bg-white/30 transition-colors">
-            <FaArrowLeft />
-          </Link>
-          <h1 className="text-xl md:text-3xl font-black tracking-tight flex-1 truncate">{part.title}</h1>
-          <div className="hidden md:block text-right">
-             <p className="text-sm font-bold text-white/80 uppercase tracking-widest mb-1">Asking Price</p>
-             <p className="text-3xl font-black">PKR {part.price?.toLocaleString()}</p>
-          </div>
-        </div>
-      </div>
+    <div className="max-w-5xl mx-auto w-full px-4 md:px-6 py-4 md:py-6 pb-48 lg:pb-6 animate-in fade-in duration-700">
+      {/* Breadcrumb */}
+      <nav className="flex items-center gap-2 text-xs md:text-sm font-medium mb-5 text-gray-900">
+        <Link to="/" className="hover:underline underline-offset-4">Home</Link>
+        <span className="text-gray-400">/</span>
+        <span className="text-gray-500 truncate">{part.title}</span>
+      </nav>
 
-      <div className="max-w-7xl mx-auto px-4 md:px-12 mt-6 md:mt-10 grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
-        {/* Left Column - Images & Details */}
-        <div className="lg:col-span-2 space-y-6 md:space-y-10">
-          
-          {/* Main Image Gallery */}
-          <div className="bg-gray-50 rounded-[2rem] p-4 md:p-6 border border-gray-100">
-            <div className="aspect-[4/3] rounded-2xl overflow-hidden bg-white mb-4 shadow-sm border border-gray-100">
-              {images.length > 0 ? (
-                <img 
-                  src={getImageUrl(images[activeImage])} 
-                  alt={part.title}
-                  className="w-full h-full object-contain"
-                />
-              ) : (
-                <div className="w-full h-full flex items-center justify-center text-gray-400 font-bold uppercase tracking-widest bg-gray-100">
-                  No Image Available
-                </div>
-              )}
-            </div>
-            
-            {/* Thumbnails */}
-            {images.length > 1 && (
-              <div className="flex gap-3 overflow-x-auto pb-2 hide-scrollbar">
-                {images.map((img, idx) => (
-                  <button 
-                    key={idx}
-                    onClick={() => setActiveImage(idx)}
-                    className={`flex-shrink-0 w-20 h-20 rounded-xl overflow-hidden border-2 transition-all ${activeImage === idx ? 'border-[#4B2DBD] shadow-md' : 'border-transparent opacity-70 hover:opacity-100'}`}
-                  >
-                    <img src={getImageUrl(img)} alt="" className="w-full h-full object-cover" />
-                  </button>
-                ))}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-10">
+        {/* Left: Gallery */}
+        <div className="space-y-4">
+          <div className="relative group rounded-[1.2rem] overflow-hidden bg-gray-50 border-2 border-gray-100">
+            {images.length > 0 ? (
+              <img 
+                src={getImageUrl(images[activeImage])} 
+                alt={part.title} 
+                className="w-full aspect-[16/9] md:aspect-[21/9] object-cover transition-transform duration-700 group-hover:scale-105 cursor-zoom-in" 
+                onClick={() => setIsFullScreenOpen(true)}
+              />
+            ) : (
+              <div className="w-full aspect-[16/9] md:aspect-[21/9] flex items-center justify-center text-gray-400 font-black uppercase tracking-widest bg-gray-100">
+                No Image Available
               </div>
+            )}
+            
+            {images.length > 0 && (
+              <div className="absolute bottom-3 right-3 bg-white/90 backdrop-blur-sm text-gray-900 px-3 py-1 rounded-full text-xs font-black">
+                 {activeImage + 1} / {images.length}
+              </div>
+            )}
+            
+            {images.length > 1 && (
+              <>
+                <button 
+                  onClick={() => setActiveImage(prev => prev === 0 ? images.length - 1 : prev - 1)}
+                  className="absolute left-3 top-1/2 -translate-y-1/2 p-1.5 bg-white/80 hover:bg-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
+                >
+                  <ChevronLeft size={18} />
+                </button>
+                <button 
+                  onClick={() => setActiveImage(prev => prev === images.length - 1 ? 0 : prev + 1)}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 p-1.5 bg-white/80 hover:bg-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
+                >
+                  <ChevronRight size={18} />
+                </button>
+              </>
             )}
           </div>
 
-          <div className="md:hidden bg-[#4B2DBD]/10 rounded-2xl p-6 border border-[#4B2DBD]/20 text-center">
-             <p className="text-xs font-bold text-[#4B2DBD] uppercase tracking-widest mb-1">Asking Price</p>
-             <p className="text-3xl font-black text-[#4B2DBD]">PKR {part.price?.toLocaleString()}</p>
-          </div>
+          {/* Thumbnails */}
+          {images.length > 1 && (
+            <div className="grid grid-cols-5 gap-2">
+              {images.map((img, i) => (
+                <button 
+                  key={i} 
+                  onClick={() => setActiveImage(i)}
+                  className={`aspect-square rounded-lg overflow-hidden border-2 transition-all p-0.5 ${activeImage === i ? 'border-[#4B2DBD]' : 'border-gray-200 hover:border-gray-300'}`}
+                >
+                  <img src={getImageUrl(img)} className="w-full h-full object-cover rounded-md" alt="" />
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
 
-          {/* Specifications Grid */}
-          <div>
-            <h2 className="text-lg font-black text-gray-900 uppercase tracking-widest mb-6 flex items-center gap-3">
-               <FaCog className="text-[#4B2DBD]" /> Specifications
-            </h2>
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-              <div className="bg-gray-50 p-4 rounded-2xl border border-gray-100">
-                <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1">Condition</p>
-                <p className="text-sm font-black text-gray-900">{part.condition}</p>
-              </div>
-              <div className="bg-gray-50 p-4 rounded-2xl border border-gray-100">
-                <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1">Category</p>
-                <p className="text-sm font-black text-gray-900">{part.category}</p>
-              </div>
-              <div className="bg-gray-50 p-4 rounded-2xl border border-gray-100">
-                <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1">Location</p>
-                <p className="text-sm font-black text-gray-900 flex items-center gap-1">
-                   <FaMapMarkerAlt className="text-gray-400" /> {part.location}
-                </p>
-              </div>
-              {part.manufacturer && (
-                <div className="bg-gray-50 p-4 rounded-2xl border border-gray-100">
-                  <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1">Brand</p>
-                  <p className="text-sm font-black text-gray-900">{part.manufacturer}</p>
-                </div>
-              )}
+        {/* Right: Info */}
+        <div className="space-y-5">
+          <div className="flex flex-wrap items-center gap-2">
+            <div className="bg-white border border-gray-100 px-3 py-1.5 rounded-md text-gray-500 font-bold text-[10px] md:text-xs uppercase tracking-wider flex items-center gap-1.5">
+              <MapPin size={14} className="text-gray-400" />
+              {part.location}
+            </div>
+            <div className="bg-white border border-gray-100 px-3 py-1.5 rounded-md text-[#4B2DBD] font-bold text-[10px] md:text-xs uppercase tracking-wider flex items-center gap-1.5">
+              {part.condition}
             </div>
           </div>
 
-          {/* Compatibility */}
-          {(part.compatibleMake || part.compatibleModel || part.compatibleYearRange) && (
-            <div>
-              <h2 className="text-lg font-black text-gray-900 uppercase tracking-widest mb-6 flex items-center gap-3">
-                 <FaCar className="text-[#4B2DBD]" /> Compatibility
-              </h2>
-              <div className="bg-[#4B2DBD]/5 p-6 rounded-2xl border border-[#4B2DBD]/10 flex flex-wrap gap-x-8 gap-y-4">
-                {part.compatibleMake && (
-                  <div>
-                    <p className="text-[10px] font-black text-[#4B2DBD]/70 uppercase tracking-widest mb-1">Make</p>
-                    <p className="text-sm font-black text-gray-900">{part.compatibleMake}</p>
-                  </div>
-                )}
-                {part.compatibleModel && (
-                  <div>
-                    <p className="text-[10px] font-black text-[#4B2DBD]/70 uppercase tracking-widest mb-1">Model</p>
-                    <p className="text-sm font-black text-gray-900">{part.compatibleModel}</p>
-                  </div>
-                )}
-                {part.compatibleYearRange && (
-                  <div>
-                    <p className="text-[10px] font-black text-[#4B2DBD]/70 uppercase tracking-widest mb-1">Years</p>
-                    <p className="text-sm font-black text-gray-900 flex items-center gap-1">
-                      <FaCalendarAlt className="text-[#4B2DBD]" size={12} /> {part.compatibleYearRange}
-                    </p>
-                  </div>
-                )}
+          <div className="space-y-1">
+            <h1 className="text-lg md:text-xl font-black text-gray-900 tracking-tight uppercase">
+              {part.category} <span className="text-gray-300 mx-2">|</span> {part.manufacturer || 'Spare Part'}
+            </h1>
+            <div className="flex flex-col gap-0">
+              <p className="text-sm md:text-lg font-bold text-gray-500 uppercase tracking-widest">
+                {part.title}
+              </p>
+              <div className="text-2xl md:text-3xl font-black text-[#4B2DBD] tracking-tight">
+                PKR {part.price?.toLocaleString()}
               </div>
+            </div>
+          </div>
+
+          {/* Specs Grid */}
+          <div className="grid grid-cols-3 gap-2">
+            {[
+              { label: 'Condition', value: part.condition, icon: ShieldCheck },
+              { label: 'Category', value: part.category, icon: LayoutGrid },
+              { label: 'Brand', value: part.manufacturer || 'N/A', icon: Tag },
+              { label: 'Compatible Make', value: part.compatibleMake || 'Any Make', icon: Car },
+              { label: 'Compatible Model', value: part.compatibleModel || 'Any Model', icon: Settings2 },
+              { label: 'Compatible Years', value: part.compatibleYearRange || 'Any Year', icon: Calendar }
+            ].map((spec, idx) => (
+              <div key={idx} className="bg-gray-100 p-3 rounded-xl border-2 border-gray-100/50 flex flex-col items-center text-center space-y-1.5">
+                <spec.icon size={18} className="text-[#4B2DBD]" strokeWidth={2.5} />
+                <div className="space-y-0">
+                  <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">{spec.label}</p>
+                  <p className="font-black text-gray-900 text-xs md:text-sm truncate max-w-[120px]">{spec.value}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Description Section */}
+          {part.description && (
+            <div className="bg-gray-50/50 p-4 rounded-xl border border-gray-100">
+              <h4 className="text-[11px] font-black text-gray-400 uppercase tracking-widest mb-2">Description</h4>
+              <p className="text-sm font-medium text-gray-600 leading-relaxed whitespace-pre-line">
+                {part.description}
+              </p>
             </div>
           )}
 
-          {/* Description */}
-          <div>
-            <h2 className="text-lg font-black text-gray-900 uppercase tracking-widest mb-6">Description</h2>
-            <div className="bg-gray-50 p-6 md:p-8 rounded-[2rem] border border-gray-100">
-              <p className="text-sm font-medium text-gray-700 leading-relaxed whitespace-pre-wrap">{part.description}</p>
-            </div>
-          </div>
-        </div>
-
-        {/* Right Column - Seller Info */}
-        <div className="lg:sticky lg:top-32 space-y-6">
-          <div className="bg-white rounded-[2rem] border-2 border-[#4B2DBD]/20 p-6 md:p-8">
-            <div className="flex items-center gap-4 mb-6 pb-6 border-b border-gray-100">
-              <div className="w-14 h-14 bg-[#4B2DBD]/10 rounded-full flex items-center justify-center text-[#4B2DBD] font-black text-xl">
-                {part.seller?.name?.charAt(0).toUpperCase()}
+          {/* Seller Section */}
+          <div className="lg:relative lg:mt-8 fixed bottom-0 left-0 w-full lg:w-auto bg-white p-4 lg:rounded-[1.2rem] rounded-t-[1.5rem] z-40">
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+              {/* Seller Profile */}
+              <div className="flex items-center gap-3 w-full sm:w-auto">
+                <div className="relative shrink-0">
+                  <div className="w-16 h-16 rounded-full border-2 border-[#4B2DBD]/10 overflow-hidden ring-2 ring-white">
+                    {part.seller?.imageUrl ? (
+                      <img src={part.seller.imageUrl.startsWith('http') ? part.seller.imageUrl : `http://localhost:3000/uploads/${part.seller.imageUrl}`} className="w-full h-full object-cover" alt="" />
+                    ) : (
+                      <div className="w-full h-full bg-purple-50 flex items-center justify-center text-[#4B2DBD] font-black text-sm uppercase">
+                        {part.seller?.name?.charAt(0) || 'U'}
+                      </div>
+                    )}
+                  </div>
+                </div>
+                <div className="space-y-2">
+                  <div className="flex items-center gap-1">
+                    <ShieldCheck size={12} className="text-[#25D366]" fill="currentColor" fillOpacity={0.15} />
+                    <span className="text-[10px] font-black text-[#25D366] uppercase tracking-widest">Verified Seller</span>
+                  </div>
+                  <h3 className="text-base md:text-lg font-black text-gray-900 leading-none">{part.seller?.name || 'Seller Name'}</h3>
+                  <p className="text-xs md:text-sm font-bold text-gray-400 tabular-nums">{part.seller?.phoneNumber || '03454740876'}</p>
+                </div>
               </div>
-              <div>
-                <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1">Seller</p>
-                <h3 className="text-lg font-black text-gray-900">{part.seller?.name}</h3>
+
+              {/* Action Buttons */}
+              <div className="flex items-center gap-2 w-full sm:w-auto">
+                {(part.contactPreference === 'WhatsApp' || part.contactPreference === 'Both') && (
+                  <button 
+                    onClick={handleWhatsApp}
+                    className="flex-1 sm:flex-none bg-[#25D366] hover:bg-[#20bd5c] text-white px-5 py-3 rounded-full font-black text-xs flex items-center justify-center gap-1.5 transition-all active:scale-95"
+                  >
+                    <MessageSquare size={16} fill="currentColor" />
+                    WhatsApp
+                  </button>
+                )}
+                {(part.contactPreference === 'Phone' || part.contactPreference === 'Both') && (
+                  <button 
+                    onClick={handleCall}
+                    className="flex-1 sm:flex-none bg-white hover:bg-gray-50 text-gray-900 px-5 py-3 rounded-full font-black text-xs flex items-center justify-center gap-1.5 border border-gray-200 transition-all active:scale-95"
+                  >
+                    <Phone size={16} fill="currentColor" className="text-gray-400" />
+                    Call Now
+                  </button>
+                )}
               </div>
             </div>
-
-            <div className="space-y-3">
-              {(part.contactPreference === 'Phone' || part.contactPreference === 'Both') && (
-                <button 
-                  onClick={handleCall}
-                  className="w-full bg-[#4B2DBD] text-white py-4 rounded-xl font-black text-sm uppercase tracking-widest flex items-center justify-center gap-2 hover:bg-[#3b2396] transition-all"
-                >
-                  <FaPhoneAlt /> Call Seller
-                </button>
-              )}
-              
-              {(part.contactPreference === 'WhatsApp' || part.contactPreference === 'Both') && (
-                <button 
-                  onClick={handleWhatsApp}
-                  className="w-full bg-[#25D366] text-white py-4 rounded-xl font-black text-sm uppercase tracking-widest flex items-center justify-center gap-2 hover:bg-[#20b958] transition-all"
-                >
-                  <FaWhatsapp size={18} /> WhatsApp
-                </button>
-              )}
-            </div>
-          </div>
-
-          <div className="bg-gray-50 rounded-2xl p-6 text-center border border-gray-100">
-            <p className="text-xs font-bold text-gray-500">Safety Tip: Never pay in advance and always meet in a safe public place.</p>
           </div>
         </div>
       </div>
+
+      {/* Full Screen Image Modal */}
+      {isFullScreenOpen && (
+        <div 
+          className="fixed inset-0 z-[100] bg-black/95 backdrop-blur-md flex items-center justify-center animate-in fade-in duration-300"
+          onClick={() => setIsFullScreenOpen(false)}
+        >
+          <button 
+            className="absolute top-6 right-6 text-white/50 hover:text-white transition-colors p-2 z-[110]"
+            onClick={() => setIsFullScreenOpen(false)}
+          >
+            <X size={32} />
+          </button>
+          
+          <div className="relative w-full max-w-5xl px-4 flex items-center justify-center" onClick={(e) => e.stopPropagation()}>
+             <img 
+               src={getImageUrl(images[activeImage])} 
+               className="max-w-full max-h-[90vh] object-contain rounded-lg animate-in zoom-in duration-500"
+               alt=""
+             />
+             
+             {images.length > 1 && (
+               <>
+                 <button 
+                   onClick={() => setActiveImage(prev => prev === 0 ? images.length - 1 : prev - 1)}
+                   className="absolute left-6 md:left-10 top-1/2 -translate-y-1/2 p-3 bg-white/10 hover:bg-white/20 rounded-full text-white backdrop-blur-md transition-all hover:scale-110 active:scale-95"
+                 >
+                   <ChevronLeft size={24} />
+                 </button>
+                 <button 
+                   onClick={() => setActiveImage(prev => prev === images.length - 1 ? 0 : prev + 1)}
+                   className="absolute right-6 md:right-10 top-1/2 -translate-y-1/2 p-3 bg-white/10 hover:bg-white/20 rounded-full text-white backdrop-blur-md transition-all hover:scale-110 active:scale-95"
+                 >
+                   <ChevronRight size={24} />
+                 </button>
+               </>
+             )}
+             
+             <div className="absolute bottom-[-40px] left-1/2 -translate-x-1/2 text-white/50 font-black text-[10px] uppercase tracking-[0.3em]">
+                {activeImage + 1} / {images.length}
+             </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
