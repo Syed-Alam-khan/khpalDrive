@@ -114,7 +114,7 @@ export default function Header() {
               onClick={handleSellClick}
               className="bg-[#94D227] text-white px-6 py-2 rounded-full font-bold text-[12px] uppercase tracking-wider hover:bg-[#85bd23] transition-all border border-[#94D227]"
             >
-              Sell
+              + Sell
             </button>
             
             {user && (
@@ -224,7 +224,7 @@ export default function Header() {
             onClick={handleSellClick}
             className="w-full bg-[#4B2DBD] text-white py-3 rounded-lg font-black text-base uppercase tracking-widest flex items-center justify-center active:scale-[0.98] transition-all"
           >
-            Sell
+            + Sell
           </button>
         </div>
       )}
