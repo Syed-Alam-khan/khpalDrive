@@ -150,7 +150,17 @@ export default function SellCar() {
   const nextStep = () => {
     const newErrors = {};
     if (step === 1) {
-      if (!formData.model.trim()) newErrors.model = "Car Model is required";
+      if (!formData.model.trim()) {
+        newErrors.model = "Car Model is required";
+      } else if (formData.model.length !== 4 || isNaN(formData.model)) {
+        newErrors.model = "Please enter a valid 4-digit model year (e.g. 2022)";
+      } else {
+        const year = parseInt(formData.model);
+        const currentYear = new Date().getFullYear();
+        if (year < 1900 || year > currentYear + 2) {
+          newErrors.model = `Please enter a valid model year between 1900 and ${currentYear + 2}`;
+        }
+      }
       if (!formData.category) newErrors.category = "Please select a category";
       if (formData.category === 'other' && !newCategoryName.trim()) {
         newErrors.newCategory = "Please enter category name";
@@ -333,10 +343,24 @@ export default function SellCar() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-2">
                   <label className="text-[9px] font-black text-gray-400 uppercase tracking-widest ml-1 flex items-center gap-0.5">
-                    Car Model <span className="text-red-500">*</span>
+                    Car Model (Year) <span className="text-red-500">*</span>
                   </label>
                   <div className="relative">
-                    <input name="model" value={formData.model} onChange={handleChange} placeholder="e.g. 2002" className="w-full bg-white border border-gray-200 rounded-xl py-4 pl-12 pr-6 focus:bg-white focus:ring-2 focus:ring-[#4B2DBD]/5 focus:border-[#4B2DBD] outline-none font-bold text-base transition-all" />
+                    <input 
+                      name="model" 
+                      type="text"
+                      inputMode="numeric"
+                      pattern="[0-9]*"
+                      value={formData.model} 
+                      onChange={(e) => {
+                        const val = e.target.value.replace(/\D/g, ''); // Allow only numbers
+                        if (val.length <= 4) {
+                          setManualValue('model', val);
+                        }
+                      }} 
+                      placeholder="e.g. 2022" 
+                      className="w-full bg-white border border-gray-200 rounded-xl py-4 pl-12 pr-6 focus:bg-white focus:ring-2 focus:ring-[#4B2DBD]/5 focus:border-[#4B2DBD] outline-none font-bold text-base transition-all" 
+                    />
                     <FileText className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-300" size={14} />
                   </div>
                   {errors.model && <p className="text-red-500 text-[10px] font-bold mt-1 ml-1">* {errors.model}</p>}
