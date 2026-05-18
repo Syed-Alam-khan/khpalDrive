@@ -1,10 +1,40 @@
 import React, { useState, useEffect } from 'react';
 import { useCategory } from '../context/CategoryContext';
+import { usePartCategory } from '../context/PartCategoryContext';
 import { FaSearch, FaChevronDown, FaTimes, FaFilter, FaRedo } from 'react-icons/fa';
 import { X, RotateCcw } from 'lucide-react';
 
-const SearchFilter = ({ onSearch, locations = [] }) => {
+const SearchFilter = ({ onSearch, locations = [], activeTab = 'cars' }) => {
   const { categories } = useCategory();
+  const { categories: partCategories, getAllCategories } = usePartCategory();
+
+  useEffect(() => {
+    if (activeTab === 'parts') {
+      getAllCategories();
+    }
+  }, [activeTab]);
+
+  const displayCategories = activeTab === 'cars'
+    ? categories
+    : (partCategories || []);
+
+  const categoryLabel = activeTab === 'cars' ? 'Marka' : 'Category';
+  const categoryPlaceholder = activeTab === 'cars' ? 'All Brands' : 'All Categories';
+  const mobileCategoryLabel = activeTab === 'cars' ? 'Car Category' : 'Part Category';
+  const mobileCategoryPlaceholder = activeTab === 'cars' ? 'Select Category' : 'Select Part Category';
+
+  const themeBg = 'bg-[#4B2DBD]';
+  const themeHoverBg = 'hover:bg-[#3B2396]';
+  const themeText = 'text-[#4B2DBD]';
+  const themeBorder = 'border-[#4B2DBD]';
+  const themeFocusBorder = 'focus:border-[#4B2DBD]';
+
+  const conditionOptions = activeTab === 'cars'
+    ? [{ value: 'Used', label: 'Used' }, { value: 'New', label: 'New' }]
+    : [
+        { value: 'Used / Aftermarket', label: 'Used / Aftermarket' },
+        { value: 'Brand New / Genuine', label: 'Brand New / Genuine' }
+      ];
   const [isMobileModalOpen, setIsMobileModalOpen] = useState(false);
   const [filters, setFilters] = useState({
     marka: '',
@@ -64,17 +94,17 @@ const SearchFilter = ({ onSearch, locations = [] }) => {
       {/* Desktop Filter (Hidden on Mobile) */}
       <div className="hidden md:flex flex-row items-stretch gap-4 mb-4">
         <div className="flex-1 bg-[#F9FAFB] rounded-xl border-2 border-[#E5E7EB] flex flex-row items-center overflow-hidden">
-          {/* Marka Filter */}
+          {/* Category/Marka Filter */}
           <div className="flex-1 w-full p-3 border-r-2 border-[#E5E7EB] last:border-r-0 relative group">
-            <label className="block text-[10px] text-gray-400 font-black uppercase tracking-widest mb-1 ml-1">Marka</label>
+            <label className="block text-[10px] text-gray-400 font-black uppercase tracking-widest mb-1 ml-1">{categoryLabel}</label>
             <div className="relative">
               <select 
                 className="w-full bg-transparent font-black text-sm outline-none cursor-pointer appearance-none pr-8 text-gray-800"
                 value={filters.marka}
                 onChange={(e) => handleChange('marka', e.target.value)}
               >
-                <option value="">All Brands</option>
-                {categories.map(cat => (
+                <option value="">{categoryPlaceholder}</option>
+                {displayCategories.map(cat => (
                   <option key={cat._id} value={cat.name}>{cat.name}</option>
                 ))}
               </select>
@@ -84,46 +114,50 @@ const SearchFilter = ({ onSearch, locations = [] }) => {
             </div>
           </div>
 
-          {/* Fuel Type Filter */}
-          <div className="flex-1 w-full p-3 border-r-2 border-[#E5E7EB] last:border-r-0 relative group">
-            <label className="block text-[10px] text-gray-400 font-black uppercase tracking-widest mb-1 ml-1">Fuel Type</label>
-            <div className="relative">
-              <select 
-                className="w-full bg-transparent font-black text-sm outline-none cursor-pointer appearance-none pr-8 text-gray-800"
-                value={filters.fuelType}
-                onChange={(e) => handleChange('fuelType', e.target.value)}
-              >
-                <option value="">All Fuel</option>
-                <option value="Petrol">Petrol</option>
-                <option value="Diesel">Diesel</option>
-                <option value="CNG">CNG</option>
-                <option value="Hybrid">Hybrid</option>
-                <option value="Electric">Electric</option>
-              </select>
-              <div className="absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none text-gray-400">
-                <FaChevronDown size={18} />
+          {activeTab === 'cars' && (
+            <>
+              {/* Fuel Type Filter */}
+              <div className="flex-1 w-full p-3 border-r-2 border-[#E5E7EB] last:border-r-0 relative group">
+                <label className="block text-[10px] text-gray-400 font-black uppercase tracking-widest mb-1 ml-1">Fuel Type</label>
+                <div className="relative">
+                  <select 
+                    className="w-full bg-transparent font-black text-sm outline-none cursor-pointer appearance-none pr-8 text-gray-800"
+                    value={filters.fuelType}
+                    onChange={(e) => handleChange('fuelType', e.target.value)}
+                  >
+                    <option value="">All Fuel</option>
+                    <option value="Petrol">Petrol</option>
+                    <option value="Diesel">Diesel</option>
+                    <option value="CNG">CNG</option>
+                    <option value="Hybrid">Hybrid</option>
+                    <option value="Electric">Electric</option>
+                  </select>
+                  <div className="absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none text-gray-400">
+                    <FaChevronDown size={18} />
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
 
-          {/* Transmission Filter */}
-          <div className="flex-1 w-full p-3 border-r-2 border-[#E5E7EB] last:border-r-0 relative group">
-            <label className="block text-[10px] text-gray-400 font-black uppercase tracking-widest mb-1 ml-1">Trans.</label>
-            <div className="relative">
-              <select 
-                className="w-full bg-transparent font-black text-sm outline-none cursor-pointer appearance-none pr-8 text-gray-800"
-                value={filters.transmission}
-                onChange={(e) => handleChange('transmission', e.target.value)}
-              >
-                <option value="">All Gear</option>
-                <option value="Automatic">Automatic</option>
-                <option value="Manual">Manual</option>
-              </select>
-              <div className="absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none text-gray-400">
-                <FaChevronDown size={18} />
+              {/* Transmission Filter */}
+              <div className="flex-1 w-full p-3 border-r-2 border-[#E5E7EB] last:border-r-0 relative group">
+                <label className="block text-[10px] text-gray-400 font-black uppercase tracking-widest mb-1 ml-1">Trans.</label>
+                <div className="relative">
+                  <select 
+                    className="w-full bg-transparent font-black text-sm outline-none cursor-pointer appearance-none pr-8 text-gray-800"
+                    value={filters.transmission}
+                    onChange={(e) => handleChange('transmission', e.target.value)}
+                  >
+                    <option value="">All Gear</option>
+                    <option value="Automatic">Automatic</option>
+                    <option value="Manual">Manual</option>
+                  </select>
+                  <div className="absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none text-gray-400">
+                    <FaChevronDown size={18} />
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
+            </>
+          )}
 
           {/* Condition Filter */}
           <div className="flex-1 w-full p-3 border-r-2 border-[#E5E7EB] last:border-r-0 relative group">
@@ -135,8 +169,9 @@ const SearchFilter = ({ onSearch, locations = [] }) => {
                 onChange={(e) => handleChange('condition', e.target.value)}
               >
                 <option value="">All Cond.</option>
-                <option value="Used">Used</option>
-                <option value="New">New</option>
+                {conditionOptions.map(opt => (
+                  <option key={opt.value} value={opt.value}>{opt.label}</option>
+                ))}
               </select>
               <div className="absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none text-gray-400">
                 <FaChevronDown size={18} />
@@ -169,7 +204,7 @@ const SearchFilter = ({ onSearch, locations = [] }) => {
             <label className="block text-[10px] text-gray-400 font-black uppercase tracking-widest mb-1 ml-1">Max Price</label>
             <div className="relative">
               <select 
-                className="w-full bg-transparent font-black text-sm outline-none cursor-pointer appearance-none pr-8 text-[#4B2DBD]"
+                className={`w-full bg-transparent font-black text-sm outline-none cursor-pointer appearance-none pr-8 ${themeText}`}
                 value={filters.priceRange}
                 onChange={(e) => handleChange('priceRange', e.target.value)}
               >
@@ -190,7 +225,7 @@ const SearchFilter = ({ onSearch, locations = [] }) => {
         <div className="flex gap-2">
           <button 
             onClick={() => onSearch(filters)}
-            className="bg-[#4B2DBD] text-white px-8 py-2 rounded-xl flex items-center justify-center gap-3 hover:bg-[#3B2396] transition-all font-black min-w-[140px]"
+            className={`${themeBg} text-white px-8 py-2 rounded-xl flex items-center justify-center gap-3 ${themeHoverBg} transition-all font-black min-w-[140px]`}
           >
             <FaSearch size={14} />
             <span className="text-sm uppercase tracking-widest">Search</span>
@@ -215,10 +250,10 @@ const SearchFilter = ({ onSearch, locations = [] }) => {
               className="flex-1 bg-[#F9FAFB] border-2 border-[#E5E7EB] rounded-xl py-3.5 px-5 flex items-center justify-between font-black text-gray-800"
             >
               <div className="flex items-center gap-2">
-                <FaFilter className="text-[#4B2DBD]" size={16} />
+                <FaFilter className={themeText} size={16} />
                 <span className="text-sm uppercase tracking-widest">Filters</span>
                 {activeFiltersCount > 0 && (
-                  <span className="bg-[#4B2DBD] text-white text-[9px] w-4 h-4 rounded-full flex items-center justify-center">
+                  <span className={`${themeBg} text-white text-[9px] w-4 h-4 rounded-full flex items-center justify-center`}>
                     {activeFiltersCount}
                   </span>
                 )}
@@ -233,16 +268,16 @@ const SearchFilter = ({ onSearch, locations = [] }) => {
                 <input
                   autoFocus
                   type="text"
-                  placeholder="Search cars..."
+                  placeholder={activeTab === 'cars' ? "Search cars..." : "Search auto parts..."}
                   value={filters.search}
                   onChange={(e) => {
                     const val = e.target.value;
                     handleChange('search', val);
                     onSearch({ ...filters, search: val });
                   }}
-                  className="w-full bg-[#F9FAFB] border-2 border-[#4B2DBD] rounded-xl py-3.5 px-10 text-sm font-bold outline-none"
+                  className={`w-full bg-[#F9FAFB] border-2 ${themeBorder} rounded-xl py-3.5 px-10 text-sm font-bold outline-none`}
                 />
-                <FaSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-[#4B2DBD]" size={14} />
+                <FaSearch className={`absolute left-4 top-1/2 -translate-y-1/2 ${themeText}`} size={14} />
                 {filters.search && (
                   <button 
                     onClick={() => {
@@ -281,7 +316,7 @@ const SearchFilter = ({ onSearch, locations = [] }) => {
               )}
               <button 
                 onClick={() => setIsSearchVisible(true)}
-                className="bg-[#4B2DBD] text-white w-12 rounded-xl flex items-center justify-center animate-in zoom-in duration-300"
+                className={`${themeBg} text-white w-12 rounded-xl flex items-center justify-center animate-in zoom-in duration-300`}
                 title="Search"
               >
                 <FaSearch size={16} />
@@ -324,7 +359,7 @@ const SearchFilter = ({ onSearch, locations = [] }) => {
                       placeholder="Min Price (PKR)"
                       value={filters.minPrice}
                       onChange={(e) => handleChange('minPrice', e.target.value)}
-                      className="w-full bg-[#F9FAFB] border border-[#E5E7EB] rounded-xl py-3 px-4 text-sm font-bold focus:bg-white focus:border-[#4B2DBD] outline-none transition-all"
+                      className={`w-full bg-[#F9FAFB] border border-[#E5E7EB] rounded-xl py-3 px-4 text-sm font-bold focus:bg-white ${themeFocusBorder} outline-none transition-all`}
                     />
                   </div>
                   <div className="relative">
@@ -333,7 +368,7 @@ const SearchFilter = ({ onSearch, locations = [] }) => {
                       placeholder="Max Price (PKR)"
                       value={filters.maxPrice}
                       onChange={(e) => handleChange('maxPrice', e.target.value)}
-                      className="w-full bg-[#F9FAFB] border border-[#E5E7EB] rounded-xl py-3 px-4 text-sm font-bold focus:bg-white focus:border-[#4B2DBD] outline-none transition-all"
+                      className={`w-full bg-[#F9FAFB] border border-[#E5E7EB] rounded-xl py-3 px-4 text-sm font-bold focus:bg-white ${themeFocusBorder} outline-none transition-all`}
                     />
                   </div>
                 </div>
@@ -341,15 +376,15 @@ const SearchFilter = ({ onSearch, locations = [] }) => {
 
               {/* Category Dropdown (Real API Data) */}
               <div className="space-y-4">
-                <h3 className="text-[12px] font-black text-gray-400 uppercase tracking-widest ml-1">Car Category</h3>
+                <h3 className="text-[12px] font-black text-gray-400 uppercase tracking-widest ml-1">{mobileCategoryLabel}</h3>
                 <div className="relative">
                   <select 
                     value={filters.marka}
                     onChange={(e) => handleChange('marka', e.target.value)}
-                    className="w-full bg-[#F9FAFB] border border-[#E5E7EB] rounded-xl py-3 px-4 text-sm font-bold focus:bg-white focus:border-[#4B2DBD] outline-none appearance-none transition-all text-gray-800"
+                    className={`w-full bg-[#F9FAFB] border border-[#E5E7EB] rounded-xl py-3 px-4 text-sm font-bold focus:bg-white ${themeFocusBorder} outline-none appearance-none transition-all text-gray-800`}
                   >
-                    <option value="">Select Category</option>
-                    {categories.map(cat => (
+                    <option value="">{mobileCategoryPlaceholder}</option>
+                    {displayCategories.map(cat => (
                       <option key={cat._id} value={cat.name}>{cat.name}</option>
                     ))}
                   </select>
@@ -366,7 +401,7 @@ const SearchFilter = ({ onSearch, locations = [] }) => {
                   <select 
                     value={filters.location}
                     onChange={(e) => handleChange('location', e.target.value)}
-                    className="w-full bg-[#F9FAFB] border border-[#E5E7EB] rounded-xl py-3 px-4 text-sm font-bold focus:bg-white focus:border-[#4B2DBD] outline-none appearance-none transition-all text-gray-800"
+                    className={`w-full bg-[#F9FAFB] border border-[#E5E7EB] rounded-xl py-3 px-4 text-sm font-bold focus:bg-white ${themeFocusBorder} outline-none appearance-none transition-all text-gray-800`}
                   >
                     <option value="">Select City</option>
                     {locations.map(loc => (
@@ -379,41 +414,65 @@ const SearchFilter = ({ onSearch, locations = [] }) => {
                 </div>
               </div>
 
-              {/* Car Type / Status */}
-              <div className="space-y-4">
-                <h3 className="text-[12px] font-black text-gray-400 uppercase tracking-widest ml-1">Car Type</h3>
-                <div className="flex flex-wrap gap-2">
-                  {['Non Cut', 'Cut', 'Import', 'Local'].map(t => (
-                    <button 
-                      key={t}
-                      onClick={() => handleChange('type', t)}
-                      className={`px-4 py-3 rounded-xl text-[12px] font-black border transition-all ${
-                        filters.type === t ? 'bg-[#4B2DBD] text-white border-[#4B2DBD]' : 'bg-[#F9FAFB] text-gray-500 border-[#E5E7EB]'
-                      }`}
-                    >
-                      {t} {filters.type === t && '✓'}
-                    </button>
-                  ))}
-                </div>
-              </div>
+              {activeTab === 'cars' ? (
+                <>
+                  {/* Car Type / Status */}
+                  <div className="space-y-4">
+                    <h3 className="text-[12px] font-black text-gray-400 uppercase tracking-widest ml-1">Car Type</h3>
+                    <div className="flex flex-wrap gap-2">
+                      {['Non Cut', 'Cut', 'Import', 'Local'].map(t => (
+                        <button 
+                          key={t}
+                          onClick={() => handleChange('type', t)}
+                          className={`px-4 py-3 rounded-xl text-[12px] font-black border transition-all ${
+                            filters.type === t ? `${themeBg} text-white ${themeBorder}` : 'bg-[#F9FAFB] text-gray-500 border-[#E5E7EB]'
+                          }`}
+                        >
+                          {t} {filters.type === t && '✓'}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
 
-              {/* Fuel Type */}
-              <div className="space-y-4">
-                <h3 className="text-[12px] font-black text-gray-400 uppercase tracking-widest ml-1">Fuel Type</h3>
-                <div className="grid grid-cols-3 gap-2">
-                  {['Petrol', 'Diesel', 'CNG', 'Hybrid'].map(f => (
-                    <button 
-                      key={f}
-                      onClick={() => handleChange('fuelType', f)}
-                      className={`py-3 rounded-xl text-[12px] font-black border transition-all ${
-                        filters.fuelType === f ? 'bg-[#4B2DBD] text-white border-[#4B2DBD]' : 'bg-[#F9FAFB] text-gray-500 border-[#E5E7EB]'
-                      }`}
-                    >
-                      {f}
-                    </button>
-                  ))}
-                </div>
-              </div>
+                  {/* Fuel Type */}
+                  <div className="space-y-4">
+                    <h3 className="text-[12px] font-black text-gray-400 uppercase tracking-widest ml-1">Fuel Type</h3>
+                    <div className="grid grid-cols-3 gap-2">
+                      {['Petrol', 'Diesel', 'CNG', 'Hybrid'].map(f => (
+                        <button 
+                          key={f}
+                          onClick={() => handleChange('fuelType', f)}
+                          className={`py-3 rounded-xl text-[12px] font-black border transition-all ${
+                            filters.fuelType === f ? `${themeBg} text-white ${themeBorder}` : 'bg-[#F9FAFB] text-gray-500 border-[#E5E7EB]'
+                          }`}
+                        >
+                          {f}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                </>
+              ) : (
+                <>
+                  {/* Part Condition */}
+                  <div className="space-y-4">
+                    <h3 className="text-[12px] font-black text-gray-400 uppercase tracking-widest ml-1">Condition</h3>
+                    <div className="flex flex-wrap gap-2">
+                      {conditionOptions.map(opt => (
+                        <button 
+                          key={opt.value}
+                          onClick={() => handleChange('condition', opt.value)}
+                          className={`px-4 py-3 rounded-xl text-[12px] font-black border transition-all ${
+                            filters.condition === opt.value ? `${themeBg} text-white ${themeBorder}` : 'bg-[#F9FAFB] text-gray-500 border-[#E5E7EB]'
+                          }`}
+                        >
+                          {opt.label} {filters.condition === opt.value && '✓'}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                </>
+              )}
             </div>
 
             {/* Modal Footer Buttons */}
@@ -426,7 +485,7 @@ const SearchFilter = ({ onSearch, locations = [] }) => {
               </button>
               <button 
                 onClick={handleApplyMobile}
-                className="w-full bg-[#4B2DBD] text-white py-4 rounded-xl font-black text-sm uppercase tracking-widest active:scale-[0.98] transition-all"
+                className={`w-full ${themeBg} text-white py-4 rounded-xl font-black text-sm uppercase tracking-widest active:scale-[0.98] transition-all`}
               >
                 Apply ({activeFiltersCount})
               </button>

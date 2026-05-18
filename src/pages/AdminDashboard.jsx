@@ -4,6 +4,8 @@ import Swal from 'sweetalert2';
 import { useCar } from '../context/CarContext';
 import { useUser } from '../context/UserContext';
 import { useCategory } from '../context/CategoryContext';
+import { usePartCategory } from '../context/PartCategoryContext';
+import { useAutoPart } from '../context/AutoPartContext';
 
 export default function AdminDashboard() {
   const [activeTab, setActiveTab] = useState('Overview');
@@ -11,13 +13,18 @@ export default function AdminDashboard() {
   const { cars: allCars, deleteCar, loading: carsLoading, getAllCars } = useCar();
   const { getAllUsers, deleteUser, updateUser, loading: usersLoading } = useUser();
   const { categories, addCategory, updateCategory, deleteCategory, loading: catsLoading, getAllCategories } = useCategory();
+  const { categories: partCategories, addCategory: addPartCategory, updateCategory: updatePartCategory, deleteCategory: deletePartCategory, loading: partCatsLoading, getAllCategories: getAllPartCategories } = usePartCategory();
+  const { parts: allParts, deletePart, loading: partsLoading, getAllParts } = useAutoPart();
   const [cars, setCars] = useState([]);
   const [users, setUsers] = useState([]);
+  const [parts, setParts] = useState([]);
   
   // Pagination States
   const [userPage, setUserPage] = useState(1);
   const [carPage, setCarPage] = useState(1);
   const [catPage, setCatPage] = useState(1);
+  const [partPage, setPartPage] = useState(1);
+  const [partCatPage, setPartCatPage] = useState(1);
   const itemsPerPage = 5;
 
   // Category Form State
@@ -32,7 +39,13 @@ export default function AdminDashboard() {
   const [editingCategory, setEditingCategory] = useState(null);
   const [editCategoryName, setEditCategoryName] = useState('');
 
-  const loading = carsLoading || usersLoading || catsLoading;
+  // Part Category Form State
+  const [newPartCategoryName, setNewPartCategoryName] = useState('');
+  const [submittingPartCategory, setSubmittingPartCategory] = useState(false);
+  const [editingPartCategory, setEditingPartCategory] = useState(null);
+  const [editPartCategoryName, setEditPartCategoryName] = useState('');
+
+  const loading = carsLoading || usersLoading || catsLoading || partsLoading || partCatsLoading;
 
   const fetchData = async () => {
     try {
@@ -43,7 +56,11 @@ export default function AdminDashboard() {
       const userList = usersData.users || usersData.data || (Array.isArray(usersData) ? usersData : []);
       setUsers(userList);
       
+      const partsData = await getAllParts();
+      setParts(partsData.parts || partsData || []);
+
       await getAllCategories();
+      await getAllPartCategories();
     } catch (err) {
       console.error('Admin sync failure', err);
       toast.error('Sync Denied');
@@ -67,6 +84,22 @@ export default function AdminDashboard() {
       toast.error(err.response?.data?.message || 'Failed to add category');
     } finally {
       setSubmittingCategory(false);
+    }
+  };
+
+  const handleCreatePartCategory = async (e) => {
+    e.preventDefault();
+    if (!newPartCategoryName.trim()) return;
+    try {
+      setSubmittingPartCategory(true);
+      const response = await addPartCategory(newPartCategoryName);
+      toast.success(response.message || 'Part Category Added');
+      setNewPartCategoryName('');
+      fetchData();
+    } catch (err) {
+      toast.error(err.response?.data?.message || 'Failed to add part category');
+    } finally {
+      setSubmittingPartCategory(false);
     }
   };
 
@@ -122,6 +155,28 @@ export default function AdminDashboard() {
     });
   };
 
+  const handleDeletePartCategory = async (catId) => {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "This will remove the part category permanently!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          const response = await deletePartCategory(catId);
+          Swal.fire('Deleted!', response.message || 'Category has been removed.', 'success');
+          fetchData();
+        } catch (err) {
+          toast.error(err.response?.data?.message || 'Failed to delete category');
+        }
+      }
+    });
+  };
+
   const handleDeleteCar = async (carId) => {
     Swal.fire({
       title: 'Are you sure?',
@@ -143,6 +198,28 @@ export default function AdminDashboard() {
           fetchData();
         } catch (err) {
           toast.error(err.response?.data?.message || 'Failed to delete car');
+        }
+      }
+    });
+  };
+
+  const handleDeletePart = async (partId) => {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "This part will be removed from the marketplace!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          const response = await deletePart(partId);
+          Swal.fire('Removed!', response.message || 'Part has been removed.', 'success');
+          fetchData();
+        } catch (err) {
+          toast.error(err.response?.data?.message || 'Failed to delete part');
         }
       }
     });
@@ -172,6 +249,19 @@ export default function AdminDashboard() {
       const response = await updateCategory(editingCategory._id, editCategoryName);
       toast.success(response.message || 'Category updated');
       setEditingCategory(null);
+      fetchData();
+    } catch (err) {
+      toast.error(err.response?.data?.message || 'Failed to update category');
+    }
+  };
+
+  const handleUpdatePartCategory = async (e) => {
+    e.preventDefault();
+    if (!editPartCategoryName.trim()) return;
+    try {
+      const response = await updatePartCategory(editingPartCategory._id, editPartCategoryName);
+      toast.success(response.message || 'Part Category updated');
+      setEditingPartCategory(null);
       fetchData();
     } catch (err) {
       toast.error(err.response?.data?.message || 'Failed to update category');
@@ -235,7 +325,7 @@ export default function AdminDashboard() {
       <aside className={`w-64 bg-gray-900 text-white flex flex-col p-6 lg:sticky top-0 h-screen z-40 transition-all fixed lg:translate-x-0 ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'}`}>
         <div className="hidden lg:block text-2xl font-black tracking-tighter text-blue-500 mb-12 px-2">NCP ADMIN</div>
         <nav className="space-y-1 flex-1">
-          {['Overview', 'Manage Cars', 'Manage Users', 'Categories'].map(tab => (
+          {['Overview', 'Manage Cars', 'Manage Auto Parts', 'Manage Users', 'Categories', 'Part Categories'].map(tab => (
             <button 
               key={tab}
               onClick={() => { setActiveTab(tab); setIsSidebarOpen(false); }}
@@ -453,6 +543,94 @@ export default function AdminDashboard() {
                  </div>
               </div>
            </div>
+         )}
+
+        {activeTab === 'Manage Auto Parts' && (
+           <div className="bg-white rounded-2xl border border-gray-100 overflow-hidden">
+              <div className="px-6 py-4 border-b border-gray-50 bg-gray-50/50 flex justify-between items-center">
+                 <h2 className="text-xs font-black text-gray-900 uppercase tracking-widest">Auto Parts Inventory</h2>
+                 <div className="text-[9px] font-black text-amber-600 bg-amber-50 px-3 py-1 rounded-md">{parts.length} Items</div>
+              </div>
+              <div className="overflow-x-auto">
+                 <table className="w-full text-left text-xs min-w-[800px]">
+                    <thead className="bg-gray-50/20 text-[9px] font-black text-gray-400 uppercase tracking-widest border-b border-gray-50">
+                       <tr>
+                          <th className="px-6 py-4">Part Details</th>
+                          <th className="px-6 py-4">Price</th>
+                          <th className="px-6 py-4">Status</th>
+                          <th className="px-6 py-4 text-right">Action</th>
+                       </tr>
+                    </thead>
+                    <tbody className="divide-y divide-gray-50 font-bold">
+                       {paginate(parts, partPage).map(part => (
+                         <tr key={part._id} className="hover:bg-gray-50/50 transition-colors">
+                            <td className="px-6 py-3 flex items-center gap-3">
+                               <div className="w-10 h-10 rounded-lg bg-gray-100 overflow-hidden shrink-0">
+                                  <img src={part.images?.[0] ? (part.images[0].startsWith('http') ? part.images[0] : `http://localhost:3000/uploads/${part.images[0]}`) : 'https://via.placeholder.com/40'} className="w-full h-full object-cover" alt="" />
+                               </div>
+                               <div>
+                                  <div className="text-gray-900 font-black uppercase text-[11px]">{part.title}</div>
+                                  <div className="text-[9px] text-gray-400 uppercase font-bold">{part.category}</div>
+                               </div>
+                            </td>
+                            <td className="px-6 py-3 text-blue-600 font-black">PKR {part.price?.toLocaleString()}</td>
+                            <td className="px-6 py-3 uppercase text-[9px]">
+                               <span className={part.status === 'sold' ? 'text-red-500' : 'text-emerald-500'}>{part.status}</span>
+                            </td>
+                            <td className="px-6 py-3 text-right">
+                               <button onClick={() => handleDeletePart(part._id)} className="text-red-500 hover:underline text-[9px] font-black uppercase tracking-widest">Delete</button>
+                            </td>
+                         </tr>
+                       ))}
+                    </tbody>
+                 </table>
+                 <PaginationControls current={partPage} total={parts.length} onPageChange={setPartPage} />
+              </div>
+           </div>
+        )}
+
+        {activeTab === 'Part Categories' && (
+           <div className="space-y-6">
+              <div className="bg-white p-6 rounded-2xl border border-gray-100">
+                 <h2 className="text-xs font-black text-gray-900 uppercase tracking-widest mb-4">Add Part Taxonomy</h2>
+                 <form onSubmit={handleCreatePartCategory} className="flex gap-4">
+                    <input value={newPartCategoryName} onChange={(e) => setNewPartCategoryName(e.target.value)} placeholder="NEW PART CATEGORY..." className="flex-1 bg-white border border-gray-200 rounded-xl px-4 py-3 text-[11px] font-black uppercase outline-none focus:border-blue-500 transition-colors" />
+                    <button type="submit" disabled={submittingPartCategory} className="bg-blue-600 text-white px-6 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-blue-700 transition-colors">
+                       {submittingPartCategory ? '...' : 'Add'}
+                    </button>
+                 </form>
+              </div>
+              <div className="bg-white rounded-2xl border border-gray-100 overflow-hidden">
+                 <div className="px-6 py-4 border-b border-gray-50 bg-gray-50/50 flex justify-between items-center">
+                    <h2 className="text-xs font-black text-gray-900 uppercase tracking-widest">Part Category Registry</h2>
+                    <div className="text-[9px] font-black text-gray-500 bg-gray-100 px-3 py-1 rounded-md">{partCategories.length} Total</div>
+                 </div>
+                 <div className="overflow-x-auto">
+                   <table className="w-full text-left text-xs min-w-[600px]">
+                       <thead className="bg-gray-50/20 text-[9px] font-black text-gray-400 uppercase tracking-widest border-b border-gray-50">
+                         <tr>
+                            <th className="px-6 py-4">Label</th>
+                            <th className="px-6 py-4 text-center">Identifier</th>
+                            <th className="px-6 py-4 text-right whitespace-nowrap">Operations</th>
+                         </tr>
+                      </thead>
+                      <tbody className="divide-y divide-gray-50 font-bold uppercase text-[10px]">
+                         {paginate(partCategories, partCatPage).map(cat => (
+                           <tr key={cat._id} className="hover:bg-gray-50/50">
+                              <td className="px-6 py-4 font-black text-gray-900">{cat.name}</td>
+                              <td className="px-6 py-4 text-center text-[9px] text-gray-400 opacity-60 font-medium">{cat._id}</td>
+                              <td className="px-6 py-4 text-right space-x-2">
+                                 <button onClick={() => { setEditingPartCategory(cat); setEditPartCategoryName(cat.name); }} className="text-blue-600 hover:underline text-[9px] font-black uppercase tracking-widest">Edit</button>
+                                 <button onClick={() => handleDeletePartCategory(cat._id)} className="text-red-500 hover:underline text-[9px] font-black uppercase tracking-widest">Delete</button>
+                              </td>
+                           </tr>
+                         ))}
+                      </tbody>
+                   </table>
+                   <PaginationControls current={partCatPage} total={partCategories.length} onPageChange={setPartCatPage} />
+                 </div>
+              </div>
+           </div>
         )}
 
         {editingUser && (
@@ -501,6 +679,23 @@ export default function AdminDashboard() {
                     </div>
                    <div className="flex gap-3 pt-6">
                       <button type="button" onClick={() => setEditingCategory(null)} className="flex-1 bg-gray-100 text-gray-500 py-3 rounded-xl font-black uppercase text-[10px] tracking-widest">Cancel</button>
+                      <button type="submit" className="flex-1 bg-blue-600 text-white py-3 rounded-xl font-black uppercase text-[10px] tracking-widest">Save</button>
+                   </div>
+                </form>
+             </div>
+          </div>
+        )}
+        {editingPartCategory && (
+          <div className="fixed inset-0 z-[60] bg-black/40 backdrop-blur-sm flex items-center justify-center p-4">
+             <div className="bg-white w-full max-w-lg rounded-2xl p-8 relative">
+                <h2 className="text-xl font-black text-gray-900 uppercase mb-6">Edit Part Category</h2>
+                <form onSubmit={handleUpdatePartCategory} className="space-y-4">
+                    <div className="space-y-1">
+                      <label className="text-[9px] font-black text-gray-400 uppercase tracking-widest ml-2">Name</label>
+                      <input value={editPartCategoryName} onChange={(e) => setEditPartCategoryName(e.target.value)} className="w-full bg-white border border-gray-200 rounded-xl py-3 px-4 outline-none font-bold text-gray-800 text-xs" />
+                    </div>
+                   <div className="flex gap-3 pt-6">
+                      <button type="button" onClick={() => setEditingPartCategory(null)} className="flex-1 bg-gray-100 text-gray-500 py-3 rounded-xl font-black uppercase text-[10px] tracking-widest">Cancel</button>
                       <button type="submit" className="flex-1 bg-blue-600 text-white py-3 rounded-xl font-black uppercase text-[10px] tracking-widest">Save</button>
                    </div>
                 </form>

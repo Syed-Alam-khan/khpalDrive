@@ -2,7 +2,6 @@
 import axios from 'axios';
 
 // Dynamically determine the backend URL based on the current hostname
-// This ensures it works both on localhost and over the local network (192.168.x.x)
 const baseURL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
   ? 'http://localhost:3000/api' 
   : 'https://khpaldrivebackend-production.up.railway.app/api';

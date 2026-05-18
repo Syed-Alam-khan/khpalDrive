@@ -11,6 +11,7 @@ export default function Header() {
   const { user, logout } = useUser();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
+  const [isSellSheetOpen, setIsSellSheetOpen] = useState(false);
   const dropdownRef = useRef(null);
 
   // Remove the useEffect that loads userInfo from localStorage manually
@@ -24,6 +25,16 @@ export default function Header() {
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
+
+  const handleSellClick = (e) => {
+    e.preventDefault();
+    if (!user) {
+      navigate('/register');
+    } else {
+      setIsSellSheetOpen(true);
+      setIsMenuOpen(false);
+    }
+  };
 
   const handleLogout = async () => {
     Swal.fire({
@@ -99,12 +110,12 @@ export default function Header() {
                 Login
               </Link>
             )}
-            <Link 
-              to={user ? "/sell" : "/register"} 
+            <button 
+              onClick={handleSellClick}
               className="bg-[#94D227] text-white px-6 py-2 rounded-full font-bold text-[12px] uppercase tracking-wider hover:bg-[#85bd23] transition-all border border-[#94D227]"
             >
-              Sell my Car
-            </Link>
+              Sell
+            </button>
             
             {user && (
               <div className="relative ml-2" ref={dropdownRef}>
@@ -209,12 +220,63 @@ export default function Header() {
       {/* Fixed Bottom Sell Button for Mobile */}
       {isHomePage && (
         <div className="md:hidden fixed bottom-0 left-0 w-full z-40 bg-white p-4 pb-4 border-t border-gray-100">
-          <Link 
-            to={user ? "/sell" : "/register"} 
+          <button 
+            onClick={handleSellClick}
             className="w-full bg-[#4B2DBD] text-white py-3 rounded-lg font-black text-base uppercase tracking-widest flex items-center justify-center active:scale-[0.98] transition-all"
           >
-            Sell my Car
-          </Link>
+            Sell
+          </button>
+        </div>
+      )}
+
+      {/* Sell Bottom Sheet */}
+      {isSellSheetOpen && (
+        <div className="fixed inset-0 z-[100] bg-black/60 backdrop-blur-sm animate-in fade-in duration-300 flex items-end justify-center">
+          <div className="w-full max-w-md bg-white rounded-t-3xl p-6 animate-in slide-in-from-bottom-full duration-500 shadow-2xl">
+            <div className="flex items-center justify-between mb-6">
+              <h2 className="text-gray-900 font-black text-xl tracking-tight">What would you like to sell?</h2>
+              <button 
+                onClick={() => setIsSellSheetOpen(false)}
+                className="w-8 h-8 bg-gray-50 rounded-full flex items-center justify-center text-gray-400 hover:bg-gray-100 transition-colors"
+              >
+                <FaTimes size={14} />
+              </button>
+            </div>
+            
+            <div className="space-y-4 pb-4">
+              <Link 
+                to="/sell" 
+                onClick={() => setIsSellSheetOpen(false)}
+                className="block w-full border-2 border-gray-100 rounded-2xl p-4 hover:border-[#4B2DBD] hover:bg-gray-50 transition-all group"
+              >
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 bg-[#4B2DBD]/10 rounded-full flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">
+                    🚗
+                  </div>
+                  <div>
+                    <h3 className="font-black text-gray-900 text-lg">Sell a Car</h3>
+                    <p className="text-sm font-bold text-gray-400">List your vehicle for sale</p>
+                  </div>
+                </div>
+              </Link>
+              
+              <Link 
+                to="/sell-part" 
+                onClick={() => setIsSellSheetOpen(false)}
+                className="block w-full border-2 border-gray-100 rounded-2xl p-4 hover:border-[#4B2DBD] hover:bg-gray-50 transition-all group"
+              >
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 bg-[#4B2DBD]/20 rounded-full flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">
+                    ⚙️
+                  </div>
+                  <div>
+                    <h3 className="font-black text-gray-900 text-lg">Sell Auto Parts / Acc.</h3>
+                    <p className="text-sm font-bold text-gray-400">List engines, rims, accessories</p>
+                  </div>
+                </div>
+              </Link>
+            </div>
+          </div>
         </div>
       )}
     </header>

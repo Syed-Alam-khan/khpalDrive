@@ -18,13 +18,19 @@ import Settings from './pages/Settings'
 import { UserProvider } from './context/UserContext'
 import { CarProvider } from './context/CarContext'
 import { CategoryProvider } from './context/CategoryContext'
+import { PartCategoryProvider } from './context/PartCategoryContext'
+import { AutoPartProvider } from './context/AutoPartContext'
+import SellAutoPart from './pages/SellAutoPart'
+import PartDetail from './pages/PartDetail'
 
 function App() {
   return (
     <UserProvider>
       <CarProvider>
         <CategoryProvider>
-          <Router>
+          <PartCategoryProvider>
+            <AutoPartProvider>
+              <Router>
             <div className="min-h-screen font-sans selection:bg-purple-100 overflow-x-hidden">
               <Routes>
                 {/* Admin Route - No MainLayout */}
@@ -45,8 +51,10 @@ function App() {
                       <Route path="/register" element={<Register />} />
                       <Route path="/login" element={<Login />} />
                       <Route path="/sell" element={<ProtectedRoute><SellCar /></ProtectedRoute>} />
+                      <Route path="/sell-part" element={<ProtectedRoute><SellAutoPart /></ProtectedRoute>} />
                       <Route path="/listings" element={<ProtectedRoute><MyListings /></ProtectedRoute>} />
                       <Route path="/detail/:id" element={<CarDetail />} />
+                      <Route path="/part/:id" element={<PartDetail />} />
                       <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
                       <Route path="/settings" element={<ProtectedRoute><Settings /></ProtectedRoute>} />
                     </Routes>
@@ -60,7 +68,9 @@ function App() {
                 theme="light"
               />
             </div>
-          </Router>
+            </Router>
+            </AutoPartProvider>
+          </PartCategoryProvider>
         </CategoryProvider>
       </CarProvider>
     </UserProvider>

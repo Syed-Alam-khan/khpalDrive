@@ -95,6 +95,11 @@ export default function SellCar() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+    let newValue = value;
+    if (name === 'carName' && value) {
+      newValue = value.charAt(0).toUpperCase() + value.slice(1);
+    }
+    
     if (name === 'category' && value === 'other') {
       setIsOtherCategory(true);
       setFormData({ ...formData, category: 'other' });
@@ -102,7 +107,7 @@ export default function SellCar() {
       setIsOtherCategory(false);
       setFormData({ ...formData, category: value });
     } else {
-      setFormData({ ...formData, [name]: value });
+      setFormData({ ...formData, [name]: newValue });
     }
   };
 
