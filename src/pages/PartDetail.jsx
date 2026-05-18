@@ -47,6 +47,24 @@ export default function PartDetail() {
 
   const images = part.images && part.images.length > 0 ? part.images : [];
 
+  const handleWhatsApp = () => {
+    let phone = part.seller?.phoneNumber || part.seller?.phone || '';
+    phone = phone.replace(/\D/g, '');
+    if (phone.startsWith('0')) {
+      phone = '92' + phone.slice(1);
+    }
+    if (phone.length === 10) {
+      phone = '92' + phone;
+    }
+    const message = `Hi, I am interested in your auto part: ${part.title} listed for PKR ${part.price?.toLocaleString()} on KhpalDrive.`;
+    window.open(`https://wa.me/${phone}?text=${encodeURIComponent(message)}`, '_blank');
+  };
+
+  const handleCall = () => {
+    const phone = (part.seller?.phoneNumber || part.seller?.phone || '').replace(/\D/g, '');
+    window.location.href = `tel:${phone}`;
+  };
+
   return (
     <div className="bg-white min-h-screen pb-20">
       {/* Top Banner */}
@@ -188,20 +206,21 @@ export default function PartDetail() {
 
             <div className="space-y-3">
               {(part.contactPreference === 'Phone' || part.contactPreference === 'Both') && (
-                <a href={`tel:${part.seller?.phone}`} className="w-full bg-[#4B2DBD] text-white py-4 rounded-xl font-black text-sm uppercase tracking-widest flex items-center justify-center gap-2 hover:bg-[#3b2396] transition-all">
+                <button 
+                  onClick={handleCall}
+                  className="w-full bg-[#4B2DBD] text-white py-4 rounded-xl font-black text-sm uppercase tracking-widest flex items-center justify-center gap-2 hover:bg-[#3b2396] transition-all"
+                >
                   <FaPhoneAlt /> Call Seller
-                </a>
+                </button>
               )}
               
               {(part.contactPreference === 'WhatsApp' || part.contactPreference === 'Both') && (
-                <a 
-                  href={`https://wa.me/${part.seller?.phone?.replace(/[^0-9]/g, '')}?text=Hi, I am interested in your auto part: ${part.title} on KhpalDrive`} 
-                  target="_blank" 
-                  rel="noreferrer"
+                <button 
+                  onClick={handleWhatsApp}
                   className="w-full bg-[#25D366] text-white py-4 rounded-xl font-black text-sm uppercase tracking-widest flex items-center justify-center gap-2 hover:bg-[#20b958] transition-all"
                 >
                   <FaWhatsapp size={18} /> WhatsApp
-                </a>
+                </button>
               )}
             </div>
           </div>
