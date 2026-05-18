@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from 'react';
 import { useUser } from '../context/UserContext';
 import Swal from 'sweetalert2';
 import { FaBars, FaTimes } from 'react-icons/fa';
-import { CircleFadingPlus } from 'lucide-react';
+import { CirclePlus } from 'lucide-react';
 
 export default function Header() {
   const navigate = useNavigate();
@@ -115,7 +115,7 @@ export default function Header() {
               onClick={handleSellClick}
               className="bg-[#94D227] text-white px-5 py-2 rounded-full font-bold text-[12px] uppercase tracking-wider hover:bg-[#85bd23] transition-all border border-[#94D227] flex items-center gap-1.5"
             >
-              <CircleFadingPlus size={16} /> Sell
+              <CirclePlus size={16} /> Sell
             </button>
             
             {user && (
@@ -225,7 +225,7 @@ export default function Header() {
             onClick={handleSellClick}
             className="w-full bg-[#4B2DBD] text-white py-3 rounded-lg font-black text-base uppercase tracking-widest flex items-center justify-center gap-2 active:scale-[0.98] transition-all"
           >
-            <CircleFadingPlus size={18} /> Sell
+            <CirclePlus size={18} /> Sell
           </button>
         </div>
       )}
