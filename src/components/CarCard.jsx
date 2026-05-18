@@ -11,12 +11,17 @@ export default function CarCard({ car }) {
     <Link to={`/detail/${car._id}`} className="block group">
       <div className="bg-[#F9FAFB] border-[3px] border-gray-200 rounded-2xl overflow-hidden transition-all duration-300">
         {/* Car Image */}
-        <div className="aspect-[4/3] overflow-hidden">
+        <div className="aspect-[4/3] overflow-hidden relative">
           <img
             src={getImageUrl(car.images?.[0])}
             alt={car.carName}
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
           />
+          {car.type && (
+            <div className="absolute top-2 right-2 bg-white/90 backdrop-blur text-[8px] font-black px-2 py-0.5 rounded text-gray-800 uppercase tracking-wider shadow-sm">
+              {car.type}
+            </div>
+          )}
         </div>
 
         {/* Car Info */}
@@ -26,9 +31,16 @@ export default function CarCard({ car }) {
             <h3 className="text-lg md:text-xl font-black text-black truncate uppercase">
               {car.carName}
             </h3>
-            <p className="text-xs md:text-sm font-black text-black uppercase tracking-widest">
-              {car.category?.name || 'Luxury'}
-            </p>
+            <div className="flex items-center justify-between gap-2">
+              <p className="text-xs md:text-sm font-black text-black uppercase tracking-widest truncate">
+                {car.category?.name || 'Luxury'}
+              </p>
+              {car.model && (
+                <p className="text-xs md:text-sm font-black text-gray-500 shrink-0">
+                  {car.model}
+                </p>
+              )}
+            </div>
             <p className="text-[#4B2DBD] font-black text-sm md:text-base truncate">
               PKR {car.price?.toLocaleString()}
             </p>
