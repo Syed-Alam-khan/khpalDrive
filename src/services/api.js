@@ -4,7 +4,7 @@ import axios from 'axios';
 // Dynamically determine the backend URL based on the current hostname
 const baseURL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
   ? 'http://localhost:3000/api' 
-  : 'https://khpal-drive-backend.vercel.app/';
+  : 'https://khpal-drive-backend.vercel.app/api';
 
 const API = axios.create({
   baseURL: baseURL,
